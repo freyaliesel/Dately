@@ -32,3 +32,18 @@ delegation:
 Lea: design - picking CSS framework
 Kit:
 Jenni
+
+
+
+### UI Elements
+in navigation: Home, Saved, About Us
+
+Search fields: location, date
+
+
+
+
+
+
+possible extra features beyond MVP:
+search for a restaurant based on featured event
