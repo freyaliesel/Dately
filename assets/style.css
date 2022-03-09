@@ -1,0 +1,120 @@
+/* =====Fonts and Styles====*/
+h1 {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 900;
+  line-height: 2em;
+  color: white;
+}
+h2 {
+  font-family: "Montserrat", sans-serif;
+  line-height: 2em;
+  color: white;
+}
+h3 {
+  font-family: "Montserrat", sans-serif;
+  line-height: 3em;
+  color: white;
+}
+h4 {
+  font-family: "Montserrat", sans-serif;
+  line-height: 2em;
+  color: white;
+}
+h5 {
+  font-family: "Montserrat", sans-serif;
+  line-height: 2em;
+  color: white;
+}
+h6 {
+  font-family: "Montserrat", sans-serif;
+  line-height: 2em;
+  color: white;
+}
+p {
+  font-size: 16px;
+  font-family: "Montserrat", sans-serif;
+  line-height: 1.8em;
+  color: white;
+}
+
+/*===========*/
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+    height: 1000px;
+  background: rgb(34, 12, 33);
+  background: linear-gradient(
+    130deg,
+    rgba(34, 12, 33, 1) 0%,
+    rgba(15, 30, 41, 1) 13%,
+    rgba(0, 0, 0, 1) 24%,
+    rgba(0, 0, 0, 1) 68%,
+    rgba(15, 30, 41, 1) 87%,
+    rgba(34, 12, 33, 1) 100%
+  );
+
+}
+/*===========*/
+nav{
+    height: 100px;
+}
+nav li{
+    font-family: "Montserrat", sans-serif;
+    border-width: 3px;
+    border-style: solid;
+    background-color: black;
+    border-image: linear-gradient(to right, rgb(0, 221, 250), rgb(255, 0, 140)) 1;
+    width: 150px;
+    text-align: center;
+    box-shadow:0px 0px 15px #ff009d;
+
+}
+nav ul{
+ 
+}
+ /*===========*/ 
+main {
+    width: 80%;
+  margin: auto;
+}
+
+.logo{
+width: 350px;
+}
+.nav-wrapper{
+background-color: black;
+font-size: 16px;
+font-family: "Montserrat", sans-serif;
+color: white;
+}
+
+
+.row {
+    color: white;
+    padding-top: 200px;
+}
+.event-img{
+    height: 800px;
+}
+/* @media only screen and (max-width: 600px) {
+     .row{
+display: none;
+    }
+} */
+.btn-small{
+    font-family: "Montserrat", sans-serif;
+    border-width: 3px;
+    border-style: solid;
+    background-color: black;
+    border-image: linear-gradient(to right, rgb(0, 221, 250), rgb(255, 0, 140)) 1;
+    width: 200px;
+    margin-top: 80px;
+    height: 40px;
+    box-shadow:0px 0px 15px #ff009d;
+  }
+
+
