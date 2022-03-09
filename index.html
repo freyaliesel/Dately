@@ -1,25 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.css"
-        integrity="sha512-t38vG/f94E72wz6pCsuuhcOPJlHKwPy+PY+n1+tJFzdte3hsIgYE7iEpgg/StngunGszVMrRfvwZinrza0vMTA=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400;700&display=swap" rel="stylesheet">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.css"
+      integrity="sha512-t38vG/f94E72wz6pCsuuhcOPJlHKwPy+PY+n1+tJFzdte3hsIgYE7iEpgg/StngunGszVMrRfvwZinrza0vMTA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400;700&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="./assets/style.css" />
     <title>Project</title>
-</head>
+  </head>
 
-<body>
-<header>
-    <nav>
+  <body>
+    <header>
+      <nav>
         <div class="nav-wrapper">
-        <img href="#"class="logo"src="assets/links/Dately Logo.png">
+          <img href="#" class="logo" src="assets/links/Dately Logo.png" />
           <ul id="nav-mobile" class="right hide-on-med-and-down">
             <li><a>HOME</a></li>
             <li><a>BUCKET LIST</a></li>
@@ -27,24 +33,71 @@
           </ul>
         </div>
       </nav>
-</header>
-<main>
-<div class="row">
-    <div class="col s7 push-s5"><span class="flow-text"><h1>EXPERIENCE CHICAGO</h1><h5>For all your local date night experiences in chicago. Find local bars, restaurants and events near you. Love more than one? No worries like and add to your bucket list and save for later.</h5></span> <br> 
-        <a class="waves-effect waves-light btn-small">Search</a> <div> <img class="chicago-img" src="assets/links/Chicago.png""></div></div>
-       
-     
-    <div class="col s5 pull-s7"><span class="flow-text"></span><img class="event-img" src="assets/links/Events.png"></div>
-  </div>
+    </header>
+    <main>
+      <div class="row">
+        <div class="col s7 push-s5">
+          <span class="flow-text"
+            ><h1>EXPERIENCE CHICAGO</h1>
+            <h5>
+              For all your local date night experiences in chicago. Find local
+              bars, restaurants and events near you. Love more than one? No
+              worries! Like and add to your bucket list and save for later.
+            </h5></span
+          >
+          <br />
 
+          <!---Modal-->
+          <button data-target="modal1" class="btn modal-trigger">Modal</button>
+          <div id="modal1" class="modal">
+            <div class="modal-content">
+              <h5>Search</h5>
+              <input
+                type="text"
+                placeholder="Select Date"
+                class="datepicker"
+                id="datepicker"
+                value="";
+              />
+              <br />
+              <select id="dropdown" class="browser-default">
+                <option value="" disabled selected>Select Location</option>
+                <option value="Lakeview">Lakeview</option>
+                <option value="Bucktown">Bucktown</option>
+                <option value="Logan Square">Logan Square</option>
+              </select>
+            </div>
+            <div class="modal-footer">
+              <a href="#!" class="modal-close waves-effect waves-green btn-flat"
+                >Agree</a
+              >
+            </div>
+          </div>
+          <br />
+          <!--Search Button to Trigger Modal (not done yet)-->
+          <a
+            class="waves-effect waves-light btn-small modal-trigger"
+            href="#modal1"
+            >Search</a
+          >
+          <div><img class="chicago-img" src="assets/links/Chicago.png" /></div>
+        </div>
 
-</main>
+        <div class="col s5 pull-s7">
+          <span class="flow-text"></span
+          ><img class="event-img" src="assets/links/Events.png" />
+        </div>
+      </div>
+    </main>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.js"
-        integrity="sha512-m2PhLxj2N91eYrIGU2cmIu2d0SkaE4A14bCjVb9zykvp6WtsdriFCiXQ/8Hdj0kssUB/Nz0dMBcoLsJkSCto0Q=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <!--Scripts Go Here-->
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.js"
+      integrity="sha512-m2PhLxj2N91eYrIGU2cmIu2d0SkaE4A14bCjVb9zykvp6WtsdriFCiXQ/8Hdj0kssUB/Nz0dMBcoLsJkSCto0Q=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
     <script src="./assets/script.js"></script>
-</body>
-
+  </body>
 </html>
