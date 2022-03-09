@@ -148,13 +148,31 @@ main {
 margin-right: 45px;
 }
 
+.modal {
+    font-family: "Montserrat", sans-serif;
+    border-width: 3px;
+    border-style: solid;
+    background-color: black;
+    border-image: linear-gradient(to right, rgb(0, 221, 250), rgb(255, 0, 140)) 1;
+    height: 100%;
+    width: 75%;
+}
 
+.input-field {
+  font-family: "Montserrat", sans-serif;
+    border-width: 3px;
+    border-style: solid;
+    background-color: black;
+}
+
+.datepicker {
+  color: white;
+}
 
 @media only screen and (max-width: 600px){
   .hide-mobile {
     display: none;
   }
-
     .mobile-show{
       display: show;
     }
@@ -181,5 +199,3 @@ footer{
   color: rgb(189, 187, 187);
   text-align: center;
   padding-top: 20px;
-  
-}
