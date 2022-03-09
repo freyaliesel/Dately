@@ -45,7 +45,6 @@ p {
 }
 
 body {
-  height: 1000px;
   background: rgb(34, 12, 33);
   background: linear-gradient(
     130deg,
@@ -61,7 +60,6 @@ body {
 nav {
   height: 120px;
   
-
 }
 
 nav li {
@@ -98,19 +96,36 @@ main {
 
 .row {
   color: white;
-  padding-top: 70px;
+  padding-top:80px;
 }
+
 .event-img {
   height: 800px;
+  transition-delay: 1s;
+  animation: fadeInAnimation ease 4s
+    
 }
+@keyframes fadeInAnimation {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+     }
+}
+
 .chicago-img {
   width: 650px;
 }
-/* @media only screen and (max-width: 600px) {
-     .row{
-display: none;
-    }
-} */
+@media only screen and (max-width: 600px){
+  .chicago-img{ 
+  width: 450px;
+  padding-right: 40px;
+  margin-top: 60px;
+  }
+}
+
+
 .btn-small {
   font-family: "Montserrat", sans-serif;
   text-align: left;
@@ -127,7 +142,44 @@ display: none;
   height: 40px;
   box-shadow: 0px 0px 10px #ff009d;
   
+  
 }
 .medium{
 margin-right: 45px;
+}
+
+
+
+@media only screen and (max-width: 600px){
+  .hide-mobile {
+    display: none;
+  }
+
+    .mobile-show{
+      display: show;
+    }
+}
+
+@media only screen and (min-width: 600px){
+.desktop-show {
+  display: show;
+}
+.hide-desktop {
+  display: none;
+}
+}
+
+.mobile-search{
+  background-color: dimgray;
+  
+}
+  
+footer{
+  margin-top: 50px;
+  font-family: "Montserrat", sans-serif;
+  height: 60px;
+  color: rgb(189, 187, 187);
+  text-align: center;
+  padding-top: 20px;
+  
 }
