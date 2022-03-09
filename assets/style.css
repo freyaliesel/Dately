@@ -45,7 +45,7 @@ p {
 }
 
 body {
-    height: 1000px;
+  height: 1000px;
   background: rgb(34, 12, 33);
   background: linear-gradient(
     130deg,
@@ -56,68 +56,78 @@ body {
     rgba(15, 30, 41, 1) 87%,
     rgba(34, 12, 33, 1) 100%
   );
-
 }
 /*===========*/
-nav{
-    height: 120px;
-}
-nav li{
-    font-family: "Montserrat", sans-serif;
-    border-width: 3px;
-    border-style: solid;
-    background-color: black;
-    border-image: linear-gradient(to right, rgb(0, 221, 250), rgb(255, 0, 140)) 1;
-    width: 150px;
-    text-align: center;
-    box-shadow:0px 0px 15px #ff009d;
+nav {
+  height: 120px;
+  
 
 }
-nav ul{
- 
+
+nav li {
+  font-family: "Montserrat", sans-serif;
+  background: linear-gradient(rgb(0, 0, 0) 0 0) padding-box,
+  linear-gradient(to right, rgb(0, 221, 250),#8b35fb, #fb3570)
+  border-box;
+  width: 200px;
+  text-align: center;
+  padding: 10px;
+  border: 2px solid transparent;
+  border-radius: 10px;
+  display: inline-block;
+  margin: 50px 10px;
+  box-shadow: 0px 0px 10px #ff009d;
+  line-height: 2.5;
 }
- /*===========*/ 
+
+/*===========*/
 main {
-    width: 80%;
+  width: 80%;
   margin: auto;
 }
 
-.logo{
-width: 350px;
+.logo {
+  width: 350px;
 }
-.nav-wrapper{
-background-color: black;
-font-size: 16px;
-font-family: "Montserrat", sans-serif;
-color: white;
+.nav-wrapper {
+  background-color: black;
+  font-size: 16px;
+  font-family: "Montserrat", sans-serif;
+  color: white;
 }
-
 
 .row {
-    color: white;
-    padding-top: 70px;
+  color: white;
+  padding-top: 70px;
 }
-.event-img{
-    height: 800px;
+.event-img {
+  height: 800px;
 }
-.chicago-img{
-    width: 650px;
+.chicago-img {
+  width: 650px;
 }
 /* @media only screen and (max-width: 600px) {
      .row{
 display: none;
     }
 } */
-.btn-small{
-    font-family: "Montserrat", sans-serif;
-    border-width: 3px;
-    border-style: solid;
-    background-color: black;
-    border-image: linear-gradient(to right, rgb(0, 221, 250), rgb(255, 0, 140)) 1;
-    width: 200px;
-    margin-top: 30px;
-    height: 40px;
-    box-shadow:0px 0px 15px #ff009d;
-  }
-
-
+.btn-small {
+  font-family: "Montserrat", sans-serif;
+  text-align: left;
+  font-size: 16px;
+  background: linear-gradient(rgb(0, 0, 0) 0 0) padding-box,
+  linear-gradient(to right, rgb(0, 221, 250),#8b35fb, #fb3570)
+  border-box;
+  color: #ffffff;
+  width: 200px;
+  border: 2px solid transparent;
+  border-radius: 10px;
+  width: 220px;
+  margin-top: 30px;
+  height: 40px;
+  box-shadow: 0px 0px 10px #ff009d;
+  
+}
+.medium{
+margin-right: 45px;
+}
