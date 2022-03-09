@@ -2,7 +2,6 @@
 h1 {
   font-family: "Montserrat", sans-serif;
   font-weight: 900;
-  line-height: 2em;
   color: white;
 }
 h2 {
@@ -22,6 +21,7 @@ h4 {
 }
 h5 {
   font-family: "Montserrat", sans-serif;
+  font-weight: 100;
   line-height: 2em;
   color: white;
 }
@@ -60,7 +60,7 @@ body {
 }
 /*===========*/
 nav{
-    height: 100px;
+    height: 120px;
 }
 nav li{
     font-family: "Montserrat", sans-serif;
@@ -95,10 +95,13 @@ color: white;
 
 .row {
     color: white;
-    padding-top: 200px;
+    padding-top: 70px;
 }
 .event-img{
     height: 800px;
+}
+.chicago-img{
+    width: 650px;
 }
 /* @media only screen and (max-width: 600px) {
      .row{
@@ -112,7 +115,7 @@ display: none;
     background-color: black;
     border-image: linear-gradient(to right, rgb(0, 221, 250), rgb(255, 0, 140)) 1;
     width: 200px;
-    margin-top: 80px;
+    margin-top: 30px;
     height: 40px;
     box-shadow:0px 0px 15px #ff009d;
   }
