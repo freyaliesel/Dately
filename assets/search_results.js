@@ -76,27 +76,27 @@ function generateEventResults(data) {
         divEl.appendChild(spanEl);
         
         // date of event
-        pEl = document.createElement("pEl");
+        pEl = document.createElement("p");
         divEl.appendChild(pEl);
         pEl.textContent = dayjs(event.time_start).format("ddd, MMM D, h:mma");
 
         // cost
-        pEl = document.createElement("pEl");
+        pEl = document.createElement("p");
         divEl.appendChild(pEl);
         pEl.textContent = "$" + event.cost;
 
         // event address
-        pEl = document.createElement("pEl");
+        pEl = document.createElement("p");
         divEl.appendChild(pEl);
-        pEl.textContent = "location: " + event.location.address1;
+        pEl.textContent = event.location.address1;
 
-        // event category
-        pEl = document.createElement("pEl");
-        divEl.appendChild(pEl);
-        pEl.textContent = event.category;
+        // // event category
+        // pEl = document.createElement("p");
+        // divEl.appendChild(pEl);
+        // pEl.textContent = event.category;
 
         // event description
-        pEl = document.createElement("pEl");
+        pEl = document.createElement("p");
         divEl.appendChild(pEl);
         pEl.textContent = event.description;
 
@@ -109,7 +109,7 @@ function generateEventResults(data) {
         aEl = document.createElement("a");
         divEl.appendChild(aEl);
         aEl.setAttribute("href", event.event_site_url);
-        aEl.textContent = "Visit Website";
+        aEl.textContent = "See on Yelp";
 
         // yelp link
         aEl = document.createElement("a");
