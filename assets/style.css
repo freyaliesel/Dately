@@ -226,16 +226,35 @@ footer {
   
 }
 .card {
-  border-radius: 15px;
   max-height: 400px;;
+}
+.card .card-action a:not(.btn):not(.btn-large):not(.btn-small):not(.btn-large):not(.btn-floating){
+  font-family: "Montserrat", sans-serif;
+  background-color: white;
+  color: black;
+  font-size: 14px;
 }
 
 
 .card:hover {
-  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-  transform: scale(1.1);
+  transform: scale(1.08);
 }
-
+.card .card-content{
+  background-color: white;
+  color: black
+}
+.card-content p{
+  font-family: "Montserrat", sans-serif;
+  background-color: white;
+  color: black;
+  font-size: 14px;
+  
+}
+.card .card-image .card-title{
+  font-family: "Montserrat", sans-serif;
+  color: black;
+  font-weight: bold;
+}
 .container p{
   font-size: 12px;
   font-family: "Montserrat", sans-serif;
