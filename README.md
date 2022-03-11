@@ -19,9 +19,9 @@ APIs: google maps API- for location
 ### User Story
 
 ```
-AS A... person looking for something to do in my neighborhood
-I WANT...to enter the date and place I want to go
-SO THAT...I am presented with a restaurant and event
+AS A... person looking for something to do
+I WANT...to enter a date and location
+SO THAT...I am presented with events and restaurants
 
 
 
@@ -30,20 +30,11 @@ SO THAT...I am presented with a restaurant and event
 
 delegation:
 Lea: design - picking CSS framework
-Kit:
-Jenni
-
-
-
-### UI Elements
-in navigation: Home, Saved, About Us
-
-Search fields: location, date
-
+Kit: Yelp API
+Jenni: Google Maps API
 
 
 
 
 
 possible extra features beyond MVP:
-search for a restaurant based on featured event

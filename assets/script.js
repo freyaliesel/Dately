@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // jquery is the only option here due to how datepicker is written in materialize
     // when user picks a date in calendar, it stores date to 'userDate' variable in format yyyy-mm-dd
     var elems = document.querySelectorAll(".datepicker");
-    var instances = M.Datepicker.init(elems);
+    instances = M.Datepicker.init(elems);
     $("#datepicker").datepicker({
         onSelect: function (input) {
             date = input.toISOString().substring(0, 10);
@@ -20,10 +20,28 @@ document.addEventListener("DOMContentLoaded", function () {
         },
     });
 
-  // dropdown section
-  // when user picks a location from dropdown, it stores location in 'userLocation' variable
-  var dropSelect = document.getElementById("dropdown").addEventListener('change', function() {
-    userLocation = this.value;
-    console.log("The value of userLocation is: " + userLocation);
-  });
+    // dropdown section
+    // when user picks a location from dropdown, it stores location in 'userLocation' variable
 });
+
+function saveParameters() {
+    let input = document.getElementById("location");
+    let searchParameters = {
+        date: date,
+        location: input.value,
+    };
+    localStorage.setItem("searchParameters", JSON.stringify(searchParameters));
+    console.log(searchParameters);
+}
+
+document
+    .getElementById("submit-btn")
+    .addEventListener("click", function(){
+      saveParameters();
+      window.location.href = "./search_results.html"
+    });
+
+// var dropSelect = document.getElementById("dropdown").addEventListener('change', function() {
+//   userLocation = this.value;
+//   console.log("The value of userLocation is: " + userLocation);
+// });
