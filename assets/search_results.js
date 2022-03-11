@@ -1,15 +1,24 @@
-// figuring out Yelp stuff
+// implementing Yelp stuff
 
-var date = dayjs().unix();
-var place = "logansquare";
+function retrieveLocation() {
+    let searchParameters = JSON.parse(localStorage.getItem("searchParameters"))
+    searchParameters.date = dayjs(searchParameters.date).unix();
+    searchParameters.location = searchParameters.location.replace(/\s/g, "");
+    return searchParameters;
+}
+
+console.log(retrieveLocation());
+// var date = dayjs().unix();
+// var place = "logansquare";
 
 // use cors-anywhere to access yelp API
 // accepts 2 variables as input: locaiton and date in unix
-function accessYelp(place, date) {
+function accessYelp() {
+    let param = retrieveLocation();
     let url =
         "https://cors-anywhere-bc.herokuapp.com/https://api.yelp.com/v3/events?";
-    let location = "location=" + place;
-    let startDate = "&start_date=" + date;
+    let location = "location=" + param.location;
+    let startDate = "&start_date=" + param.date;
     let results = "&limit=10";
     let excluded =
         "&excluded_events=chicago-chicago-bachelor-party-exotic-dancers-topless-nudy-waitresses-call-us-312-488-4673";
@@ -21,12 +30,10 @@ function accessYelp(place, date) {
         }),
     })
         .then((response) => response.json())
-        .then((data) => parseResults(data.events));
+        .then((data) => generateEventResults(data.events));
 }
 
-accessYelp(place, date);
-
-function parseResults(events) {
+function generateEventResults(events) {
     console.log("displaying results");
     console.log(events);
     let displayEl = document.getElementById("card-parent");
@@ -123,3 +130,6 @@ function parseResults(events) {
         aEl.textContent = "Get Tickets";
     });
 }
+
+
+accessYelp();
