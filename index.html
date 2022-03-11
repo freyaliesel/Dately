@@ -36,24 +36,26 @@
           <h5>For all your local date night experiences in chicago. Find local bars, restaurants and events near you.
             Love more than one? No worries! Like and add to your bucket list and save for later.</h5>
         </span> <br>
-        
+
         <div>
           <!---Modal-->
-          <button data-target="modal1" class=" modal-trigger waves-effect waves-light btn-small"><i class="medium material-icons">search</i>Search</button>
+          <button data-target="modal1" class=" modal-trigger waves-effect waves-light btn-small"><i
+              class="medium material-icons">search</i>Search</button>
           <div id="modal1" class="modal">
             <div class="modal-content">
               <h5>Search</h5>
               <input type="text" placeholder="Select Date" class="datepicker" id="datepicker" value="" ; />
               <br />
-              <select id="dropdown" class="browser-default">
-                <option value="" disabled selected>Select Location</option>
-                <option value="Lakeview">Lakeview</option>
-                <option value="Bucktown">Bucktown</option>
-                <option value="Logan Square">Logan Square</option>
-              </select>
+              <div class="input-field">
+                <input placeholder="Neighborhood name" id="location" class="browser-default">
+                </input>
+              </div>
             </div>
             <div class="modal-footer">
-              <button><a href="search_index.html" class="modal-close waves-effect waves-green btn-flat">Search</a></button>
+              <button id="submit-btn" class="modal-close waves-effect waves-green btn-flat">Search
+                <!-- <a href="search_index.html" -->
+                <!-- </a> -->
+              </button>
             </div>
           </div>
           <br />
@@ -61,7 +63,7 @@
         </div>
       </div>
 
-<!-- Mobile -->
+      <!-- Mobile -->
       <div class=" hide-mobile col s5 pull-s7"><span class="flow-text"></span><img class="event-img"
           src="assets/links/Events.png"></div>
     </div>
@@ -78,7 +80,7 @@
             </div>
           </form>
         </div>
-    
+
 
       </nav>
       <div class="col s12 flow-text">
