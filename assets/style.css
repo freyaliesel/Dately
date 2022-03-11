@@ -322,7 +322,7 @@ font-size: 12px;
 }
 
 /* flex */
-#card-parent {
+.card-parent {
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;

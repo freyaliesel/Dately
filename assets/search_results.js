@@ -1,7 +1,7 @@
 // implementing Yelp API
 
 function retrieveLocation() {
-    let searchParameters = JSON.parse(localStorage.getItem("searchParameters"))
+    let searchParameters = JSON.parse(localStorage.getItem("searchParameters"));
     searchParameters.date = dayjs(searchParameters.date).unix();
     searchParameters.location = searchParameters.location.replace(/\s/g, "");
     return searchParameters;
@@ -27,13 +27,16 @@ function accessYelp() {
         }),
     })
         .then((response) => response.json())
-        .then((data) => generateEventResults(data.events));
+        .then(function (data) {
+            generateEventResults(data)
+        } );
 }
 
-function generateEventResults(events) {
+function generateEventResults(data) {
     console.log("displaying results");
+    let events = data.events;
     console.log(events);
-    let displayEl = document.getElementById("card-parent");
+    let displayEl = document.getElementById("yelp-results");
 
     events.forEach((event) => {
         // create card
@@ -51,7 +54,6 @@ function generateEventResults(events) {
         imgEl.setAttribute("src", event.image_url);
         divEl.appendChild(imgEl);
         
-        
         // add button
         let aEl = document.createElement("a");
         aEl.className = "btn-floating halfway-fab waves-effect waves-light red";
@@ -61,21 +63,11 @@ function generateEventResults(events) {
         iEl.textContent = "add";
         aEl.appendChild(iEl);
         
-        // new div for content
+
+        // create div for content
         divEl = document.createElement("div");
         cardEl.appendChild(divEl);
         divEl.className = "card-content";
-        
-        // // icons - star
-        // iEl = document.createElement("i");
-        // divEl.appendChild(iEl);
-        // iEl.className = "material-icons";
-        // iEl.textContent = "star";
-        // // icons - addcircle
-        // iEl = document.createElement("i");
-        // divEl.appendChild(iEl);
-        // iEl.className = "material-icons";
-        // iEl.textContent = "add_circle";
         
         // event name
         let spanEl = document.createElement("span");
@@ -108,7 +100,7 @@ function generateEventResults(events) {
         divEl.appendChild(pEl);
         pEl.textContent = event.description;
 
-        // new div for links
+        // create div for links
         divEl = document.createElement("div");
         divEl.className = "card-action";
         cardEl.appendChild(divEl);
@@ -127,4 +119,15 @@ function generateEventResults(events) {
     });
 }
 
+
+function passEventCoords(event) {
+    console.log(event.target);
+}
+
 accessYelp();
+
+document.getElementById("yelp-results").addEventListener("click", function(event){
+    console.log("clicked" + event.target);
+    
+    passEventCoords(event);
+})
