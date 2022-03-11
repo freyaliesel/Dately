@@ -19,9 +19,6 @@ document.addEventListener("DOMContentLoaded", function () {
             document.querySelector("input").value = date;
         },
     });
-
-    // dropdown section
-    // when user picks a location from dropdown, it stores location in 'userLocation' variable
 });
 
 function saveParameters() {
@@ -40,8 +37,3 @@ document
       saveParameters();
       window.location.href = "./search_results.html"
     });
-
-// var dropSelect = document.getElementById("dropdown").addEventListener('change', function() {
-//   userLocation = this.value;
-//   console.log("The value of userLocation is: " + userLocation);
-// });

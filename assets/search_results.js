@@ -1,4 +1,4 @@
-// implementing Yelp stuff
+// implementing Yelp API
 
 function retrieveLocation() {
     let searchParameters = JSON.parse(localStorage.getItem("searchParameters"))
@@ -6,10 +6,7 @@ function retrieveLocation() {
     searchParameters.location = searchParameters.location.replace(/\s/g, "");
     return searchParameters;
 }
-
-console.log(retrieveLocation());
-// var date = dayjs().unix();
-// var place = "logansquare";
+// console.log(retrieveLocation());
 
 // use cors-anywhere to access yelp API
 // accepts 2 variables as input: locaiton and date in unix
@@ -69,12 +66,10 @@ function generateEventResults(events) {
         iEl.textContent = "add";
         aEl.appendChild(iEl);
 
-
         // new div for content
         divEl = document.createElement("div");
         cardEl.appendChild(divEl);
         divEl.className = "card-content";
-
 
         // // icons - star
         // iEl = document.createElement("i");
@@ -130,6 +125,5 @@ function generateEventResults(events) {
         aEl.textContent = "Get Tickets";
     });
 }
-
 
 accessYelp();
