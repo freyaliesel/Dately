@@ -20,28 +20,10 @@ document.addEventListener("DOMContentLoaded", function () {
         },
     });
 
-    // dropdown section
-    // when user picks a location from dropdown, it stores location in 'userLocation' variable
-    // var dropSelect = document.getElementById("dropdown").addEventListener('change', function() {
-    //   userLocation = this.value;
-    //   console.log("The value of userLocation is: " + userLocation);
-    // });
+  // dropdown section
+  // when user picks a location from dropdown, it stores location in 'userLocation' variable
+  var dropSelect = document.getElementById("dropdown").addEventListener('change', function() {
+    userLocation = this.value;
+    console.log("The value of userLocation is: " + userLocation);
+  });
 });
-
-document
-    .getElementById("submit-btn")
-    .addEventListener("click", function (event) {
-        event.preventDefault();
-        console.log(this);
-        let location = document.getElementById("location").value;
-        console.log(date + "," + location);
-
-        let parameters = {
-          date: date,
-          location: location
-        }
-
-        localStorage.setItem("searchParameters", JSON.stringify(parameters));
-
-        window.location.assign("./search_index.html");
-    });
