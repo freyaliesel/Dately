@@ -83,7 +83,7 @@ function generateEventResults(data) {
         // cost
         pEl = document.createElement("p");
         divEl.appendChild(pEl);
-        pEl.textContent = "$" + event.cost;
+        event.cost !== null ? pEl.textContent = "$" + event.cost : pEl.textContent = "Free";
 
         // event address
         pEl = document.createElement("p");
