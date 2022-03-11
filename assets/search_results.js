@@ -51,12 +51,7 @@ function generateEventResults(events) {
         imgEl.setAttribute("src", event.image_url);
         divEl.appendChild(imgEl);
         
-        // event name
-        let spanEl = document.createElement("span");
-        spanEl.className = "card-title";
-        spanEl.textContent = event.name
-        divEl.appendChild(spanEl);
-
+        
         // add button
         let aEl = document.createElement("a");
         aEl.className = "btn-floating halfway-fab waves-effect waves-light red";
@@ -65,12 +60,12 @@ function generateEventResults(events) {
         iEl.className = "material-icons";
         iEl.textContent = "add";
         aEl.appendChild(iEl);
-
+        
         // new div for content
         divEl = document.createElement("div");
         cardEl.appendChild(divEl);
         divEl.className = "card-content";
-
+        
         // // icons - star
         // iEl = document.createElement("i");
         // divEl.appendChild(iEl);
@@ -81,7 +76,13 @@ function generateEventResults(events) {
         // divEl.appendChild(iEl);
         // iEl.className = "material-icons";
         // iEl.textContent = "add_circle";
-
+        
+        // event name
+        let spanEl = document.createElement("span");
+        spanEl.className = "card-title";
+        spanEl.textContent = event.name
+        divEl.appendChild(spanEl);
+        
         // date of event
         pEl = document.createElement("pEl");
         divEl.appendChild(pEl);
@@ -108,7 +109,7 @@ function generateEventResults(events) {
         pEl.textContent = event.description;
 
         // new div for links
-        divEl = document.createElement("divEl");
+        divEl = document.createElement("div");
         divEl.className = "card-action";
         cardEl.appendChild(divEl);
 
