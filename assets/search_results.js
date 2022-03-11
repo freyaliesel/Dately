@@ -55,13 +55,13 @@ function generateEventResults(data) {
         divEl.appendChild(imgEl);
         
         // add button
-        let aEl = document.createElement("a");
-        aEl.className = "btn-floating halfway-fab waves-effect waves-light red";
-        divEl.appendChild(aEl);
+        let buttonEl = document.createElement("button");
+        buttonEl.className = "btn-floating halfway-fab waves-effect waves-light pink";
+        divEl.appendChild(buttonEl);
         let iEl = document.createElement("i");
         iEl.className = "material-icons";
         iEl.textContent = "add";
-        aEl.appendChild(iEl);
+        buttonEl.appendChild(iEl);
         
 
         // create div for content
@@ -106,7 +106,7 @@ function generateEventResults(data) {
         cardEl.appendChild(divEl);
 
         // event site URL
-        aEl = document.createElement("a");
+        let aEl = document.createElement("a");
         divEl.appendChild(aEl);
         aEl.setAttribute("href", event.event_site_url);
         aEl.textContent = "See on Yelp";
