@@ -174,6 +174,20 @@ main {
   min-height: 360px
 
 }
+
+.input-field {
+  border-style: none;
+  
+}
+
+.input-field::placeholder {
+  color: gray;
+}
+
+#location {
+  color: white;
+}
+
 .modal .modal-footer {
   background-color: black;
   color: white;
