@@ -236,19 +236,17 @@ footer {
   border: 2px solid transparent;
   border-radius: 10px;
   overflow: scroll;
-  max-height: 760px;
+  min-height: 760px;
   
 }
-.card {
-  max-height: 400px;;
-}
+
 .card .card-action a:not(.btn):not(.btn-large):not(.btn-small):not(.btn-large):not(.btn-floating){
   font-family: "Montserrat", sans-serif;
   background-color: white;
   color: black;
   font-size: 14px;
+  
 }
-
 
 .card:hover {
   transform: scale(1.08);
@@ -257,17 +255,22 @@ footer {
   background-color: white;
   color: black
 }
+
 .card-content p{
   font-family: "Montserrat", sans-serif;
   background-color: white;
   color: black;
   font-size: 14px;
+}
+.card .card-action:last-child {
+align-self: flex-end;
   
 }
 .card .card-image .card-title{
   font-family: "Montserrat", sans-serif;
   color: black;
   font-weight: bold;
+
 }
 .container p{
   font-size: 12px;
@@ -280,6 +283,10 @@ footer {
   font-weight: bold;
   font-family: "Montserrat", sans-serif;
   color:black;
+}
+
+.bucketlist-card {
+  display: flex;
 }
 
 /* scroll bar */
@@ -304,4 +311,28 @@ footer {
 .banner{
   width: 100%;
   
+}
+
+/* Event Cards on Search Page */
+.event {
+display: flex; 
+width:300px;
+flex-wrap: wrap;
+flex-direction: row;
+justify-content: center;
+margin: 20px;
+font-size: 12px;
+
+}
+
+/* flex */
+.card-parent {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.card-image{
+  height: fit-content;
 }

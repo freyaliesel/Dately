@@ -13,7 +13,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400;700&display=swap" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="./assets/style.css" />
-  <title>Bucket List</title>
+  <title>Dately - Bucket List</title>
 </head>
 
 <body>
@@ -23,36 +23,64 @@
         <img href="#" class="logo" src="assets/links/Dately Logo.png">
         <ul id="nav-mobile" class="right hide-on-med-and-down">
           <li class="waves-effect waves-light"><a href="index.html">home</a></li>
-          <li class="waves-effect waves-light"><a href="bucketlist_index.html">bucket list</a></li>
-          <li class="waves-effect waves-light"><a href="about_index.html">about</a></li>
+          <li class="waves-effect waves-light"><a href="bucketlist.html">bucket list</a></li>
+          <li class="waves-effect waves-light"><a href="about.html">about</a></li>
         </ul>
       </div>
     </nav>
   </header>
   <main>
     <div class=" desktop-show hide-mobile row">
-      <div class="card-container col s7 push-s5"><span class="flow-text">
+      <div class="card-container col s7 push-s3">
+        <span class="flow-text">
           <h2>Your Top Picks</h2>
+          </span>
 
-<!-- prototype cards -->
-          <div class="col s4">
-            <div class="card">
-              <div class="card-image">
-                <img src="assets/links/drinks.jpg">
-                <span class="card-title">Card Title</span>
+          <!-- prototype cards -->
+          <div class="card-parent">
+
+            <!-- Card prototype -->
+            <div class="card bucketlist-card">
+              <div class="event">
+                <div class="card-image">
+                  <img src="assets/links/drinks.jpg">
+                </div>
+                <div class="card-content">
+                  <span class="card-title">Event Title</span>
+                  <p>date</p>
+                  <p>$$$</p>
+                  <p>address</p>
+                  <p>Description.</p>
+                </div>
+                <div class="card-action">
+                  <a href="#">Visit Website</a>
+                  <a href="#">Tickets</a>
+                </div>
               </div>
-              <div class="card-content">
-                <i class="material-icons">star</i> <i class="material-icons">add_circle</i><p>address</p> <p>$$$</p> <p>date</p> 
-                <p>I am a very simple card. I am good at containing small bits of information.</p>
-                  
-              </div>
-              <div class="card-action">
-                <a href="#">Visit Website</a> <a href="#">Tickets</a>
+
+              <div class="event">
+                <div class="card-image">
+                  <img src="assets/links/drinks.jpg">
+                </div>
+                <div class="card-content">
+                  <span class="card-title">Restaurant Name</span>
+                  <p>star rating</p>
+                  <p>$$$</p>
+                  <p>address</p>
+                  <p>Description.</p>
+                </div>
+                <div class="card-action">
+                  <a href="#">Visit Website</a>
+                  <a href="#">Get a Table</a>
+                </div>
               </div>
             </div>
 
+
+
+
           </div>
-<!-- prototype cards -->
+          <!-- prototype cards -->
       </div>
 
       <!-- Mobile -->
@@ -86,7 +114,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.js"
     integrity="sha512-m2PhLxj2N91eYrIGU2cmIu2d0SkaE4A14bCjVb9zykvp6WtsdriFCiXQ/8Hdj0kssUB/Nz0dMBcoLsJkSCto0Q=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <script src="./assets/script.js"></script>
+  <script src="./assets/bucketlist.js"></script>
 </body>
 
 <footer>
