@@ -122,12 +122,142 @@ function generateEventResults(data) {
 
 function passEventCoords(event) {
     console.log(event.target);
+    initSearch();
 }
 
 accessYelp();
 
 document.getElementById("yelp-results").addEventListener("click", function(event){
     console.log("clicked" + event.target);
-    
-    passEventCoords(event);
+    if (event.target.className == "material-icons"){
+        console.log("button clicked");
+        passEventCoords(event);
+    }
 })
+
+// google api
+function callback(results, status) {
+    if (status === google.maps.places.PlacesServiceStatus.OK && results) {
+            generatePlaceResults(results);
+        }
+      }
+
+function generatePlaceResults(results) {
+    console.log("displaying places");
+    let places = results;
+    console.log(places);
+    let displayEl = document.getElementById("google-results");
+
+    places.forEach((place) => {
+        //create card
+        let cardEl = document.createElement("div");
+        cardEl.className = "card event";
+        displayEl.appendChild(cardEl);
+
+          // div for image
+          let divEl = document.createElement("div");
+          divEl.className = "card-image";
+          cardEl.appendChild(divEl);
+  
+          // image
+          let imgEl = document.createElement("img");
+          imgEl.setAttribute("src", "./assets/links/drinks.jpg");
+          divEl.appendChild(imgEl);
+          
+          // add button
+          let buttonEl = document.createElement("button");
+          buttonEl.className = "btn-floating halfway-fab waves-effect waves-light pink";
+          divEl.appendChild(buttonEl);
+          let iEl = document.createElement("i");
+          iEl.className = "material-icons";
+          iEl.textContent = "add";
+          buttonEl.appendChild(iEl);
+          
+          // create div for content
+          divEl = document.createElement("div");
+          cardEl.appendChild(divEl);
+          divEl.className = "card-content";
+          
+          // place name
+          let spanEl = document.createElement("span");
+          spanEl.className = "card-title";
+          spanEl.textContent = place.name;
+          divEl.appendChild(spanEl);
+
+          // date of event
+        //pEl = document.createElement("p");
+        //divEl.appendChild(pEl);
+        //pEl.textContent = dayjs(event.time_start).format("ddd, MMM D, h:mma");
+
+        // cost
+        //pEl = document.createElement("p");
+        //divEl.appendChild(pEl);
+        //event.cost !== null ? pEl.textContent = "$" + event.cost : pEl.textContent = "Free";
+
+        // place address
+        pEl = document.createElement("p");
+        divEl.appendChild(pEl);
+        pEl.textContent = place.formatted_address;
+
+        // rating
+        pEl = document.createElement("p");
+        divEl.appendChild(pEl);
+        place.rating !== 0 ? pEl.textContent = (place.rating + "/5") : pEl.textContent= "No Rating";
+
+        // place type
+        pEl = document.createElement("p");
+        divEl.appendChild(pEl);
+        let placeType = "";
+        let index = 0;
+        for (i = 0; i< place.types.length; i++) {
+            // console.log(`${key} = ${value}`);
+            placeType = placeType+ " " + place.types[i];
+            index++;
+        }
+        pEl.textContent = placeType;
+
+        // create div for links
+        divEl = document.createElement("div");
+        divEl.className = "card-action";
+        cardEl.appendChild(divEl);
+
+        // place URL
+        // let aEl = document.createElement("a");
+        // divEl.appendChild(aEl);
+        // if (place.html_Attributions !== null) {
+        //     for (i=0; i < place.html_attributions.length; i++){
+        //         aEl.setAttribute("href", place.html_attributions[i]);
+        //         console.log(html_attributions[i]);
+        //     }
+        // }
+        // else {
+        //     aEl.className = 'btn-flat disabled';
+        // }
+        // aEl.textContent = "Go to Website";
+
+        // yelp link
+        //aEl = document.createElement("a");
+        //divEl.appendChild(aEl);
+        //aEl.setAttribute("href", event.tickets_url);
+        //aEl.textContent = "Get Tickets";
+    });
+}
+  
+function initSearch() {
+    console.log("initsearch");
+    
+    let service;
+    var elem = document.querySelector("#google-results");
+    const location = {
+      lat: 41.84582,
+      lng: -87.62474
+    };
+    service = new google.maps.places.PlacesService(elem);
+    service.textSearch(
+      {
+        location: location,
+        radius: 100,
+        query: "restaurant"
+      },
+      callback);
+}
