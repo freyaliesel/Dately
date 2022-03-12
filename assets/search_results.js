@@ -29,6 +29,7 @@ function accessYelp() {
         .then((response) => response.json())
         .then(function (data) {
             generateEventResults(data)
+            localStorage.setItem("yelpData", JSON.stringify(data));
         } );
 }
 
@@ -37,12 +38,14 @@ function generateEventResults(data) {
     let events = data.events;
     console.log(events);
     let displayEl = document.getElementById("yelp-results");
-
+    let index = 0;
     events.forEach((event) => {
         // create card
         let cardEl = document.createElement("div");
         cardEl.className = "card event";
+        cardEl.id = `card-${index}`
         displayEl.appendChild(cardEl);
+        index++;
 
         // div for image
         let divEl = document.createElement("div");
@@ -122,20 +125,26 @@ function generateEventResults(data) {
 function passEventCoords(event) {
     event.stopPropagation();
     let current = event.target
-    console.log(current);
+    // console.log(current);
 
     let card = current.closest(".event")
     console.log(card);
-    let index = card.getAttribute("id").substring //remove the card-
-    console.log(index)
+    let index = card.getAttribute("id");
+    index = index.substring(index.indexOf("-") + 1);
 
-    initSearch();
+    let data = JSON.parse(localStorage.getItem("yelpData"));
+    let coords = {
+        latitude: data.events[index].latitude,
+        longitude: data.events[index].longitude
+    }
+    // console.log(coords)
+
+    initSearch(coords);
 }
 
 accessYelp();
 
 document.getElementById("yelp-results").addEventListener("click", function(event){
-    console.log("clicked" + event.target);
     if (event.target.className == "material-icons"){
         console.log("button clicked");
         passEventCoords(event);
