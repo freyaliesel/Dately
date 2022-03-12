@@ -166,10 +166,58 @@ function callbackOne(request, status) {
   }
 }
 
-function callbackTwo(placeRequest, status) {
+function callbackTwo(placeDetails, status) {
   if (status == google.maps.places.PlacesServiceStatus.OK) {
-    console.log(placeRequest);
+    generatePlaceDetails(placeDetails);
   }
+}
+
+function generatePlaceDetails(data) {
+  console.log(data);
+  let index = localStorage.getItem("resCardIndex");
+
+  let parentContainer = document.querySelector("#google-results");
+
+  let cards = parentContainer.children;
+  //console.log(cards);
+  
+ //console.log(cards[index]);
+  
+ let reveal = cards[index].children[3];
+
+    // restaurant name
+    let spanEl = document.createElement("span");
+    spanEl.className = "card-title";
+    let iEl = document.createElement("i");
+    spanEl.appendChild(iEl);
+    iEl.className = "material-icons right";
+    iEl.textContent = "close";
+    iEl.style.color = "black";
+    reveal.appendChild(spanEl);
+    spanEl.textContent = data.name;
+
+    let pEl = document.createElement("p");
+    reveal.appendChild(pEl);
+    // pEl.textContent = data.opening_hours;
+    // figure out how to display all the closing and opening hours for each day
+    //console.log(data.opening_hours);
+
+    let aEl = document.createElement("a");
+    reveal.appendChild(aEl);
+    aEl.setAttribute("href", "tel:"+data.international_phone_number);
+    aEl.textContent = data.formatted_phone_number;
+
+    let brEl = document.createElement("br");
+    reveal.appendChild(brEl);
+
+    aEl = document.createElement("a");
+    reveal.appendChild(aEl);
+    aEl.setAttribute("href", data.website);
+    aEl.textContent = "Website";
+
+
+
+
 }
 
 function generatePlaceResults() {
@@ -181,6 +229,7 @@ function generatePlaceResults() {
 
   places.forEach((place) => {
     //create card
+    //add logic to not display closed businesses, but keep increasing the index of the array goes up
     let cardEl = document.createElement("div");
     cardEl.className = "card sticky-action event";
     cardEl.id = `card-${i}`;
@@ -262,13 +311,12 @@ function generatePlaceResults() {
 }
 
 function nextSearch (event) {
-  event.stopPropagation();
   let current = event.target;
-
   let card = current.closest(".event");
   console.log(card);
   let index = card.getAttribute("id");
   index = index.substring(index.indexOf("-") + 1);
+  localStorage.setItem("resCardIndex", index);
   let passId = placeArray[index];
   getPlaceInfo(passId);
 }
@@ -277,8 +325,8 @@ function nextSearch (event) {
 document
   .getElementById("google-results")
   .addEventListener("click", function (event) {
-    if (event.target.className == "activator") {
-      console.log("button clicked");
+    if (event.target.className.includes("activator")) {
+      console.log("card clicked");
       nextSearch(event);
     }
   });
@@ -313,7 +361,7 @@ function getPlaceInfo(passId) {
 
   var placeRequest = {
     placeId: placeId,
-    fields: ["name", "formatted_phone_number", "photos", "website"],
+    fields: ["name", "formatted_phone_number", "photos", "website", "international_phone_number", "opening_hours"],
   };
 
   service = new google.maps.places.PlacesService(elem);
