@@ -119,9 +119,16 @@ function generateEventResults(data) {
     });
 }
 
-
 function passEventCoords(event) {
-    console.log(event.target);
+    event.stopPropagation();
+    let current = event.target
+    console.log(current);
+
+    let card = current.closest(".event")
+    console.log(card);
+    let index = card.getAttribute("id").substring //remove the card-
+    console.log(index)
+
     initSearch();
 }
 
