@@ -30,18 +30,22 @@
             </div>
         </nav>
     </header>
-    <img class="banner" src="assets/links/chicago-banner.jpg">
+    <!-- <img class="banner" src="assets/links/chicago-banner.jpg"> -->
     <main>
+<div class="desktop-show row">
+<div class="col s5 "> <h2> Find an Event</h2>
+<h5>Pair your event with one of chicago's top restaurants near your event location.</h5>
+<h5>Click location and then click your restaurant. To many wonderful places to choose from? No worries. We save it for later. View your bucket list to see all your saved options.</h5></div>
+        <div class="col s7 ">
+            <div>
+                <div class="card-container col s12 flow-text">
+                    <span class="flow-text">
+                        <h2>Choose Event</h2>
+                    </span>
+                    <div id="yelp-results" class="card-parent">
 
-        <div class="desktop-show row">
-            <div class="card-container col s12 flow-text">
-                <span class="flow-text">
-                    <h2>Find Events</h2>
-                </span>
-                <div id="yelp-results" class="card-parent">
-
-                    <!-- Card prototype -->
-                    <!-- <div class="card event">
+                        <!-- Card prototype -->
+                        <!-- <div class="card event">
                         <div class="card-image">
                             <img src="assets/links/drinks.jpg">
                             <button class="btn-floating halfway-fab waves-effect waves-light pink">
@@ -61,18 +65,19 @@
                         </div>
                     </div> -->
 
-
+                    </div>
                 </div>
 
 
             </div>
-            <div class="card-container col s12 flow-text">
-                <span class="flow-text">
-                    <h2>Find Restaurants</h2>
-                </span>
-                <div id="google-results" class="card-parent">
-                    <!-- Card prototype -->
-                    <!-- <div class="card place">
+            <div >
+                <div class="card-container col s12 flow-text">
+                    <span class="flow-text">
+                        <h2>Choose Restaurant</h2>
+                    </span>
+                    <div id="google-results" class="card-parent">
+                        <!-- Card prototype -->
+                        <!-- <div class="card place">
                         <div class="card-image">
                             <img src="assets/links/drinks.jpg">
                             <button class="btn-floating halfway-fab waves-effect waves-light pink">
@@ -91,14 +96,16 @@
                             <a href="#">Tickets</a>
                         </div>
                     </div> -->
+                    </div>
                 </div>
             </div>
+        </div>
     </main>
 
 
     <!--Scripts Go Here-->
     <script
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCDcbgoFc7s1BFXp3Rdc3BIlhRUUemRciI&libraries=places"></script>
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCDcbgoFc7s1BFXp3Rdc3BIlhRUUemRciI&libraries=places"></script>
     <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.js"
         integrity="sha512-m2PhLxj2N91eYrIGU2cmIu2d0SkaE4A14bCjVb9zykvp6WtsdriFCiXQ/8Hdj0kssUB/Nz0dMBcoLsJkSCto0Q=="
