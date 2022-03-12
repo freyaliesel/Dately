@@ -285,6 +285,10 @@ align-self: flex-end;
   color:black;
 }
 
+.bucketlist-card {
+  display: flex;
+}
+
 /* scroll bar */
 
 /* width */
@@ -310,7 +314,7 @@ align-self: flex-end;
 }
 
 /* Event Cards on Search Page */
-.event{
+.event {
 display: flex; 
 width:300px;
 flex-wrap: wrap;
@@ -322,7 +326,7 @@ font-size: 12px;
 }
 
 /* flex */
-#card-parent {
+.card-parent {
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;

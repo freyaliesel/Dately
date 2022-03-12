@@ -1,7 +1,7 @@
 // implementing Yelp API
 
 function retrieveLocation() {
-    let searchParameters = JSON.parse(localStorage.getItem("searchParameters"))
+    let searchParameters = JSON.parse(localStorage.getItem("searchParameters"));
     searchParameters.date = dayjs(searchParameters.date).unix();
     searchParameters.location = searchParameters.location.replace(/\s/g, "");
     return searchParameters;
@@ -27,13 +27,16 @@ function accessYelp() {
         }),
     })
         .then((response) => response.json())
-        .then((data) => generateEventResults(data.events));
+        .then(function (data) {
+            generateEventResults(data)
+        } );
 }
 
-function generateEventResults(events) {
+function generateEventResults(data) {
     console.log("displaying results");
+    let events = data.events;
     console.log(events);
-    let displayEl = document.getElementById("card-parent");
+    let displayEl = document.getElementById("yelp-results");
 
     events.forEach((event) => {
         // create card
@@ -51,31 +54,20 @@ function generateEventResults(events) {
         imgEl.setAttribute("src", event.image_url);
         divEl.appendChild(imgEl);
         
-        
         // add button
-        let aEl = document.createElement("a");
-        aEl.className = "btn-floating halfway-fab waves-effect waves-light red";
-        divEl.appendChild(aEl);
+        let buttonEl = document.createElement("button");
+        buttonEl.className = "btn-floating halfway-fab waves-effect waves-light pink";
+        divEl.appendChild(buttonEl);
         let iEl = document.createElement("i");
         iEl.className = "material-icons";
         iEl.textContent = "add";
-        aEl.appendChild(iEl);
+        buttonEl.appendChild(iEl);
         
-        // new div for content
+
+        // create div for content
         divEl = document.createElement("div");
         cardEl.appendChild(divEl);
         divEl.className = "card-content";
-        
-        // // icons - star
-        // iEl = document.createElement("i");
-        // divEl.appendChild(iEl);
-        // iEl.className = "material-icons";
-        // iEl.textContent = "star";
-        // // icons - addcircle
-        // iEl = document.createElement("i");
-        // divEl.appendChild(iEl);
-        // iEl.className = "material-icons";
-        // iEl.textContent = "add_circle";
         
         // event name
         let spanEl = document.createElement("span");
@@ -84,40 +76,40 @@ function generateEventResults(events) {
         divEl.appendChild(spanEl);
         
         // date of event
-        pEl = document.createElement("pEl");
+        pEl = document.createElement("p");
         divEl.appendChild(pEl);
         pEl.textContent = dayjs(event.time_start).format("ddd, MMM D, h:mma");
 
         // cost
-        pEl = document.createElement("pEl");
+        pEl = document.createElement("p");
         divEl.appendChild(pEl);
-        pEl.textContent = "$" + event.cost;
+        event.cost !== null ? pEl.textContent = "$" + event.cost : pEl.textContent = "Free";
 
         // event address
-        pEl = document.createElement("pEl");
+        pEl = document.createElement("p");
         divEl.appendChild(pEl);
-        pEl.textContent = "location: " + event.location.address1;
+        pEl.textContent = event.location.address1;
 
-        // event category
-        pEl = document.createElement("pEl");
-        divEl.appendChild(pEl);
-        pEl.textContent = event.category;
+        // // event category
+        // pEl = document.createElement("p");
+        // divEl.appendChild(pEl);
+        // pEl.textContent = event.category;
 
         // event description
-        pEl = document.createElement("pEl");
+        pEl = document.createElement("p");
         divEl.appendChild(pEl);
         pEl.textContent = event.description;
 
-        // new div for links
+        // create div for links
         divEl = document.createElement("div");
         divEl.className = "card-action";
         cardEl.appendChild(divEl);
 
         // event site URL
-        aEl = document.createElement("a");
+        let aEl = document.createElement("a");
         divEl.appendChild(aEl);
         aEl.setAttribute("href", event.event_site_url);
-        aEl.textContent = "Visit Website";
+        aEl.textContent = "See on Yelp";
 
         // yelp link
         aEl = document.createElement("a");
@@ -127,4 +119,15 @@ function generateEventResults(events) {
     });
 }
 
+
+function passEventCoords(event) {
+    console.log(event.target);
+}
+
 accessYelp();
+
+document.getElementById("yelp-results").addEventListener("click", function(event){
+    console.log("clicked" + event.target);
+    
+    passEventCoords(event);
+})
