@@ -156,10 +156,13 @@ document
   });
 
 // google api
+const placeArray = new Array();
+
 function callbackOne(request, status) {
   if (status === google.maps.places.PlacesServiceStatus.OK && request) {
     console.log("processing places");
-    generatePlaceResults(request);
+    localStorage.setItem("places", JSON.stringify(request));
+    generatePlaceResults();
   }
 }
 
@@ -169,12 +172,12 @@ function callbackTwo(placeRequest, status) {
   }
 }
 
-function generatePlaceResults(request) {
+function generatePlaceResults() {
   console.log("displaying places");
-  let places = request;
+  let places = JSON.parse(localStorage.getItem("places"));
+  console.log(places);
   let displayEl = document.getElementById("google-results");
   let i = 0;
-  const placeArray = new Array();
 
   places.forEach((place) => {
     //create card
@@ -183,7 +186,7 @@ function generatePlaceResults(request) {
     cardEl.id = `card-${i}`;
     displayEl.appendChild(cardEl);
     //create array for cardEl.id and corresponding place_id
-    placeArray.push([cardEl.id, place.place_id]);
+    placeArray.push(place.place_id);
     i++;
 
     // div for image
@@ -236,9 +239,9 @@ function generatePlaceResults(request) {
     cardEl.appendChild(divEl);
 
     // create div for reveal
-    // divEl = document.createElement("div");
-    // divEl.className = "card-reveal";
-    // cardEl.appendChild(divEl);
+    divEl = document.createElement("div");
+    divEl.className = "card-reveal";
+    cardEl.appendChild(divEl);
 
     // // place name
     // spanEl = document.createElement("span");
@@ -256,17 +259,27 @@ function generatePlaceResults(request) {
     // }
     // pEl.textContent = "Category: " + placeType + ", ";
   });
-  console.log(placeArray);
 }
 
-// on user click of place card, do api call on place_id
+function nextSearch (event) {
+  event.stopPropagation();
+  let current = event.target;
+
+  let card = current.closest(".event");
+  console.log(card);
+  let index = card.getAttribute("id");
+  index = index.substring(index.indexOf("-") + 1);
+  let passId = placeArray[index];
+  getPlaceInfo(passId);
+}
+
+// listener for user click on a place card
 document
   .getElementById("google-results")
   .addEventListener("click", function (event) {
-    if (event.target.className == "card") {
+    if (event.target.className == "activator") {
       console.log("button clicked");
-      console.log(card.id);
-      //getPlaceInfo(card.id, event);
+      nextSearch(event);
     }
   });
 
@@ -289,18 +302,19 @@ function initSearch(coords) {
   service.textSearch(request, callbackOne);
 }
 
-function getPlaceInfo(event) {
+function getPlaceInfo(passId) {
   let service;
-  var elem = document.querySelector("#google-results");
+  var elem = document.querySelector("#empty");
   console.log("getting place details from place_id");
 
   // get place_id for the specific card user clicked
+  let placeId = passId;
+  console.log(placeId);
 
   var placeRequest = {
     placeId: placeId,
     fields: ["name", "formatted_phone_number", "photos", "website"],
   };
-  console.log(placeRequest);
 
   service = new google.maps.places.PlacesService(elem);
   service.getDetails(placeRequest, callbackTwo);
