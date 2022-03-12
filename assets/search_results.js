@@ -214,10 +214,6 @@ function generatePlaceDetails(data) {
     reveal.appendChild(aEl);
     aEl.setAttribute("href", data.website);
     aEl.textContent = "Website";
-
-
-
-
 }
 
 function generatePlaceResults() {
