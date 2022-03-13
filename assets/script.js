@@ -28,7 +28,8 @@ function saveParameters() {
         location: input.value,
     };
     localStorage.setItem("yelpParam", JSON.stringify(param));
-    // console.log(param);
+    console.log("setting search parameters")
+    console.log(param);
 }
 
 document

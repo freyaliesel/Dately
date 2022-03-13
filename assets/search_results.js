@@ -4,26 +4,22 @@ function checkSearchHistory() {
     let yelpData = JSON.parse(localStorage.getItem("yelpData"));
 
     // if the search parameters exist
-    if (localStorage.getItem("yelpParam") !== null) {
-        if (yelpParam.date && yelpParam.location) {
-            // prepare to send to api, then clear the storage
-            parseLocation(yelpParam);
-            localStorage.removeItem("yelpParam");
-            console.log("performing new yelp search")
-        }
-    } //if not, check if there is valid stored search data
-    else if (localStorage.getItem("yelpData") !== null) {
-        if (yelpData.events.length > 0) {
-            // send yelpData to populate event results
-            populateEventResults(yelpData);
-            console.log("populating yelp results based on last search performed");
+    if (yelpParam !== null && yelpParam.date && yelpParam.location) {
+        // send to api, then clear the storage
+        parseLocation(yelpParam);
+        localStorage.removeItem("yelpParam");
+        console.log("performing new yelp search");
+    } // if not, check if there is valid stored search data
+    else if (yelpData !== null && yelpData.events.length > 0) {
+        // send yelpData to populate event results
+        populateEventResults(yelpData);
+        console.log("populating yelp results based on last search performed");
 
-            // check if there is stored google search data
-            let googlePlaceData = JSON.parse(localStorage.getItem("gTextData"));
-            if (googlePlaceData.length > 0) {
-                populatePlaceResults();
-                console.log("populating restaurants based on last event selected")
-            }
+        // check if there is stored google search data
+        let gTextData = JSON.parse(localStorage.getItem("gTextData"));
+        if (gTextData !== null && gTextData.length > 0) {
+            populatePlaceResults();
+            console.log("populating restaurants based on last event selected");
         }
     } else {
         // something went wrong and alert the user
