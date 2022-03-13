@@ -178,7 +178,6 @@ function passEventCoords(event) {
 }
 
 // google api
-
 // kicks off when user clicks a button for an event
 function initSearch(coords) {
     let service;
@@ -207,12 +206,6 @@ function googleTextSearch(request, status) {
     }
 }
 
-function googlePlaceSearch(placeDetails, status) {
-    if (status == google.maps.places.PlacesServiceStatus.OK) {
-        generatePlaceDetails(placeDetails);
-    }
-}
-
 function generatePlaceResults() {
     console.log("displaying places");
     let places = JSON.parse(localStorage.getItem("places"));
@@ -224,7 +217,7 @@ function generatePlaceResults() {
         //create card
         //add logic to not display closed businesses, but keep increasing the index of the array goes up
         let cardEl = document.createElement("div");
-        cardEl.className = "card sticky-action event";
+        cardEl.className = "card event";
         cardEl.id = `card-${i}`;
         displayEl.appendChild(cardEl);
         //create array for cardEl.id and corresponding place_id
@@ -284,24 +277,27 @@ function generatePlaceResults() {
         divEl = document.createElement("div");
         divEl.className = "card-reveal";
         cardEl.appendChild(divEl);
-
-        // // place name
-        // spanEl = document.createElement("span");
-        // spanEl.className = "card-title activator";
-        // spanEl.textContent = place.name;
-        // divEl.appendChild(spanEl);
-
-        // place type
-        // pEl = document.createElement("p");
-        // divEl.appendChild(pEl);
-        // let placeType = "";
-        // for (i = 0; i < place.types.length; i++) {
-        //   placeType = placeType + " " + place.types[i];
-        //   i++;
-        // }
-        // pEl.textContent = "Category: " + placeType + ", ";
     });
 }
+
+function prepPlaceSearch(event) {
+    let current = event.target;
+    let card = current.closest(".event");
+    console.log(card);
+    let index = card.getAttribute("id");
+    index = index.substring(index.indexOf("-") + 1);
+    localStorage.setItem("resCardIndex", index);
+    let passId = placeArray[index];
+    getPlaceInfo(passId);
+}
+
+function googlePlaceSearch(placeDetails, status) {
+    if (status == google.maps.places.PlacesServiceStatus.OK) {
+        generatePlaceDetails(placeDetails);
+    }
+}
+
+
 
 function generatePlaceDetails(data) {
     console.log(data);
@@ -352,17 +348,6 @@ function generatePlaceDetails(data) {
 }
 
 
-
-function prepPlaceSearch(event) {
-    let current = event.target;
-    let card = current.closest(".event");
-    console.log(card);
-    let index = card.getAttribute("id");
-    index = index.substring(index.indexOf("-") + 1);
-    localStorage.setItem("resCardIndex", index);
-    let passId = placeArray[index];
-    getPlaceInfo(passId);
-}
 
 function getPlaceInfo(passId) {
     let service;
