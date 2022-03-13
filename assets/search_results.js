@@ -1,17 +1,18 @@
 // implementing Yelp API
 
-function retrieveLocation() {
-    let searchParameters = JSON.parse(localStorage.getItem("searchParameters"));
-    searchParameters.date = dayjs(searchParameters.date).unix();
-    searchParameters.location = searchParameters.location.replace(/\s/g, "");
-    return searchParameters;
+function parseLocation(param) {
+    // let searchParameters = JSON.parse(localStorage.getItem("searchParameters"));
+    param.date = dayjs(param.date).unix();
+    param.location = param.location.replace(/\s/g, "");
+    // return searchParameters;
+    accessYelp(param);
 }
 // console.log(retrieveLocation());
 
 // use cors-anywhere to access yelp API
-// accepts 2 variables as input: locaiton and date in unix
-function accessYelp() {
-    let param = retrieveLocation();
+// accepts object with properties "location" value string with no spaces and "date" value unix time stamp
+function accessYelp(param) {
+    // let param = retrieveLocation();
     let url =
         "https://cors-anywhere-bc.herokuapp.com/https://api.yelp.com/v3/events?";
     let location = "location=" + param.location;
@@ -370,7 +371,9 @@ function populatePlaceDetails(data) {
     }
 }
 
-accessYelp();
+// accessYelp();
+// on page load, parse and pass most recent search data to yelp API
+parseLocation(JSON.parse(localStorage.getItem("yelpParam")));
 
 document
     .getElementById("yelp-results")

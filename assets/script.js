@@ -23,12 +23,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
 function saveParameters() {
     let input = document.getElementById("location");
-    let searchParameters = {
+    let param = {
         date: date,
         location: input.value,
     };
-    localStorage.setItem("searchParameters", JSON.stringify(searchParameters));
-    console.log(searchParameters);
+    localStorage.setItem("yelpParam", JSON.stringify(param));
+    // console.log(param);
 }
 
 document
