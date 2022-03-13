@@ -293,12 +293,6 @@ function prepPlaceSearch(event) {
     getPlaceDetails(passId);
 }
 
-function googlePlaceSearch(placeDetails, status) {
-    if (status == google.maps.places.PlacesServiceStatus.OK) {
-        generatePlaceDetails(placeDetails);
-    }
-}
-
 function getPlaceDetails(passId) {
     let service;
     var elem = document.querySelector("#empty");
@@ -324,7 +318,13 @@ function getPlaceDetails(passId) {
     service.getDetails(placeRequest, googlePlaceSearch);
 }
 
-function generatePlaceDetails(data) {
+function googlePlaceSearch(placeDetails, status) {
+    if (status == google.maps.places.PlacesServiceStatus.OK) {
+        populatePlaceDetails(placeDetails);
+    }
+}
+
+function populatePlaceDetails(data) {
     console.log(data);
     let index = localStorage.getItem("resCardIndex");
 
@@ -371,9 +371,6 @@ function generatePlaceDetails(data) {
         aEl.textContent = "Website";
     }
 }
-
-
-
 
 
 accessYelp();
