@@ -280,7 +280,7 @@ function populatePlaceResults() {
     });
 }
 
-function prepPlaceSearch(event) {
+function prepDetailsSearch(event) {
     let current = event.target;
     let card = current.closest(".event");
     console.log(card);
@@ -387,6 +387,6 @@ document
     .addEventListener("click", function (event) {
         if (event.target.className.includes("activator")) {
             console.log("card clicked");
-            prepPlaceSearch(event);
+            prepDetailsSearch(event);
         }
     });
