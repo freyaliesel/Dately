@@ -28,12 +28,12 @@ function accessYelp() {
     })
         .then((response) => response.json())
         .then(function (data) {
-            generateEventResults(data);
+            populateEventResults(data);
             localStorage.setItem("yelpData", JSON.stringify(data));
         });
 }
 
-function generateEventResults(data) {
+function populateEventResults(data) {
     console.log("displaying results");
     let events = data.events;
     console.log(events);
@@ -196,19 +196,17 @@ function initSearch(coords) {
     service = new google.maps.places.PlacesService(elem);
     service.textSearch(request, googleTextSearch);
 }
-const placeArray = new Array();
 
 function googleTextSearch(request, status) {
     if (status === google.maps.places.PlacesServiceStatus.OK && request) {
         console.log("processing places");
         localStorage.setItem("places", JSON.stringify(request));
-        generatePlaceResults();
+        populatePlaceResults();
     }
 }
 
-
-
-function generatePlaceResults() {
+const placeArray = new Array();
+function populatePlaceResults() {
     console.log("displaying places");
     let places = JSON.parse(localStorage.getItem("places"));
     console.log(places);
@@ -371,7 +369,6 @@ function populatePlaceDetails(data) {
         aEl.textContent = "Website";
     }
 }
-
 
 accessYelp();
 
