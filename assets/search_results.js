@@ -206,6 +206,8 @@ function googleTextSearch(request, status) {
     }
 }
 
+
+
 function generatePlaceResults() {
     console.log("displaying places");
     let places = JSON.parse(localStorage.getItem("places"));
@@ -288,7 +290,7 @@ function prepPlaceSearch(event) {
     index = index.substring(index.indexOf("-") + 1);
     localStorage.setItem("resCardIndex", index);
     let passId = placeArray[index];
-    getPlaceInfo(passId);
+    getPlaceDetails(passId);
 }
 
 function googlePlaceSearch(placeDetails, status) {
@@ -297,7 +299,30 @@ function googlePlaceSearch(placeDetails, status) {
     }
 }
 
+function getPlaceDetails(passId) {
+    let service;
+    var elem = document.querySelector("#empty");
+    console.log("getting place details from place_id");
 
+    // get place_id for the specific card user clicked
+    let placeId = passId;
+    console.log(placeId);
+
+    var placeRequest = {
+        placeId: placeId,
+        fields: [
+            "name",
+            "formatted_phone_number",
+            "photos",
+            "website",
+            "international_phone_number",
+            "opening_hours",
+        ],
+    };
+
+    service = new google.maps.places.PlacesService(elem);
+    service.getDetails(placeRequest, googlePlaceSearch);
+}
 
 function generatePlaceDetails(data) {
     console.log(data);
@@ -349,30 +374,7 @@ function generatePlaceDetails(data) {
 
 
 
-function getPlaceInfo(passId) {
-    let service;
-    var elem = document.querySelector("#empty");
-    console.log("getting place details from place_id");
 
-    // get place_id for the specific card user clicked
-    let placeId = passId;
-    console.log(placeId);
-
-    var placeRequest = {
-        placeId: placeId,
-        fields: [
-            "name",
-            "formatted_phone_number",
-            "photos",
-            "website",
-            "international_phone_number",
-            "opening_hours",
-        ],
-    };
-
-    service = new google.maps.places.PlacesService(elem);
-    service.getDetails(placeRequest, googlePlaceSearch);
-}
 
 accessYelp();
 
