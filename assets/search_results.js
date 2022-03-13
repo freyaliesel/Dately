@@ -14,15 +14,15 @@ function checkSearchHistory() {
         // send yelpData to populate event results
         populateEventResults(yelpData);
         console.log("populating yelp results based on last search performed");
-
         // check if there is stored google search data
         let gTextData = JSON.parse(localStorage.getItem("gTextData"));
         if (gTextData !== null && gTextData.length > 0) {
             populatePlaceResults();
             console.log("populating restaurants based on last event selected");
         }
-    } else {
-        // something went wrong and alert the user
+    } // something went wrong and alert the user
+    else {
+        // Need an alert of some kind, either text in-line or modal
         console.log("checkHistory: something went wrong");
     }
 }
@@ -403,26 +403,19 @@ function populatePlaceDetails(data) {
     }
 }
 
-// accessYelp();
 // on page load, parse and pass most recent search data to yelp API
-// parseLocation(JSON.parse(localStorage.getItem("yelpParam")));
 checkSearchHistory();
 
 document
-    .getElementById("yelp-results")
+    .querySelector("body")
     .addEventListener("click", function (event) {
         if (event.target.className.includes("bucketlist-add")) {
             console.log("button clicked");
             passEventCoords(event);
         }
-    });
-
-// listener for user click on a place card
-document
-    .getElementById("google-results")
-    .addEventListener("click", function (event) {
-        if (event.target.className.includes("activator")) {
+        else if (event.target.className.includes("activator")) {
             console.log("card clicked");
             prepDetailsSearch(event);
         }
     });
+
