@@ -409,13 +409,27 @@ checkSearchHistory();
 document
     .querySelector("body")
     .addEventListener("click", function (event) {
-        if (event.target.className.includes("bucketlist-add")) {
-            console.log("button clicked");
-            passEventCoords(event);
-        }
-        else if (event.target.className.includes("activator")) {
-            console.log("card clicked");
-            prepDetailsSearch(event);
+        let container = event.target.closest(".card-parent");
+
+        if (container.id == "yelp-results") {
+            if (event.target.className.includes("bucketlist-add")) {
+                console.log("button clicked");
+                passEventCoords(event);
+            }
+        } else if (container.id == "google-results") {
+            if (event.target.className.includes("activator")) {
+                console.log("card clicked");
+                prepDetailsSearch(event);
+            }
         }
     });
 
+// listener for user click on a place card
+// document
+//     .getElementById("google-results")
+//     .addEventListener("click", function (event) {
+//         if (event.target.className.includes("activator")) {
+//             console.log("card clicked");
+//             prepDetailsSearch(event);
+//         }
+//     });
