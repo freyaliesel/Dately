@@ -315,13 +315,22 @@ function populatePlaceResults() {
 function prepDetailsSearch(event) {
     let current = event.target;
     let card = current.closest(".event");
-    console.log(card);
-    let index = card.getAttribute("id");
-    index = index.substring(index.indexOf("-") + 1);
-    localStorage.setItem("resCardIndex", index);
-    let placeArray = JSON.parse(localStorage.getItem("gIDs"));
-    let passId = placeArray[index];
-    getPlaceDetails(passId);
+
+    let detailsEl = card.querySelector(".card-reveal");
+    let details = detailsEl.children;
+
+    // check if details exist before making API call
+    if (details.length == 0) {
+        let index = card.getAttribute("id");
+        index = index.substring(index.indexOf("-") + 1);
+        localStorage.setItem("resCardIndex", index);
+        let placeArray = JSON.parse(localStorage.getItem("gIDs"));
+        let passId = placeArray[index];
+        getPlaceDetails(passId);
+    } else {
+        console.log("details exist");
+        return;
+    }
 }
 
 function getPlaceDetails(passId) {
@@ -406,11 +415,10 @@ function populatePlaceDetails(data) {
 // on page load, parse and pass most recent search data to yelp API
 checkSearchHistory();
 
-document
-    .querySelector("body")
-    .addEventListener("click", function (event) {
-        let container = event.target.closest(".card-parent");
+document.querySelector("body").addEventListener("click", function (event) {
+    let container = event.target.closest(".card-parent");
 
+    if (container !== null) {
         if (container.id == "yelp-results") {
             if (event.target.className.includes("bucketlist-add")) {
                 console.log("button clicked");
@@ -422,14 +430,5 @@ document
                 prepDetailsSearch(event);
             }
         }
-    });
-
-// listener for user click on a place card
-// document
-//     .getElementById("google-results")
-//     .addEventListener("click", function (event) {
-//         if (event.target.className.includes("activator")) {
-//             console.log("card clicked");
-//             prepDetailsSearch(event);
-//         }
-//     });
+    }
+});
