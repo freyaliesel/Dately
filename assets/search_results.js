@@ -1,3 +1,36 @@
+// determine if need to call api on page load
+function checkSearchHistory() {
+    let yelpParam = JSON.parse(localStorage.getItem("yelpParam"));
+    let yelpData = JSON.parse(localStorage.getItem("yelpData"));
+
+    // if the search parameters exist
+    if (localStorage.getItem("yelpParam") !== null) {
+        if (yelpParam.date && yelpParam.location) {
+            // prepare to send to api, then clear the storage
+            parseLocation(yelpParam);
+            localStorage.removeItem("yelpParam");
+            console.log("performing new yelp search")
+        }
+    } //if not, check if there is valid stored search data
+    else if (localStorage.getItem("yelpData") !== null) {
+        if (yelpData.events.length > 0) {
+            // send yelpData to populate event results
+            populateEventResults(yelpData);
+            console.log("populating yelp results based on last search performed");
+
+            // check if there is stored google search data
+            let googlePlaceData = JSON.parse(localStorage.getItem("gTextData"));
+            if (googlePlaceData.length > 0) {
+                populatePlaceResults();
+                console.log("populating restaurants based on last event selected")
+            }
+        }
+    } else {
+        // something went wrong and alert the user
+        console.log("checkHistory: something went wrong");
+    }
+}
+
 // implementing Yelp API
 
 function parseLocation(param) {
@@ -11,6 +44,7 @@ function parseLocation(param) {
 
 // use cors-anywhere to access yelp API
 // accepts object with properties "location" value string with no spaces and "date" value unix time stamp
+// this will need to change if/when implementing variable parameter calls - will need additional function
 function accessYelp(param) {
     // let param = retrieveLocation();
     let url =
@@ -201,29 +235,29 @@ function initSearch(coords) {
 function googleTextSearch(request, status) {
     if (status === google.maps.places.PlacesServiceStatus.OK && request) {
         console.log("processing places");
-        localStorage.setItem("places", JSON.stringify(request));
+        localStorage.setItem("gTextData", JSON.stringify(request));
         populatePlaceResults();
     }
 }
 
-const placeArray = new Array();
 function populatePlaceResults() {
     console.log("displaying places");
-    let places = JSON.parse(localStorage.getItem("places"));
+    let placeArray = [];
+    let places = JSON.parse(localStorage.getItem("gTextData"));
     console.log(places);
     let displayEl = document.getElementById("google-results");
-    let i = 0;
+    let index = 0;
 
     places.forEach((place) => {
         //create card
         //add logic to not display closed businesses, but keep increasing the index of the array goes up
         let cardEl = document.createElement("div");
         cardEl.className = "card event";
-        cardEl.id = `card-${i}`;
+        cardEl.id = `card-${index}`;
         displayEl.appendChild(cardEl);
         //create array for cardEl.id and corresponding place_id
         placeArray.push(place.place_id);
-        i++;
+        index++;
 
         // div for image
         let divEl = document.createElement("div");
@@ -279,6 +313,7 @@ function populatePlaceResults() {
         divEl.className = "card-reveal";
         cardEl.appendChild(divEl);
     });
+    localStorage.setItem("gIDs", JSON.stringify(placeArray));
 }
 
 function prepDetailsSearch(event) {
@@ -288,6 +323,7 @@ function prepDetailsSearch(event) {
     let index = card.getAttribute("id");
     index = index.substring(index.indexOf("-") + 1);
     localStorage.setItem("resCardIndex", index);
+    let placeArray = JSON.parse(localStorage.getItem("gIDs"));
     let passId = placeArray[index];
     getPlaceDetails(passId);
 }
@@ -373,7 +409,8 @@ function populatePlaceDetails(data) {
 
 // accessYelp();
 // on page load, parse and pass most recent search data to yelp API
-parseLocation(JSON.parse(localStorage.getItem("yelpParam")));
+// parseLocation(JSON.parse(localStorage.getItem("yelpParam")));
+checkSearchHistory();
 
 document
     .getElementById("yelp-results")
