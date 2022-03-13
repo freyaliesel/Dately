@@ -207,7 +207,7 @@ function googleTextSearch(request, status) {
     }
 }
 
-function callbackTwo(placeDetails, status) {
+function googlePlaceSearch(placeDetails, status) {
     if (status == google.maps.places.PlacesServiceStatus.OK) {
         generatePlaceDetails(placeDetails);
     }
@@ -386,7 +386,7 @@ function getPlaceInfo(passId) {
     };
 
     service = new google.maps.places.PlacesService(elem);
-    service.getDetails(placeRequest, callbackTwo);
+    service.getDetails(placeRequest, googlePlaceSearch);
 }
 
 accessYelp();
