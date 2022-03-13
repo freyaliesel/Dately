@@ -11,149 +11,182 @@ function retrieveLocation() {
 // use cors-anywhere to access yelp API
 // accepts 2 variables as input: locaiton and date in unix
 function accessYelp() {
-  let param = retrieveLocation();
-  let url =
-    "https://cors-anywhere-bc.herokuapp.com/https://api.yelp.com/v3/events?";
-  let location = "location=" + param.location;
-  let startDate = "&start_date=" + param.date;
-  let results = "&limit=10";
-  let excluded =
-    "&excluded_events=chicago-chicago-bachelor-party-exotic-dancers-topless-nudy-waitresses-call-us-312-488-4673";
-  fetch(url + location + startDate + results + excluded, {
-    method: "get",
-    headers: new Headers({
-      Authorization:
-        "Bearer DdZGPiM69U6N1FeqeFAXnUK8NSX_7W9ozcMbNxCnJA16g309AiVdccMB2B9PEf8U7-aLoMGc3yp0H6ynxVMrVwgYHYJsMP7tqXt66pwj0kJDkBr4Mb34W-PjwGEpYnYx",
-    }),
-  })
-    .then((response) => response.json())
-    .then(function (data) {
-      generateEventResults(data);
-      localStorage.setItem("yelpData", JSON.stringify(data));
-    });
+    let param = retrieveLocation();
+    let url =
+        "https://cors-anywhere-bc.herokuapp.com/https://api.yelp.com/v3/events?";
+    let location = "location=" + param.location;
+    let startDate = "&start_date=" + param.date;
+    let results = "&limit=10";
+    let excluded =
+        "&excluded_events=chicago-chicago-bachelor-party-exotic-dancers-topless-nudy-waitresses-call-us-312-488-4673";
+    fetch(url + location + startDate + results + excluded, {
+        method: "get",
+        headers: new Headers({
+            Authorization:
+                "Bearer DdZGPiM69U6N1FeqeFAXnUK8NSX_7W9ozcMbNxCnJA16g309AiVdccMB2B9PEf8U7-aLoMGc3yp0H6ynxVMrVwgYHYJsMP7tqXt66pwj0kJDkBr4Mb34W-PjwGEpYnYx",
+        }),
+    })
+        .then((response) => response.json())
+        .then(function (data) {
+            generateEventResults(data);
+            localStorage.setItem("yelpData", JSON.stringify(data));
+        });
 }
 
 function generateEventResults(data) {
-  console.log("displaying results");
-  let events = data.events;
-  console.log(events);
-  let displayEl = document.getElementById("yelp-results");
-  let index = 0;
-  events.forEach((event) => {
-    // create card
-    let cardEl = document.createElement("div");
-    cardEl.className = "card event";
-    cardEl.id = `card-${index}`;
-    displayEl.appendChild(cardEl);
-    index++;
+    console.log("displaying results");
+    let events = data.events;
+    console.log(events);
+    let displayEl = document.getElementById("yelp-results");
+    let index = 0;
+    events.forEach((event) => {
+        // create card
+        let cardEl = document.createElement("div");
+        cardEl.className = "card event text-black";
+        cardEl.id = `card-${index}`;
+        displayEl.appendChild(cardEl);
+        index++;
 
-    // div for image
-    let divEl = document.createElement("div");
-    divEl.className = "card-image";
-    cardEl.appendChild(divEl);
+        // div for image
+        let divEl = document.createElement("div");
+        cardEl.appendChild(divEl);
+        divEl.className = "card-image";
 
-    // image
-    let imgEl = document.createElement("img");
-    imgEl.setAttribute("src", event.image_url);
-    divEl.appendChild(imgEl);
+        // image
+        let imgEl = document.createElement("img");
+        imgEl.className = "activator";
+        imgEl.setAttribute("src", event.image_url);
+        divEl.appendChild(imgEl);
 
-    // add button
-    let buttonEl = document.createElement("button");
-    buttonEl.className =
-      "btn-floating halfway-fab waves-effect waves-light pink";
-    divEl.appendChild(buttonEl);
-    let iEl = document.createElement("i");
-    iEl.className = "material-icons";
-    iEl.textContent = "add";
-    buttonEl.appendChild(iEl);
+        // add button
+        let buttonEl = document.createElement("button");
+        buttonEl.className =
+            "btn-floating halfway-fab waves-effect waves-light pink";
+        divEl.appendChild(buttonEl);
+        let iEl = document.createElement("i");
+        iEl.className = "material-icons bucketlist-add";
+        iEl.textContent = "place";
+        buttonEl.appendChild(iEl);
 
-    // create div for content
-    divEl = document.createElement("div");
-    cardEl.appendChild(divEl);
-    divEl.className = "card-content";
+        // card content
+        divEl = document.createElement("div");
+        cardEl.appendChild(divEl);
+        divEl.className = "card-content";
 
-    // event name
-    let spanEl = document.createElement("span");
-    spanEl.className = "card-title";
-    spanEl.textContent = event.name;
-    divEl.appendChild(spanEl);
+        // event name
+        let spanEl = document.createElement("span");
+        spanEl.className = "card-title activator";
+        spanEl.textContent = event.name;
+        divEl.appendChild(spanEl);
 
-    // date of event
-    pEl = document.createElement("p");
-    divEl.appendChild(pEl);
-    pEl.textContent = dayjs(event.time_start).format("ddd, MMM D, h:mma");
+        // create div for revealed content
+        divEl = document.createElement("div");
+        cardEl.appendChild(divEl);
+        divEl.className = "card-reveal";
 
-    // cost
-    pEl = document.createElement("p");
-    divEl.appendChild(pEl);
-    event.cost !== null
-      ? (pEl.textContent = "$" + event.cost)
-      : (pEl.textContent = "Free");
+        spanEl = document.createElement("span");
+        divEl.appendChild(spanEl);
+        spanEl.className = "card-title";
+        iEl = document.createElement("i");
+        spanEl.appendChild(iEl);
+        iEl.className = "material-icons right";
+        iEl.textContent = "close";
+        iEl.style.color = "black";
 
-    // event address
-    pEl = document.createElement("p");
-    divEl.appendChild(pEl);
-    pEl.textContent = event.location.address1;
+        // date of event
+        pEl = document.createElement("p");
+        divEl.appendChild(pEl);
+        pEl.textContent = dayjs(event.time_start).format("ddd, MMM D, h:mma");
 
-    // // event category
-    // pEl = document.createElement("p");
-    // divEl.appendChild(pEl);
-    // pEl.textContent = event.category;
+        // cost
+        pEl = document.createElement("p");
+        divEl.appendChild(pEl);
+        event.cost !== null
+            ? (pEl.textContent = "$" + event.cost)
+            : (pEl.textContent = "Free");
 
-    // event description
-    pEl = document.createElement("p");
-    divEl.appendChild(pEl);
-    pEl.textContent = event.description;
+        // event address
+        pEl = document.createElement("p");
+        divEl.appendChild(pEl);
+        pEl.textContent = event.location.address1;
 
-    // create div for links
-    divEl = document.createElement("div");
-    divEl.className = "card-action";
-    cardEl.appendChild(divEl);
+        // // event category
+        // pEl = document.createElement("p");
+        // divEl.appendChild(pEl);
+        // pEl.textContent = event.category;
 
-    // event site URL
-    let aEl = document.createElement("a");
-    divEl.appendChild(aEl);
-    aEl.setAttribute("href", event.event_site_url);
-    aEl.textContent = "See on Yelp";
+        // event description
+        pEl = document.createElement("p");
+        divEl.appendChild(pEl);
+        pEl.textContent = event.description;
+        pEl.style.borderTop = "1px solid white";
+        pEl.style.paddingTop = "10px";
 
-    // yelp link
-    aEl = document.createElement("a");
-    divEl.appendChild(aEl);
-    aEl.setAttribute("href", event.tickets_url);
-    aEl.textContent = "Get Tickets";
-  });
+        // create div for button
+        let dEl = document.createElement("div");
+        divEl.appendChild(dEl);
+        dEl.className = "card-action";
+        // dEl.style.maxHeight = "21px";
+
+        buttonEl = document.createElement("button");
+        dEl.appendChild(buttonEl);
+        buttonEl.className = "waves-effect waves-light white-text btn-flat pink center-align";
+        buttonEl.textContent = "Find Restaurants";
+        iEl = document.createElement("i");
+        iEl.className = "material-icons left bucketlist-add";
+        iEl.textContent = "place";
+        buttonEl.appendChild(iEl);
+
+        // create div for links
+        divEl = document.createElement("div");
+        divEl.className = "card-action";
+        cardEl.appendChild(divEl);
+
+        // event site URL
+        let aEl = document.createElement("a");
+        divEl.appendChild(aEl);
+        aEl.setAttribute("href", event.event_site_url);
+        aEl.textContent = "See on Yelp";
+
+        // yelp link
+        aEl = document.createElement("a");
+        divEl.appendChild(aEl);
+        aEl.setAttribute("href", event.tickets_url);
+        aEl.textContent = "Get Tickets";
+    });
 }
 
 function passEventCoords(event) {
-  event.stopPropagation();
-  let current = event.target;
-  // console.log(current);
+    event.stopPropagation();
+    let current = event.target;
+    // console.log(current);
 
-  let card = current.closest(".event");
-  console.log(card);
-  let index = card.getAttribute("id");
-  index = index.substring(index.indexOf("-") + 1);
+    let card = current.closest(".event");
+    console.log(card);
+    let index = card.getAttribute("id");
+    index = index.substring(index.indexOf("-") + 1);
 
-  let data = JSON.parse(localStorage.getItem("yelpData"));
-  let coords = {
-    latitude: data.events[index].latitude,
-    longitude: data.events[index].longitude,
-  };
-  // console.log(coords)
+    let data = JSON.parse(localStorage.getItem("yelpData"));
+    let coords = {
+        latitude: data.events[index].latitude,
+        longitude: data.events[index].longitude,
+    };
+    // console.log(coords)
 
-  initSearch(coords);
+    initSearch(coords);
 }
 
 accessYelp();
 
 document
-  .getElementById("yelp-results")
-  .addEventListener("click", function (event) {
-    if (event.target.className == "material-icons") {
-      console.log("button clicked");
-      passEventCoords(event);
-    }
-  });
+    .getElementById("yelp-results")
+    .addEventListener("click", function (event) {
+        if (event.target.className.includes("bucketlist-add")) {
+            console.log("button clicked");
+            passEventCoords(event);
+        }
+    });
+
 
 // google api
 const placeArray = new Array();
