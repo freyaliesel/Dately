@@ -1,17 +1,57 @@
-// implementing Yelp API
+// determine if need to call api on page load
+function checkSearchHistory() {
+    let yelpParam = JSON.parse(localStorage.getItem("yelpParam"));
+    let yelpData = JSON.parse(localStorage.getItem("yelpData"));
 
-function retrieveLocation() {
-    let searchParameters = JSON.parse(localStorage.getItem("searchParameters"));
-    searchParameters.date = dayjs(searchParameters.date).unix();
-    searchParameters.location = searchParameters.location.replace(/\s/g, "");
-    return searchParameters;
+    // if the search parameters exist
+    if (yelpParam !== null && yelpParam.date && yelpParam.location) {
+        // send to api, then clear the storage
+        parseLocation(yelpParam);
+        localStorage.removeItem("yelpParam");
+        console.log("performing new yelp search");
+    } // if not, check if there is valid stored search data
+    else if (yelpData !== null && yelpData.events.length > 0) {
+        // send yelpData to populate event results
+        populateEventResults(yelpData);
+        console.log("populating yelp results based on last search performed");
+        // check if there is stored google search data
+        let gTextData = JSON.parse(localStorage.getItem("gTextData"));
+        if (gTextData !== null && gTextData.length > 0) {
+            populatePlaceResults();
+            console.log("populating restaurants based on last event selected");
+        }
+    } // something went wrong and alert the user
+    else {
+        let displayEl = document.getElementById("yelp-results");
+
+        if (document.getElementsByTagName("h4").length > 0) {
+            console.log(
+                "checkHistory: something went wrong on first search on page"
+            );
+            // needs a modal or pop up to alert user something went wrong
+        } else if (document.querySelectorAll(".card").length > 0) {
+            // Need an alert of some kind, either text in-line or modal
+            console.log("checkHistory: something went wrong");
+        } else {
+            // user has not yet performed a search
+            let textEl = document.createElement("h4");
+            displayEl.appendChild(textEl);
+            textEl.textContent = "Search for an event to get started!";
+        }
+    }
 }
-// console.log(retrieveLocation());
+
+// prepare parameters to send to Yelp API
+function parseLocation(param) {
+    param.date = dayjs(param.date).unix();
+    param.location = param.location.replace(/\s/g, "");
+    accessYelp(param);
+}
 
 // use cors-anywhere to access yelp API
-// accepts 2 variables as input: locaiton and date in unix
-function accessYelp() {
-    let param = retrieveLocation();
+// this will need to change if/when implementing variable parameter calls - will need additional function
+function accessYelp(param) {
+    // accepts object with properties "location" value string with no spaces and "date" value unix time stamp
     let url =
         "https://cors-anywhere-bc.herokuapp.com/https://api.yelp.com/v3/events?";
     let location = "location=" + param.location;
@@ -33,6 +73,7 @@ function accessYelp() {
         });
 }
 
+// make cards for yelp results
 function populateEventResults(data) {
     console.log("displaying results");
     let events = data.events;
@@ -110,11 +151,6 @@ function populateEventResults(data) {
         divEl.appendChild(pEl);
         pEl.textContent = event.location.address1;
 
-        // // event category
-        // pEl = document.createElement("p");
-        // divEl.appendChild(pEl);
-        // pEl.textContent = event.category;
-
         // event description
         pEl = document.createElement("p");
         divEl.appendChild(pEl);
@@ -126,8 +162,8 @@ function populateEventResults(data) {
         let dEl = document.createElement("div");
         divEl.appendChild(dEl);
         dEl.className = "card-action";
-        // dEl.style.maxHeight = "21px";
 
+        // make the button
         buttonEl = document.createElement("button");
         dEl.appendChild(buttonEl);
         buttonEl.className =
@@ -157,12 +193,13 @@ function populateEventResults(data) {
     });
 }
 
+// prepare and pass parameters for google search
 function passEventCoords(event) {
     event.stopPropagation();
     let current = event.target;
-    // console.log(current);
-
+    let parentEl = document.getElementById("yelp-results");
     let card = current.closest(".event");
+
     console.log(card);
     let index = card.getAttribute("id");
     index = index.substring(index.indexOf("-") + 1);
@@ -172,13 +209,25 @@ function passEventCoords(event) {
         latitude: data.events[index].latitude,
         longitude: data.events[index].longitude,
     };
-    // console.log(coords)
-
     initSearch(coords);
 }
 
-// google api
-// kicks off when user clicks a button for an event
+function applyGlow(click) {
+    console.log("applying glow to selected card");
+
+    let card = click.target;
+    let current = card.closest(".event");
+    let parent = current.closest(".card-container");
+    let previous = parent.querySelector(".selected");
+
+    current.classList.add("selected");
+
+    if (previous) {
+        previous.classList.remove("selected");
+    }
+}
+
+// send parameters to google for initial place information
 function initSearch(coords) {
     let service;
     var elem = document.querySelector("#google-results");
@@ -197,32 +246,34 @@ function initSearch(coords) {
     service.textSearch(request, googleTextSearch);
 }
 
+// if status is okay, send data to make cards
 function googleTextSearch(request, status) {
     if (status === google.maps.places.PlacesServiceStatus.OK && request) {
         console.log("processing places");
-        localStorage.setItem("places", JSON.stringify(request));
+        localStorage.setItem("gTextData", JSON.stringify(request));
         populatePlaceResults();
     }
 }
 
-const placeArray = new Array();
+// make cards for google results
 function populatePlaceResults() {
     console.log("displaying places");
-    let places = JSON.parse(localStorage.getItem("places"));
+    let placeArray = [];
+    let places = JSON.parse(localStorage.getItem("gTextData"));
     console.log(places);
     let displayEl = document.getElementById("google-results");
-    let i = 0;
+    let index = 0;
 
     places.forEach((place) => {
         //create card
         //add logic to not display closed businesses, but keep increasing the index of the array goes up
         let cardEl = document.createElement("div");
         cardEl.className = "card event";
-        cardEl.id = `card-${i}`;
+        cardEl.id = `card-${index}`;
         displayEl.appendChild(cardEl);
         //create array for cardEl.id and corresponding place_id
         placeArray.push(place.place_id);
-        i++;
+        index++;
 
         // div for image
         let divEl = document.createElement("div");
@@ -241,7 +292,7 @@ function populatePlaceResults() {
             "btn-floating halfway-fab waves-effect waves-light pink";
         divEl.appendChild(buttonEl);
         let iEl = document.createElement("i");
-        iEl.className = "material-icons";
+        iEl.className = "material-icons bucketlist-add";
         iEl.textContent = "add";
         buttonEl.appendChild(iEl);
 
@@ -278,19 +329,32 @@ function populatePlaceResults() {
         divEl.className = "card-reveal";
         cardEl.appendChild(divEl);
     });
+    localStorage.setItem("gIDs", JSON.stringify(placeArray));
 }
 
+// prepare parameters for details search
 function prepDetailsSearch(event) {
     let current = event.target;
     let card = current.closest(".event");
-    console.log(card);
-    let index = card.getAttribute("id");
-    index = index.substring(index.indexOf("-") + 1);
-    localStorage.setItem("resCardIndex", index);
-    let passId = placeArray[index];
-    getPlaceDetails(passId);
+
+    let detailsEl = card.querySelector(".card-reveal");
+    let details = detailsEl.children;
+
+    // check if details exist before making API call
+    if (details.length == 0) {
+        let index = card.getAttribute("id");
+        index = index.substring(index.indexOf("-") + 1);
+        localStorage.setItem("resCardIndex", index);
+        let placeArray = JSON.parse(localStorage.getItem("gIDs"));
+        let passId = placeArray[index];
+        getPlaceDetails(passId);
+    } else {
+        console.log("details exist");
+        return;
+    }
 }
 
+// send parameters to google for detailed information
 function getPlaceDetails(passId) {
     let service;
     var elem = document.querySelector("#empty");
@@ -316,12 +380,14 @@ function getPlaceDetails(passId) {
     service.getDetails(placeRequest, googlePlaceSearch);
 }
 
+// if status is okay, send data to make cards
 function googlePlaceSearch(placeDetails, status) {
     if (status == google.maps.places.PlacesServiceStatus.OK) {
         populatePlaceDetails(placeDetails);
     }
 }
 
+// populate details on card if not already present
 function populatePlaceDetails(data) {
     console.log(data);
     let index = localStorage.getItem("resCardIndex");
@@ -330,8 +396,6 @@ function populatePlaceDetails(data) {
 
     let cards = parentContainer.children;
     //console.log(cards);
-
-    //console.log(cards[index]);
 
     let reveal = cards[index].children[3];
 
@@ -370,23 +434,27 @@ function populatePlaceDetails(data) {
     }
 }
 
-accessYelp();
+// on page load, parse and pass most recent search data to yelp API
+checkSearchHistory();
 
-document
-    .getElementById("yelp-results")
-    .addEventListener("click", function (event) {
-        if (event.target.className.includes("bucketlist-add")) {
-            console.log("button clicked");
-            passEventCoords(event);
-        }
-    });
+// click query selector event delegator
+document.querySelector("body").addEventListener("click", function (event) {
+    let container = event.target.closest(".card-parent");
 
-// listener for user click on a place card
-document
-    .getElementById("google-results")
-    .addEventListener("click", function (event) {
-        if (event.target.className.includes("activator")) {
-            console.log("card clicked");
-            prepDetailsSearch(event);
+    if (container !== null) {
+        if (container.id == "yelp-results") {
+            if (event.target.className.includes("bucketlist-add")) {
+                console.log("button clicked");
+                passEventCoords(event);
+                applyGlow(event);
+            }
+        } else if (container.id == "google-results") {
+            if (event.target.className.includes("bucketlist-add")) {
+                applyGlow(event);
+            } else if (event.target.className.includes("activator")) {
+                console.log("card clicked");
+                prepDetailsSearch(event);
+            }
         }
-    });
+    }
+});
