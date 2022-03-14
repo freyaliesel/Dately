@@ -27,22 +27,18 @@ function checkSearchHistory() {
     }
 }
 
-// implementing Yelp API
-
+// prepare parameters to send to Yelp API
 function parseLocation(param) {
-    // let searchParameters = JSON.parse(localStorage.getItem("searchParameters"));
     param.date = dayjs(param.date).unix();
     param.location = param.location.replace(/\s/g, "");
-    // return searchParameters;
     accessYelp(param);
 }
-// console.log(retrieveLocation());
+
 
 // use cors-anywhere to access yelp API
-// accepts object with properties "location" value string with no spaces and "date" value unix time stamp
 // this will need to change if/when implementing variable parameter calls - will need additional function
 function accessYelp(param) {
-    // let param = retrieveLocation();
+// accepts object with properties "location" value string with no spaces and "date" value unix time stamp
     let url =
         "https://cors-anywhere-bc.herokuapp.com/https://api.yelp.com/v3/events?";
     let location = "location=" + param.location;
@@ -64,6 +60,7 @@ function accessYelp(param) {
         });
 }
 
+// make cards for yelp results
 function populateEventResults(data) {
     console.log("displaying results");
     let events = data.events;
@@ -141,11 +138,6 @@ function populateEventResults(data) {
         divEl.appendChild(pEl);
         pEl.textContent = event.location.address1;
 
-        // // event category
-        // pEl = document.createElement("p");
-        // divEl.appendChild(pEl);
-        // pEl.textContent = event.category;
-
         // event description
         pEl = document.createElement("p");
         divEl.appendChild(pEl);
@@ -157,8 +149,8 @@ function populateEventResults(data) {
         let dEl = document.createElement("div");
         divEl.appendChild(dEl);
         dEl.className = "card-action";
-        // dEl.style.maxHeight = "21px";
 
+        // make the button
         buttonEl = document.createElement("button");
         dEl.appendChild(buttonEl);
         buttonEl.className =
@@ -188,10 +180,10 @@ function populateEventResults(data) {
     });
 }
 
+// prepare and pass parameters for google search
 function passEventCoords(event) {
     event.stopPropagation();
     let current = event.target;
-    // console.log(current);
 
     let card = current.closest(".event");
     console.log(card);
@@ -203,13 +195,10 @@ function passEventCoords(event) {
         latitude: data.events[index].latitude,
         longitude: data.events[index].longitude,
     };
-    // console.log(coords)
-
     initSearch(coords);
 }
 
-// google api
-// kicks off when user clicks a button for an event
+// send parameters to google for initial place information
 function initSearch(coords) {
     let service;
     var elem = document.querySelector("#google-results");
@@ -228,6 +217,7 @@ function initSearch(coords) {
     service.textSearch(request, googleTextSearch);
 }
 
+// if status is okay, send data to make cards
 function googleTextSearch(request, status) {
     if (status === google.maps.places.PlacesServiceStatus.OK && request) {
         console.log("processing places");
@@ -236,6 +226,7 @@ function googleTextSearch(request, status) {
     }
 }
 
+// make cards for google results
 function populatePlaceResults() {
     console.log("displaying places");
     let placeArray = [];
@@ -312,6 +303,7 @@ function populatePlaceResults() {
     localStorage.setItem("gIDs", JSON.stringify(placeArray));
 }
 
+// prepare parameters for details search
 function prepDetailsSearch(event) {
     let current = event.target;
     let card = current.closest(".event");
@@ -333,6 +325,7 @@ function prepDetailsSearch(event) {
     }
 }
 
+// send parameters to google for detailed information
 function getPlaceDetails(passId) {
     let service;
     var elem = document.querySelector("#empty");
@@ -358,12 +351,14 @@ function getPlaceDetails(passId) {
     service.getDetails(placeRequest, googlePlaceSearch);
 }
 
+// if status is okay, send data to make cards
 function googlePlaceSearch(placeDetails, status) {
     if (status == google.maps.places.PlacesServiceStatus.OK) {
         populatePlaceDetails(placeDetails);
     }
 }
 
+// populate details on card if not already present
 function populatePlaceDetails(data) {
     console.log(data);
     let index = localStorage.getItem("resCardIndex");
@@ -372,8 +367,6 @@ function populatePlaceDetails(data) {
 
     let cards = parentContainer.children;
     //console.log(cards);
-
-    //console.log(cards[index]);
 
     let reveal = cards[index].children[3];
 
@@ -415,6 +408,7 @@ function populatePlaceDetails(data) {
 // on page load, parse and pass most recent search data to yelp API
 checkSearchHistory();
 
+// click query selector event delegator
 document.querySelector("body").addEventListener("click", function (event) {
     let container = event.target.closest(".card-parent");
 
