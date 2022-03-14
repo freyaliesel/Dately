@@ -37,6 +37,7 @@ function checkSearchHistory() {
             let textEl = document.createElement("h4");
             displayEl.appendChild(textEl);
             textEl.textContent = "Search for an event to get started!";
+            textEl.className = "white-text";
         }
     }
 }
