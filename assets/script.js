@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", function () {
 function saveParameters() {
     let input = document.getElementById("location").value;
 
-    if (input.value && date) {
+    if (input && date) {
         console.log("setting search parameters");
         let param = {
             date: date,

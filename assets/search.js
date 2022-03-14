@@ -22,8 +22,22 @@ function checkSearchHistory() {
         }
     } // something went wrong and alert the user
     else {
-        // Need an alert of some kind, either text in-line or modal
-        console.log("checkHistory: something went wrong");
+        let displayEl = document.getElementById("yelp-results");
+
+        if (document.getElementsByTagName("h4").length > 0) {
+            console.log(
+                "checkHistory: something went wrong on first search on page"
+            );
+            // needs a modal or pop up to alert user something went wrong
+        } else if (document.querySelectorAll(".card").length > 0) {
+            // Need an alert of some kind, either text in-line or modal
+            console.log("checkHistory: something went wrong");
+        } else {
+            // user has not yet performed a search
+            let textEl = document.createElement("h4");
+            displayEl.appendChild(textEl);
+            textEl.textContent = "Search for an event to get started!";
+        }
     }
 }
 
