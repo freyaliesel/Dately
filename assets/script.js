@@ -35,10 +35,6 @@ function saveParameters() {
     } else {
         // tell user to input something to make another search
     }
-
-
-
-
 }
 
 // event listener - submits form and sends user to search_results
