@@ -34,11 +34,10 @@ function parseLocation(param) {
     accessYelp(param);
 }
 
-
 // use cors-anywhere to access yelp API
 // this will need to change if/when implementing variable parameter calls - will need additional function
 function accessYelp(param) {
-// accepts object with properties "location" value string with no spaces and "date" value unix time stamp
+    // accepts object with properties "location" value string with no spaces and "date" value unix time stamp
     let url =
         "https://cors-anywhere-bc.herokuapp.com/https://api.yelp.com/v3/events?";
     let location = "location=" + param.location;
@@ -184,8 +183,9 @@ function populateEventResults(data) {
 function passEventCoords(event) {
     event.stopPropagation();
     let current = event.target;
-
+    let parentEl = document.getElementById("yelp-results");
     let card = current.closest(".event");
+
     console.log(card);
     let index = card.getAttribute("id");
     index = index.substring(index.indexOf("-") + 1);
@@ -196,6 +196,21 @@ function passEventCoords(event) {
         longitude: data.events[index].longitude,
     };
     initSearch(coords);
+}
+
+function applyGlow(click) {
+    console.log("applying glow to selected card");
+
+    let card = click.target;
+    let current = card.closest(".event");
+    let parent = current.closest(".card-container");
+    let previous = parent.querySelector(".selected");
+
+    current.classList.add("selected");
+
+    if (previous) {
+        previous.classList.remove("selected");
+    }
 }
 
 // send parameters to google for initial place information
@@ -263,7 +278,7 @@ function populatePlaceResults() {
             "btn-floating halfway-fab waves-effect waves-light pink";
         divEl.appendChild(buttonEl);
         let iEl = document.createElement("i");
-        iEl.className = "material-icons";
+        iEl.className = "material-icons bucketlist-add";
         iEl.textContent = "add";
         buttonEl.appendChild(iEl);
 
@@ -417,9 +432,12 @@ document.querySelector("body").addEventListener("click", function (event) {
             if (event.target.className.includes("bucketlist-add")) {
                 console.log("button clicked");
                 passEventCoords(event);
+                applyGlow(event);
             }
         } else if (container.id == "google-results") {
-            if (event.target.className.includes("activator")) {
+            if (event.target.className.includes("bucketlist-add")) {
+                applyGlow(event);
+            } else if (event.target.className.includes("activator")) {
                 console.log("card clicked");
                 prepDetailsSearch(event);
             }
