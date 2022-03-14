@@ -44,15 +44,21 @@
           <div id="modal1" class="modal">
             <div class="modal-content">
               <h5>Search</h5>
-              <input type="text" placeholder="Select Date" class="datepicker" id="datepicker" value="" ; />
-              <br />
               <div class="input-field">
-                <input placeholder="Neighborhood name" id="location" class="browser-default">
+                <input class="datepicker validate" id="datepicker" type="text"/>
+                <label for="datepicker">Date</label>
+                <span class="helper-text" data-error="Field is required"></span>
+              </div>
+              <div class="input-field">
+                <input id="location" class="validate" type="text">
+                <label for="location">Neighborhood</label>
+                <span class="helper-text" data-error="Field is required"></span>
                 </input>
               </div>
             </div>
             <div class="modal-footer">
-              <button id="submit-btn" class="modal-close waves-effect waves-green btn-flat">Search
+              <a href="#!" class="modal-close waves-effect waves-purple btn-flat">Close</a>
+              <button id="submit-btn" class="waves-effect waves-purple btn-flat">Search
                 <!-- <a href="search_index.html" -->
                 <!-- </a> -->
               </button>
@@ -95,6 +101,7 @@
 
   <!--Scripts Go Here-->
   <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.js"
     integrity="sha512-m2PhLxj2N91eYrIGU2cmIu2d0SkaE4A14bCjVb9zykvp6WtsdriFCiXQ/8Hdj0kssUB/Nz0dMBcoLsJkSCto0Q=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>

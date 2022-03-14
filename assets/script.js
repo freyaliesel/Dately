@@ -1,10 +1,14 @@
 // set global variables to empty strings
 var date = "";
 
+
+
 // event listeners
 document.addEventListener("DOMContentLoaded", function () {
     // initialize all Materialize elements
     M.AutoInit();
+    let today = new Date().toISOString().slice(0, 10)
+    document.getElementById("datepicker").setAttribute('min', today);
 
     // when user picks a date in calendar, it stores date to 'userDate' variable in format yyyy-mm-dd
     $("#datepicker").datepicker({
@@ -18,20 +22,27 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // parses form for user input then saves in localdata for search_results page
 function saveParameters() {
-    let input = document.getElementById("location");
-    let param = {
-        date: date,
-        location: input.value,
-    };
-    localStorage.setItem("yelpParam", JSON.stringify(param));
-    console.log("setting search parameters")
-    // console.log(param);
+    let input = document.getElementById("location").value;
+
+    if (input.value && date) {
+        console.log("setting search parameters");
+        let param = {
+            date: date,
+            location: input,
+        };
+        localStorage.setItem("yelpParam", JSON.stringify(param));
+        // window.location.href = "./search_results.html";
+    } else {
+        // tell user to input something to make another search
+    }
+
+
+
+
 }
 
 // event listener - submits form and sends user to search_results
-document
-    .getElementById("submit-btn")
-    .addEventListener("click", function(){
-      saveParameters();
-      window.location.href = "./search_results.html"
-    });
+document.getElementById("submit-btn").addEventListener("click", function (event) {
+    event.preventDefault();
+    saveParameters();
+});
