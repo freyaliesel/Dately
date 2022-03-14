@@ -57,12 +57,16 @@ main {
     margin: auto;
 }
 
-.logo {
-    width: 350px;
+footer {
+    margin-top: 50px;
+    height: 60px;
+    color: rgb(189, 187, 187);
+    text-align: center;
+    padding-top: 20px;
 }
 
-.datepicker-date-display {
-    background-color: black;
+.logo {
+    width: 350px;
 }
 
 .nav-wrapper {
@@ -77,15 +81,6 @@ main {
     height: 760px;
     transition-delay: 1s;
     animation: fadeInAnimation ease 4s;
-}
-
-@keyframes fadeInAnimation {
-    0% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
-    }
 }
 
 .chicago-img {
@@ -122,6 +117,10 @@ main {
     border-radius: 10px;
 }
 
+.modal .btn-flat {
+    color: rgb(0, 221, 250);
+}
+
 .input-field {
     border-width: 3px;
 }
@@ -136,25 +135,22 @@ main {
     height: 50%;
     width: 50%;
 }
+
 .datepicker-modal {
     min-width: 475px;
     min-height: 360px;
 }
 
-.btn-flat {
-    color: rgb(0, 221, 250);
+.datepicker-date-display {
+    background-color: black;
 }
 
 .mobile-search {
     background-color: dimgray;
 }
 
-footer {
-    margin-top: 50px;
-    height: 60px;
-    color: rgb(189, 187, 187);
-    text-align: center;
-    padding-top: 20px;
+.banner {
+    width: 100%;
 }
 
 /* Cards */
@@ -180,12 +176,8 @@ footer {
     font-size: 14px;
 }
 
-.card .card-action:last-child {
+.card-action:last-child {
     align-self: flex-end;
-}
-
-.card-content p {
-    font-size: 12px;
 }
 
 .bucketlist-card {
@@ -211,10 +203,6 @@ footer {
     border-radius: 10px;
 }
 
-.banner {
-    width: 100%;
-}
-
 /* Event Cards on Search Page */
 .event {
     display: flex;
@@ -238,6 +226,14 @@ footer {
     height: fit-content;
 }
 
+@keyframes fadeInAnimation {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
 
 /* Media Queries */
 @media only screen and (max-width: 600px) {
