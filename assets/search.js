@@ -37,6 +37,7 @@ function checkSearchHistory() {
             let textEl = document.createElement("h4");
             displayEl.appendChild(textEl);
             textEl.textContent = "Search for an event to get started!";
+            textEl.className = "white-text";
         }
     }
 }
@@ -458,3 +459,25 @@ document.querySelector("body").addEventListener("click", function (event) {
         }
     }
 });
+
+function hide() {
+    console.log("hiding");
+    var display = document.getElementById("hide");
+    if (display.style.display === "none") {
+      display.style.display = "block";
+    } else {
+      display.style.display = "none";
+    }
+     show();
+  }
+
+// button click
+  function show(){
+    var display = document.getElementsByClassName("s12");
+    if (display.style.display === "show") {
+        display.style.display = "none";
+      }
+
+      // change to s6 column
+      
+}

@@ -1,7 +1,6 @@
 /* ====Universal Style==== */
 * {
     font-family: "Montserrat", sans-serif;
-    color: white;
     box-sizing: border-box;
     padding: 0;
     margin: 0;
@@ -12,21 +11,10 @@ h1 {
     font-weight: 900;
 }
 
-h4, h5, h6 {
+h4,
+h5,
+h6 {
     line-height: 2em;
-}
-
-h5 {
-    font-weight: 100;
-}
-
-
-p {
-    line-height: 1.8em;
-}
-
-p, .nav-wrapper {
-  font-size: 16px;
 }
 
 /*===========*/
@@ -42,6 +30,20 @@ body {
         rgba(34, 12, 33, 1) 100%
     );
 }
+
+/* html {
+  background: rgb(34, 12, 33);
+  background: linear-gradient(
+    130deg,
+    rgba(34, 12, 33, 1) 0%,
+    rgba(15, 30, 41, 1) 13%,
+    rgba(0, 0, 0, 1) 24%,
+    rgba(0, 0, 0, 1) 68%,
+    rgba(15, 30, 41, 1) 87%,
+    rgba(34, 12, 33, 1) 100%
+  );
+  background-attachment: fixed;
+} */
 /*===========*/
 nav {
     height: 120px;
@@ -59,8 +61,11 @@ nav li {
     line-height: 2.5;
 }
 
-nav li, .btn-small, .modal, .card-container {
-  background: linear-gradient(rgb(0, 0, 0) 0 0) padding-box,
+nav li,
+.btn-small,
+.modal,
+.card-container {
+    background: linear-gradient(rgb(0, 0, 0) 0 0) padding-box,
         linear-gradient(to right, rgb(0, 221, 250), #8b35fb, #fb3570) border-box;
 }
 
@@ -70,17 +75,21 @@ main {
     margin: auto;
 }
 
+footer {
+    margin-top: 50px;
+    height: 60px;
+    color: rgb(189, 187, 187);
+    text-align: center;
+    padding-top: 20px;
+}
+
 .logo {
     width: 350px;
 }
 
-.nav-wrapper, .modal, .input-field, .datepicker-date-display, .modal .modal-footer {
-  background-color: black;
-}
-
-/* .nav-wrapper {
+.nav-wrapper {
     font-size: 16px;
-} */
+}
 
 .row {
     padding-top: 80px;
@@ -91,27 +100,16 @@ main {
     transition-delay: 1s;
     animation: fadeInAnimation ease 4s;
 }
-@keyframes fadeInAnimation {
-    0% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
-    }
-}
 
 .chicago-img {
     width: 650px;
 }
-@media only screen and (max-width: 600px) {
-    .chicago-img {
-        width: 450px;
-        padding-right: 40px;
-        margin-top: 60px;
-    }
+
+.light-weight {
+    font-weight: 100;
 }
 
-.btn-small {
+#modal-launch {
     text-align: left;
     font-size: 16px;
     /* background: linear-gradient(rgb(0, 0, 0) 0 0) padding-box,
@@ -124,7 +122,8 @@ main {
     height: 40px;
     box-shadow: 0px 0px 10px #ff009d;
 }
-.medium {
+
+#search-icon {
     margin-right: 45px;
 }
 
@@ -137,6 +136,10 @@ main {
         linear-gradient(to right, rgb(0, 221, 250), #8b35fb, #fb3570) border-box; */
     border: 2px solid transparent;
     border-radius: 10px;
+}
+
+.modal .btn-flat {
+    color: rgb(0, 221, 250);
 }
 
 .input-field {
@@ -153,43 +156,46 @@ main {
     height: 50%;
     width: 50%;
 }
+
 .datepicker-modal {
     min-width: 475px;
     min-height: 360px;
 }
 
-.btn-flat {
-    color: rgb(0, 221, 250);
-}
-
-@media only screen and (max-width: 600px) {
-    .hide-mobile {
-        display: none;
-    }
-    .mobile-show {
-        display: show;
-    }
-}
-
-@media only screen and (min-width: 600px) {
-    .desktop-show {
-        display: show;
-    }
-    .hide-desktop {
-        display: none;
-    }
+.datepicker-date-display {
+    background-color: black;
 }
 
 .mobile-search {
     background-color: dimgray;
 }
 
-footer {
-    margin-top: 50px;
-    height: 60px;
-    color: rgb(189, 187, 187);
+.banner {
+    width: 100%;
+}
+
+.std-padding-left {
+    margin-left: 60px;
+}
+
+.chicago-image {
+    background-image: url("./links/chicago-banner.jpg");
+    background-color: #cccccc;
+    height: 500px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    z-index: -1;
+}
+
+.chicago-image-text {
     text-align: center;
-    padding-top: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
 }
 
 /* Cards */
@@ -202,46 +208,21 @@ footer {
     min-height: 760px;
 }
 
-.card
-    .card-action
-    a:not(.btn):not(.btn-large):not(.btn-small):not(.btn-large):not(.btn-floating) {
-    background-color: white;
-    color: black;
-    font-size: 14px;
-}
-
 .card:hover {
     transform: scale(1.08);
 }
 
-.card .card-content {
-    color: black;
+.card-title {
+    font-size: 20px;
+    font-weight: bold !important;
 }
 
-.card-content p {
-    background-color: white;
-    color: black;
+.card p {
     font-size: 14px;
 }
 
-.card .card-action:last-child {
+.card-action:last-child {
     align-self: flex-end;
-}
-.card .card-image .card-title {
-    color: black;
-    font-weight: bold;
-}
-
-.card-content p {
-    font-size: 12px;
-    color: black;
-    padding-bottom: 20px;
-}
-
-.card-content h5 {
-    font-size: 14px;
-    font-weight: bold;
-    color: black;
 }
 
 .bucketlist-card {
@@ -267,10 +248,6 @@ footer {
     border-radius: 10px;
 }
 
-.banner {
-    width: 100%;
-}
-
 /* Event Cards on Search Page */
 .event {
     display: flex;
@@ -282,11 +259,9 @@ footer {
     font-size: 12px;
 }
 
-/* .card-reveal span,
-.card-reveal i {
+.card .card-reveal {
     color: black;
-} */
-
+}
 /* flex */
 .card-parent {
     display: flex;
@@ -297,4 +272,40 @@ footer {
 
 .card-image {
     height: fit-content;
+}
+
+@keyframes fadeInAnimation {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+/* Media Queries */
+@media only screen and (max-width: 600px) {
+    .chicago-img {
+        width: 450px;
+        padding-right: 40px;
+        margin-top: 60px;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .hide-mobile {
+        display: none;
+    }
+    .mobile-show {
+        display: show;
+    }
+}
+
+@media only screen and (min-width: 600px) {
+    .desktop-show {
+        display: show;
+    }
+    .hide-desktop {
+        display: none;
+    }
 }
