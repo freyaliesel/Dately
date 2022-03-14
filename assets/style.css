@@ -61,8 +61,8 @@ main {
     width: 350px;
 }
 
-.nav-wrapper, .modal, .input-field, .datepicker-date-display, .modal .modal-footer {
-  background-color: black;
+.datepicker-date-display {
+    background-color: black;
 }
 
 .nav-wrapper {
