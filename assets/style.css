@@ -1,37 +1,41 @@
+/* ====Universal Style==== */
+* {
+    font-family: "Montserrat", sans-serif;
+}
+
 /* =====Fonts and Styles====*/
 h1 {
-    font-family: "Montserrat", sans-serif;
     font-weight: 900;
     color: white;
 }
+
 h2 {
-    font-family: "Montserrat", sans-serif;
     color: white;
 }
+
 h3 {
-    font-family: "Montserrat", sans-serif;
     line-height: 3em;
     color: white;
 }
+
 h4 {
-    font-family: "Montserrat", sans-serif;
     line-height: 2em;
     color: white;
 }
+
 h5 {
-    font-family: "Montserrat", sans-serif;
     font-weight: 100;
     line-height: 2em;
     color: white;
 }
+
 h6 {
-    font-family: "Montserrat", sans-serif;
     line-height: 2em;
     color: white;
 }
+
 p {
     font-size: 16px;
-    font-family: "Montserrat", sans-serif;
     line-height: 1.8em;
     color: white;
 }
@@ -61,7 +65,6 @@ nav {
 }
 
 nav li {
-    font-family: "Montserrat", sans-serif;
     background: linear-gradient(rgb(0, 0, 0) 0 0) padding-box,
         linear-gradient(to right, rgb(0, 221, 250), #8b35fb, #fb3570) border-box;
     width: 200px;
@@ -87,7 +90,6 @@ main {
 .nav-wrapper {
     background-color: black;
     font-size: 16px;
-    font-family: "Montserrat", sans-serif;
     color: white;
 }
 
@@ -122,7 +124,6 @@ main {
 }
 
 .btn-small {
-    font-family: "Montserrat", sans-serif;
     text-align: left;
     font-size: 16px;
     background: linear-gradient(rgb(0, 0, 0) 0 0) padding-box,
@@ -141,7 +142,6 @@ main {
 }
 
 .modal {
-    font-family: "Montserrat", sans-serif;
     border-width: 3px;
     border-style: solid;
     background-color: black;
@@ -154,11 +154,9 @@ main {
 }
 
 .input-field {
-    font-family: "Montserrat", sans-serif;
     border-width: 3px;
     background-color: black;
 }
-
 
 /* invalid color */
 .input-field input[type="text"].invalid {
@@ -216,7 +214,6 @@ main {
 
 footer {
     margin-top: 50px;
-    font-family: "Montserrat", sans-serif;
     height: 60px;
     color: rgb(189, 187, 187);
     text-align: center;
@@ -237,7 +234,6 @@ footer {
 .card
     .card-action
     a:not(.btn):not(.btn-large):not(.btn-small):not(.btn-large):not(.btn-floating) {
-    font-family: "Montserrat", sans-serif;
     background-color: white;
     color: black;
     font-size: 14px;
@@ -246,35 +242,33 @@ footer {
 .card:hover {
     transform: scale(1.08);
 }
+
 .card .card-content {
     background-color: white;
     color: black;
 }
 
 .card-content p {
-    font-family: "Montserrat", sans-serif;
     background-color: white;
     color: black;
     font-size: 14px;
 }
+
 .card .card-action:last-child {
     align-self: flex-end;
 }
 .card .card-image .card-title {
-    font-family: "Montserrat", sans-serif;
     color: black;
     font-weight: bold;
 }
 .container p {
     font-size: 12px;
-    font-family: "Montserrat", sans-serif;
     color: black;
     padding-bottom: 20px;
 }
 .container h5 {
     font-size: 14px;
     font-weight: bold;
-    font-family: "Montserrat", sans-serif;
     color: black;
 }
 
