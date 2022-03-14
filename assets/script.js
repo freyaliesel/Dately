@@ -31,7 +31,7 @@ function saveParameters() {
             location: input,
         };
         localStorage.setItem("yelpParam", JSON.stringify(param));
-        // window.location.href = "./search_results.html";
+        window.location.href = "./search.html";
     } else {
         // tell user to input something to make another search
     }
