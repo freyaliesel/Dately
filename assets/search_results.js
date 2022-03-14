@@ -178,6 +178,8 @@ document
         if (event.target.className.includes("bucketlist-add")) {
             console.log("button clicked");
             passEventCoords(event);
+            // function to change display
+            hide();
         }
     });
 
@@ -303,3 +305,29 @@ function initSearch(coords) {
         callback
     );
 }
+
+
+
+function hide() {
+    console.log("hiding");
+    var display = document.getElementById("hide");
+    if (display.style.display === "none") {
+      display.style.display = "block";
+    } else {
+      display.style.display = "none";
+    }
+     show();
+  }
+
+// button click
+  function show(){
+    var display = document.getElementsByClassName("s12");
+    if (display.style.display === "show") {
+        display.style.display = "none";
+      }
+
+      // change to s6 column
+      
+}
+
+

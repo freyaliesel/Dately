@@ -30,22 +30,24 @@
             </div>
         </nav>
     </header>
-    <!-- <img class="banner" src="assets/links/chicago-banner.jpg"> -->
+    <div class="chicago-image">
+        <div class="chicago-image-text">
+            <h2> Find an Event</h2>
+            <h5><b>Pick an event to see restaurants nearby and save to your bucketlist!</b></h5>
+            <button data-target="modal1" class=" modal-trigger waves-effect waves-light btn-small"><i
+                    class="medium material-icons">search</i>search</button>
+        </div>
+    </div>
     <main>
-<div class="desktop-show row">
-<div class="col s5 "> <h2> Find an Event</h2>
-<h5>Pair your event with one of chicago's top restaurants near your event location.</h5>
-<h5>Click location and then click your restaurant. To many wonderful places to choose from? No worries. We save it for later. View your bucket list to see all your saved options.</h5></div>
-        <div class="col s7 ">
-            <div>
-                <div class="card-container col s12 flow-text">
-                    <span class="flow-text">
-                        <h2>Choose Event</h2>
-                    </span>
-                    <div id="yelp-results" class="card-parent">
+        <div class="desktop-show row">
+            <div class="col s12 show">
+                <span class="flow-text">
+                    <h2>Choose Event</h2>
+                </span>
+                <div id="yelp-results" class="card-parent">
 
-                        <!-- Card prototype -->
-                        <!-- <div class="card event">
+                    <!-- Card prototype -->
+                    <!-- <div class="card event">
                         <div class="card-image">
                             <img src="assets/links/drinks.jpg">
                             <button class="btn-floating halfway-fab waves-effect waves-light pink">
@@ -65,19 +67,17 @@
                         </div>
                     </div> -->
 
-                    </div>
                 </div>
-
-
             </div>
-            <div >
-                <div class="card-container col s12 flow-text">
-                    <span class="flow-text">
-                        <h2>Choose Restaurant</h2>
-                    </span>
-                    <div id="google-results" class="card-parent">
-                        <!-- Card prototype -->
-                        <!-- <div class="card place">
+
+            <div id="hide">
+            <div class="col s6">
+                <span class="flow-text">
+                    <h2>Choose Restaurant</h2>
+                </span>
+                <div id="google-results" class="card-parent">
+                    <!-- Card prototype -->
+                    <!-- <div class="card place">
                         <div class="card-image">
                             <img src="assets/links/drinks.jpg">
                             <button class="btn-floating halfway-fab waves-effect waves-light pink">
@@ -96,8 +96,8 @@
                             <a href="#">Tickets</a>
                         </div>
                     </div> -->
-                    </div>
                 </div>
+            </div>
             </div>
         </div>
     </main>
