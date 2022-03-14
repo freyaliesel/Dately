@@ -1,52 +1,32 @@
 /* ====Universal Style==== */
 * {
     font-family: "Montserrat", sans-serif;
-}
-
-/* =====Fonts and Styles====*/
-h1 {
-    font-weight: 900;
     color: white;
-}
-
-h2 {
-    color: white;
-}
-
-h3 {
-    line-height: 3em;
-    color: white;
-}
-
-h4 {
-    line-height: 2em;
-    color: white;
-}
-
-h5 {
-    font-weight: 100;
-    line-height: 2em;
-    color: white;
-}
-
-h6 {
-    line-height: 2em;
-    color: white;
-}
-
-p {
-    font-size: 16px;
-    line-height: 1.8em;
-    color: white;
-}
-
-/*===========*/
-* {
     box-sizing: border-box;
     padding: 0;
     margin: 0;
 }
 
+/* =====Fonts and Styles====*/
+h1 {
+    font-weight: 900;
+}
+
+h4, h5, h6 {
+    line-height: 2em;
+}
+
+h5 {
+    font-weight: 100;
+}
+
+
+p {
+    font-size: 16px;
+    line-height: 1.8em;
+}
+
+/*===========*/
 body {
     background: rgb(34, 12, 33);
     background: linear-gradient(
@@ -90,11 +70,9 @@ main {
 .nav-wrapper {
     background-color: black;
     font-size: 16px;
-    color: white;
 }
 
 .row {
-    color: white;
     padding-top: 80px;
 }
 
@@ -128,7 +106,6 @@ main {
     font-size: 16px;
     background: linear-gradient(rgb(0, 0, 0) 0 0) padding-box,
         linear-gradient(to right, rgb(0, 221, 250), #8b35fb, #fb3570) border-box;
-    color: #ffffff;
     width: 200px;
     border: 2px solid transparent;
     border-radius: 10px;
@@ -178,13 +155,8 @@ main {
     min-height: 360px;
 }
 
-#location {
-    color: white;
-}
-
 .modal .modal-footer {
     background-color: black;
-    color: white;
 }
 .btn-flat {
     color: rgb(0, 221, 250);
@@ -224,7 +196,6 @@ footer {
 .card-container {
     background: linear-gradient(rgb(0, 0, 0) 0 0) padding-box,
         linear-gradient(to right, rgb(0, 221, 250), #8b35fb, #fb3570) border-box;
-    color: #ffffff;
     border: 2px solid transparent;
     border-radius: 10px;
     overflow: scroll;
@@ -244,7 +215,6 @@ footer {
 }
 
 .card .card-content {
-    background-color: white;
     color: black;
 }
 
