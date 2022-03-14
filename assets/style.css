@@ -59,7 +59,7 @@ nav li {
     line-height: 2.5;
 }
 
-nav li, .btn-small, .modal, .card-container, .selected {
+nav li, .btn-small, .modal, .card-container {
   background: linear-gradient(rgb(0, 0, 0) 0 0) padding-box,
         linear-gradient(to right, rgb(0, 221, 250), #8b35fb, #fb3570) border-box;
 }
@@ -192,7 +192,7 @@ footer {
     padding-top: 20px;
 }
 
-/* BucketList Page */
+/* Cards */
 .card-container {
     /* background: linear-gradient(rgb(0, 0, 0) 0 0) padding-box,
         linear-gradient(to right, rgb(0, 221, 250), #8b35fb, #fb3570) border-box; */
@@ -231,12 +231,14 @@ footer {
     color: black;
     font-weight: bold;
 }
-.container p {
+
+.card-content p {
     font-size: 12px;
     color: black;
     padding-bottom: 20px;
 }
-.container h5 {
+
+.card-content h5 {
     font-size: 14px;
     font-weight: bold;
     color: black;
