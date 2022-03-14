@@ -22,8 +22,11 @@ h5 {
 
 
 p {
-    font-size: 16px;
     line-height: 1.8em;
+}
+
+p, .nav-wrapper {
+  font-size: 16px;
 }
 
 /*===========*/
@@ -45,8 +48,6 @@ nav {
 }
 
 nav li {
-    background: linear-gradient(rgb(0, 0, 0) 0 0) padding-box,
-        linear-gradient(to right, rgb(0, 221, 250), #8b35fb, #fb3570) border-box;
     width: 200px;
     text-align: center;
     padding: 10px;
@@ -56,6 +57,11 @@ nav li {
     margin: 50px 10px;
     box-shadow: 0px 0px 10px #ff009d;
     line-height: 2.5;
+}
+
+nav li, .btn-small, .modal, .card-container, .selected {
+  background: linear-gradient(rgb(0, 0, 0) 0 0) padding-box,
+        linear-gradient(to right, rgb(0, 221, 250), #8b35fb, #fb3570) border-box;
 }
 
 /*===========*/
@@ -72,9 +78,9 @@ main {
   background-color: black;
 }
 
-.nav-wrapper {
+/* .nav-wrapper {
     font-size: 16px;
-}
+} */
 
 .row {
     padding-top: 80px;
@@ -108,8 +114,8 @@ main {
 .btn-small {
     text-align: left;
     font-size: 16px;
-    background: linear-gradient(rgb(0, 0, 0) 0 0) padding-box,
-        linear-gradient(to right, rgb(0, 221, 250), #8b35fb, #fb3570) border-box;
+    /* background: linear-gradient(rgb(0, 0, 0) 0 0) padding-box,
+        linear-gradient(to right, rgb(0, 221, 250), #8b35fb, #fb3570) border-box; */
     width: 200px;
     border: 2px solid transparent;
     border-radius: 10px;
@@ -127,8 +133,8 @@ main {
     border-style: solid;
     height: 50%;
     width: 50%;
-    background: linear-gradient(rgb(0, 0, 0) 0 0) padding-box,
-        linear-gradient(to right, rgb(0, 221, 250), #8b35fb, #fb3570) border-box;
+    /* background: linear-gradient(rgb(0, 0, 0) 0 0) padding-box,
+        linear-gradient(to right, rgb(0, 221, 250), #8b35fb, #fb3570) border-box; */
     border: 2px solid transparent;
     border-radius: 10px;
 }
@@ -188,8 +194,8 @@ footer {
 
 /* BucketList Page */
 .card-container {
-    background: linear-gradient(rgb(0, 0, 0) 0 0) padding-box,
-        linear-gradient(to right, rgb(0, 221, 250), #8b35fb, #fb3570) border-box;
+    /* background: linear-gradient(rgb(0, 0, 0) 0 0) padding-box,
+        linear-gradient(to right, rgb(0, 221, 250), #8b35fb, #fb3570) border-box; */
     border: 2px solid transparent;
     border-radius: 10px;
     overflow: scroll;
