@@ -84,7 +84,7 @@ function populateEventResults(data) {
     events.forEach((event) => {
         // create card
         let cardEl = document.createElement("div");
-        cardEl.className = "card event text-black";
+        cardEl.className = "card search-card text-black";
         cardEl.id = `card-${index}`;
         displayEl.appendChild(cardEl);
         index++;
@@ -198,7 +198,7 @@ function passEventCoords(event) {
     event.stopPropagation();
     let current = event.target;
     let parentEl = document.getElementById("yelp-results");
-    let card = current.closest(".event");
+    let card = current.closest(".search-card");
 
     console.log(card);
     let index = card.getAttribute("id");
@@ -210,21 +210,27 @@ function passEventCoords(event) {
         longitude: data.events[index].longitude,
     };
     initSearch(coords);
+    bucketlistAddEvent(data.events[index]);
 }
 
-function applyGlow(click) {
-    console.log("applying glow to selected card");
+// returns the bucketlist
+function getBucketList() {
+    let bList = JSON.parse(localStorage.getItem("bucketlist"));
+    let newList = [];
 
-    let card = click.target;
-    let current = card.closest(".event");
-    let parent = current.closest(".card-container");
-    let previous = parent.querySelector(".selected");
+    // if the bucketlist exists and has entries, return it, else make a new list
+   return bList && bList.length > 0 ? bList : newList;
+}
 
-    current.classList.add("selected");
+function bucketlistAddEvent(eventDetails) {
+    console.log("adding to bucket list");
 
-    if (previous) {
-        previous.classList.remove("selected");
+    let savedEvent = {
+        event: eventDetails,
     }
+    console.log(getBucketList());
+    console.log(savedEvent);
+
 }
 
 // send parameters to google for initial place information
@@ -269,7 +275,7 @@ function populatePlaceResults() {
         //create card
         //add logic to not display closed businesses, but keep increasing the index of the array goes up
         let cardEl = document.createElement("div");
-        cardEl.className = "card event";
+        cardEl.className = "card search-card";
         cardEl.id = `card-${index}`;
         displayEl.appendChild(cardEl);
         //create array for cardEl.id and corresponding place_id
@@ -341,7 +347,7 @@ function populatePlaceResults() {
 // prepare parameters for details search
 function prepDetailsSearch(event) {
     let current = event.target;
-    let card = current.closest(".event");
+    let card = current.closest(".search-card");
 
     let detailsEl = card.querySelector(".card-reveal");
     let details = detailsEl.children;
@@ -439,8 +445,26 @@ function populatePlaceDetails(data) {
     }
 }
 
-function bucketlistAdd() {
-    console.log("adding to bucket list");
+function selectCard(click) {
+    console.log("applying glow to selected card");
+
+    let card = click.target;
+    let current = card.closest(".search-card");
+    let parent = current.closest(".card-container");
+    let previous = parent.querySelector(".selected");
+
+    current.classList.add("selected");
+
+    if (previous) {
+        previous.classList.remove("selected");
+    }
+}
+
+function bucketlistAddEatery(event) {
+    console.log(event);
+    console.log("adding eatery");
+    let card = event.target.closest(".search-card")
+
 }
 
 // on page load, parse and pass most recent search data to yelp API
@@ -455,11 +479,12 @@ document.querySelector("body").addEventListener("click", function (event) {
             if (event.target.className.includes("bucketlist-add")) {
                 console.log("button clicked");
                 passEventCoords(event);
-                applyGlow(event);
+                selectCard(event);
             }
         } else if (container.id == "google-results") {
             if (event.target.className.includes("bucketlist-add")) {
-                applyGlow(event);
+               selectCard(event);
+               bucketlistAddEatery(event);
             } else if (event.target.className.includes("activator")) {
                 console.log("card clicked");
                 prepDetailsSearch(event);
