@@ -232,6 +232,7 @@ function applyGlow(click) {
 function initSearch(coords) {
     let service;
     var elem = document.querySelector("#google-results");
+    //let placeType = ""; //option to choose 'bar' or 'restaurant' for search
 
     const location = {
         lat: coords.latitude,
@@ -313,12 +314,17 @@ function populatePlaceResults() {
         divEl.appendChild(pEl);
         pEl.textContent = place.formatted_address;
 
-        // rating
+        // star rating
         pEl = document.createElement("p");
         divEl.appendChild(pEl);
-        place.rating !== 0
-            ? (pEl.textContent = "Rating: " + place.rating + "/5")
-            : (pEl.textContent = "No Rating");
+        var rating = Math.round(place.rating); //round rating to nearest integer
+        if (rating !== 0) {
+            for (var i=1; i <= rating; i++) {
+                pEl.textContent += "✭";
+            }
+        } else {
+            pEl.textContent = "No rating";
+        }
 
         // create div for links
         divEl = document.createElement("div");
