@@ -133,7 +133,6 @@ function populateEventResults(data) {
         spanEl.appendChild(iEl);
         iEl.className = "material-icons right";
         iEl.textContent = "close";
-        iEl.style.color = "black";
 
         // date of event
         pEl = document.createElement("p");
@@ -319,7 +318,7 @@ function populatePlaceResults() {
         divEl.appendChild(pEl);
         var rating = Math.round(place.rating); //round rating to nearest integer
         if (rating !== 0) {
-            for (var i=1; i <= rating; i++) {
+            for (var i = 1; i <= rating; i++) {
                 pEl.textContent += "✭";
             }
         } else {
@@ -411,14 +410,13 @@ function populatePlaceDetails(data) {
     if (cardEls.length == 0) {
         // restaurant name
         let spanEl = document.createElement("span");
+        reveal.appendChild(spanEl);
         spanEl.className = "card-title";
+        spanEl.textContent = data.name;
         let iEl = document.createElement("i");
         spanEl.appendChild(iEl);
         iEl.className = "material-icons right";
         iEl.textContent = "close";
-        iEl.style.color = "black";
-        reveal.appendChild(spanEl);
-        spanEl.textContent = data.name;
 
         let pEl = document.createElement("p");
         reveal.appendChild(pEl);
@@ -439,6 +437,10 @@ function populatePlaceDetails(data) {
         aEl.setAttribute("href", data.website);
         aEl.textContent = "Website";
     }
+}
+
+function bucketlistAdd() {
+    console.log("adding to bucket list");
 }
 
 // on page load, parse and pass most recent search data to yelp API
@@ -470,20 +472,19 @@ function hide() {
     console.log("hiding");
     var display = document.getElementById("hide");
     if (display.style.display === "none") {
-      display.style.display = "block";
+        display.style.display = "block";
     } else {
-      display.style.display = "none";
+        display.style.display = "none";
     }
-     show();
-  }
+    show();
+}
 
 // button click
-  function show(){
+function show() {
     var display = document.getElementsByClassName("s12");
     if (display.style.display === "show") {
         display.style.display = "none";
-      }
+    }
 
-      // change to s6 column
-      
+    // change to s6 column
 }
