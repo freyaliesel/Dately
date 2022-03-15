@@ -84,7 +84,7 @@ function populateEventResults(data) {
     events.forEach((event) => {
         // create card
         let cardEl = document.createElement("div");
-        cardEl.className = "card search-card text-black";
+        cardEl.className = "card sticky-action search-card";
         cardEl.id = `card-${index}`;
         displayEl.appendChild(cardEl);
         index++;
@@ -107,7 +107,7 @@ function populateEventResults(data) {
         divEl.appendChild(buttonEl);
         let iEl = document.createElement("i");
         iEl.className = "material-icons bucketlist-add";
-        iEl.textContent = "place";
+        iEl.textContent = "favorite_border";
         buttonEl.appendChild(iEl);
 
         // card content
@@ -120,6 +120,23 @@ function populateEventResults(data) {
         spanEl.className = "card-title activator";
         spanEl.textContent = event.name;
         divEl.appendChild(spanEl);
+
+        // create div for links
+        divEl = document.createElement("div");
+        divEl.className = "card-action";
+        cardEl.appendChild(divEl);
+
+        // event site URL
+        let aEl = document.createElement("a");
+        divEl.appendChild(aEl);
+        aEl.setAttribute("href", event.event_site_url);
+        aEl.textContent = "See on Yelp";
+
+        // yelp link
+        aEl = document.createElement("a");
+        divEl.appendChild(aEl);
+        aEl.setAttribute("href", event.tickets_url);
+        aEl.textContent = "Get Tickets";
 
         // create div for revealed content
         divEl = document.createElement("div");
@@ -168,28 +185,11 @@ function populateEventResults(data) {
         dEl.appendChild(buttonEl);
         buttonEl.className =
             "waves-effect waves-light white-text btn-flat pink center-align";
-        buttonEl.textContent = "Find Restaurants";
+        buttonEl.textContent = "Find Eateries";
         iEl = document.createElement("i");
         iEl.className = "material-icons left bucketlist-add";
-        iEl.textContent = "place";
+        iEl.textContent = "favorite_border";
         buttonEl.appendChild(iEl);
-
-        // create div for links
-        divEl = document.createElement("div");
-        divEl.className = "card-action";
-        cardEl.appendChild(divEl);
-
-        // event site URL
-        let aEl = document.createElement("a");
-        divEl.appendChild(aEl);
-        aEl.setAttribute("href", event.event_site_url);
-        aEl.textContent = "See on Yelp";
-
-        // yelp link
-        aEl = document.createElement("a");
-        divEl.appendChild(aEl);
-        aEl.setAttribute("href", event.tickets_url);
-        aEl.textContent = "Get Tickets";
     });
 }
 
@@ -219,7 +219,7 @@ function getBucketList() {
     let newList = [];
 
     // if the bucketlist exists and has entries, return it, else make a new list
-   return bList && bList.length > 0 ? bList : newList;
+    return bList && bList.length > 0 ? bList : newList;
 }
 
 function bucketlistAddEvent(eventDetails) {
@@ -227,10 +227,9 @@ function bucketlistAddEvent(eventDetails) {
 
     let savedEvent = {
         event: eventDetails,
-    }
+    };
     console.log(getBucketList());
     console.log(savedEvent);
-
 }
 
 // send parameters to google for initial place information
@@ -300,7 +299,7 @@ function populatePlaceResults() {
         divEl.appendChild(buttonEl);
         let iEl = document.createElement("i");
         iEl.className = "material-icons bucketlist-add";
-        iEl.textContent = "add";
+        iEl.textContent = "favorite_border";
         buttonEl.appendChild(iEl);
 
         // create div for content
@@ -346,38 +345,55 @@ function populatePlaceResults() {
 
 // prepare parameters for details search
 function prepDetailsSearch(event) {
+    // console.log(event);
     let current = event.target;
+    // console.log(current);
     let card = current.closest(".search-card");
-
     let detailsEl = card.querySelector(".card-reveal");
     let details = detailsEl.children;
+    let flag = false;
 
-    // check if details exist before making API call
-    if (details.length == 0) {
+    function getID() {
         let index = card.getAttribute("id");
         index = index.substring(index.indexOf("-") + 1);
         localStorage.setItem("resCardIndex", index);
         let placeArray = JSON.parse(localStorage.getItem("gIDs"));
-        let passId = placeArray[index];
-        getPlaceDetails(passId);
-    } else {
-        console.log("details exist");
-        return;
+        return placeArray[index];
+    }
+
+    // check origin of function call
+
+    // if event came from the add to bucketlist button,
+    if (current.className.includes("bucketlist-add")) {
+        // if there arent any details yet
+        if (details.length == 0) {
+            // get the details and save them to the bucketlist
+            flag = true;
+            getPlaceDetails(getID(), flag);
+        } else {
+            //pass details to bucketlist function
+            console.log("details exist, pass to bucketlist");
+        }
+    } else if (current.className.includes("activator")) {
+        // check if details exist before making API call
+        details.length == 0
+            ? getPlaceDetails(getID(), flag)
+            : console.log("details exist");
     }
 }
 
 // send parameters to google for detailed information
-function getPlaceDetails(passId) {
-    let service;
+function getPlaceDetails(passId, flag) {
+    // let service;
     var elem = document.querySelector("#empty");
     console.log("getting place details from place_id");
 
     // get place_id for the specific card user clicked
-    let placeId = passId;
-    console.log(placeId);
+    // let placeId = passId;
+    // console.log(placeId);
 
     var placeRequest = {
-        placeId: placeId,
+        placeId: passId,
         fields: [
             "name",
             "formatted_phone_number",
@@ -388,12 +404,26 @@ function getPlaceDetails(passId) {
         ],
     };
 
-    service = new google.maps.places.PlacesService(elem);
-    service.getDetails(placeRequest, googlePlaceSearch);
+    let service = new google.maps.places.PlacesService(elem);
+
+    if (flag === true) {
+        console.log("saving details");
+        service.getDetails(placeRequest, saveDetails);
+    } else {
+        console.log("passing details");
+        service.getDetails(placeRequest, googleDetailSearch);
+    }
+}
+// because google doesnt let us handle the api call ourselves, this has to be a separate function
+function saveDetails(details, status) {
+    if (status == google.maps.places.PlacesServiceStatus.OK) {
+        populatePlaceDetails(details);
+        bucketlistAddDetails();
+    }
 }
 
 // if status is okay, send data to make cards
-function googlePlaceSearch(placeDetails, status) {
+function googleDetailSearch(placeDetails, status) {
     if (status == google.maps.places.PlacesServiceStatus.OK) {
         populatePlaceDetails(placeDetails);
     }
@@ -442,6 +472,22 @@ function populatePlaceDetails(data) {
         reveal.appendChild(aEl);
         aEl.setAttribute("href", data.website);
         aEl.textContent = "Website";
+
+        // create div for button
+        let dEl = document.createElement("div");
+        reveal.appendChild(dEl);
+        dEl.className = "card-action";
+
+        // make the button
+        buttonEl = document.createElement("button");
+        dEl.appendChild(buttonEl);
+        buttonEl.className =
+            "waves-effect waves-light white-text btn-flat pink center-align";
+        buttonEl.textContent = "Add to Bucketlist";
+        iEl = document.createElement("i");
+        buttonEl.appendChild(iEl);
+        iEl.className = "material-icons left bucketlist-add";
+        iEl.textContent = "favorite_border";
     }
 }
 
@@ -461,10 +507,18 @@ function selectCard(click) {
 }
 
 function bucketlistAddEatery(event) {
-    console.log(event);
+    // console.log(event);
     console.log("adding eatery");
-    let card = event.target.closest(".search-card")
+    // let card = event.target.closest(".search-card");
+    console.log(card);
 
+    let index = card.getAttribute("id");
+    index = index.substring(index.indexOf("-") + 1);
+}
+
+function bucketlistAddDetails() {
+    // save the details to the bucketlist
+    console.log("saving details to bucketlist");
 }
 
 // on page load, parse and pass most recent search data to yelp API
@@ -482,11 +536,12 @@ document.querySelector("body").addEventListener("click", function (event) {
                 selectCard(event);
             }
         } else if (container.id == "google-results") {
-            if (event.target.className.includes("bucketlist-add")) {
-               selectCard(event);
-               bucketlistAddEatery(event);
-            } else if (event.target.className.includes("activator")) {
-                console.log("card clicked");
+            // prep details search regardless, but if bucketlist add, select card
+            if (event.target.closest(".card")) {
+                if (event.target.className.includes("bucketlist-add")) {
+                    selectCard(event);
+                    //    bucketlistAddEatery(event);
+                }
                 prepDetailsSearch(event);
             }
         }
