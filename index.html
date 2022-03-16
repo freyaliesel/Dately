@@ -34,48 +34,52 @@
     <div class="row">
       <div class="col l7  push-l5">
         <h1 class="white-text">EXPERIENCE CHICAGO</h1>
-          <h5 class="white-text flow-text light-weight">For all your local date night experiences in chicago. Find local bars, restaurants and events near you.
-            Love more than one? No worries! Like and add to your bucket list and save for later.</h5>
-            <br>
+        <h5 class="white-text flow-text light-weight">For all your local date night experiences in chicago. Find local
+          bars, restaurants and events near you.
+          Love more than one? No worries! Like and add to your bucket list and save for later.</h5>
+        <br>
 
         <div>
           <!---Modal-->
           <button id="modal-launch" data-target="modal1" class="modal-trigger waves-effect waves-light btn-small">
-            <i id="search-icon" class="medium material-icons">search</i>Search</button>
-          <div id="modal1" class="modal white-text">
-            <div class="modal-content black">
-              <h5>Search</h5>
+            <i id="search-icon" class="medium material-icons">search</i>Search
+          </button>
+
+          <img class="chicago-img" src="assets/links/Chicago.png">
+        </div>
+
+        <div id="modal1" class="modal black white-text">
+          <div class="modal-content black">
+            <h5>Search</h5>
+
+            <form autocomplete="off">
               <div class="input-field black">
-                <input class="datepicker validate black white-text" id="datepicker" type="text"/>
+                <input class="datepicker validate black white-text" id="datepicker" type="text" required=""
+                  aria-required="true" />
                 <label for="datepicker">Date</label>
-                <span class="helper-text" data-error="Field is required"></span>
+                <span class="helper-text" data-error="Select a date"></span>
               </div>
-              <form autocomplete="off">
               <div class="input-field">
-                <input id="location" class="autocomplete validate invalid white-text" placeholder="Name or Zip Code" required="" aria-required="true" type="text">
+                <input id="location" class="autocomplete validate invalid white-text" required="" aria-required="true"
+                  type="text">
                 <label for="location">Neighborhood</label>
-                <span class="helper-text" data-error="Please select a neighborhood." data-success=""></span>
+                <span class="helper-text" data-error="Enter a location" data-success=""></span>
                 </input>
               </div>
             </form>
-            </div>
-            <div class="modal-footer black">
-              <a href="#!" class="modal-close waves-effect waves-purple btn-flat">Close</a>
-              <button id="submit-btn" class="waves-effect waves-purple btn-flat">Search
-                <!-- <a href="search_index.html" -->
-                <!-- </a> -->
-              </button>
-            </div>
           </div>
-          <br />
-          <img class="chicago-img" src="assets/links/Chicago.png">
+          <div class="modal-footer black">
+            <a href="#!" class="modal-close waves-effect waves-purple btn-flat">Close</a>
+            <button id="submit-btn" class="waves-effect waves-purple btn-flat">Search</button>
+          </div>
         </div>
       </div>
-
       <!-- Mobile -->
-      <div class=" hide-on-small-only col s5 pull-s7"><span class="flow-text"></span><img class="event-img"
-          src="assets/links/Events.png"></div>
+      <div class=" hide-on-small-only col s5 pull-s7">
+        <img class="event-img" src="assets/links/Events.png">
+      </div>
     </div>
+
 
 
   </main>
