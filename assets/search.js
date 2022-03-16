@@ -16,7 +16,10 @@ function checkSearchHistory() {
         console.log("populating yelp results based on last search performed");
         // check if there is stored google search data
         let savedEateries = JSON.parse(localStorage.getItem("gTextData"));
-        if (savedEateries.eateries !== null && savedEateries.eateries.length > 0) {
+        if (
+            savedEateries.eateries !== null &&
+            savedEateries.eateries.length > 0
+        ) {
             populatePlaceResults();
             console.log("populating restaurants based on last event selected");
         }
@@ -238,7 +241,7 @@ function passEventCoords(event) {
     let coords = {
         latitude: data[index].latitude,
         longitude: data[index].longitude,
-        event_index: index
+        event_index: index,
     };
     initSearch(coords);
     newPair.event = data[index];
@@ -254,7 +257,6 @@ function passEventCoords(event) {
 //     // console.log(getBucketList());
 //     console.log(currentPair);
 // }
-
 
 // send parameters to google for initial place information
 function initSearch(coords) {
@@ -276,8 +278,8 @@ function initSearch(coords) {
     service.textSearch(request, googleTextSearch);
     let newObject = {
         event: coords.event_index,
-        eateries: []
-    }
+        eateries: [],
+    };
     localStorage.setItem("gTextData", JSON.stringify(newObject));
 }
 
@@ -542,7 +544,7 @@ function bucketlistAddEatery(event) {
     console.log("adding eatery");
     console.log(event);
     let card = event.target.closest(".search-card");
-    console.log (card);
+    console.log(card);
 
     let index = card.getAttribute("id");
     index = index.substring(index.indexOf("-") + 1);
@@ -554,19 +556,23 @@ function bucketlistAddEatery(event) {
 
 function bucketlistAddDetails(details) {
     // save the details to the bucketlist
-    console.log("saving details to bucketlist");
-    newPair.eatery.details = details
-
+    console.log("saving details to new bucketlist pair");
+    newPair.eatery.details = details;
     console.log(newPair);
+
+    // this needs to be moved out and onto a button for intentional saving
+    saveBucketlist();
 }
 
-// returns the bucketlist
-function getBucketList() {
+function saveBucketlist() {
+    console.log("saves to bucket list");
+
     let bList = JSON.parse(localStorage.getItem("bucketlist"));
-    let newList = [];
+    let newList = [newPair];
 
     // if the bucketlist exists and has entries, return it, else make a new list
-    return bList && bList.length > 0 ? bList : newList;
+     bList && bList.length > 0 ? bList = bList.concat(newList) : bList = newList;
+     localStorage.setItem("bucketList", JSON.stringify(bList));
 }
 
 // on page load, parse and pass most recent search data to yelp API
@@ -588,7 +594,7 @@ document.querySelector("body").addEventListener("click", function (event) {
             if (event.target.closest(".card")) {
                 if (event.target.className.includes("bucketlist-add")) {
                     selectCard(event);
-                       bucketlistAddEatery(event);
+                    bucketlistAddEatery(event);
                 }
                 prepDetailsSearch(event);
             }
