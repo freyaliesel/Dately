@@ -1,12 +1,13 @@
 // set global variables to empty strings
 var date = "";
+var cityArray = [];
 
-
-
-// event listeners
+// datepicker initialization
 document.addEventListener("DOMContentLoaded", function () {
-    // initialize all Materialize elements
+    // initialize
     M.AutoInit();
+
+    // datepicker elements
     let today = new Date().toISOString().slice(0, 10)
     document.getElementById("datepicker").setAttribute('min', today);
 
@@ -18,11 +19,36 @@ document.addEventListener("DOMContentLoaded", function () {
             document.querySelector("input").value = date;
         },
     });
+
+    // autocomplete
+    var data = {};
+
+    // when user types in a location, it autocompletes based on the list of neighborhoods
+    fetch('./assets/neighborhoods.txt')
+	.then((response) => {
+  		return response.text();
+	})
+	.then((text) => {
+        cityArray = text.split('\n');
+        
+        for (const key of cityArray) {
+            data[key] = null;
+        }
+    
+      $('input.autocomplete').autocomplete({
+            data: data,
+            minLength: 3,
+            limit: 5,
+            onAutocomplete: function(val) {
+                localStorage.setItem("userLocSelect", val);
+            }
+      });
+    });
 });
 
 // parses form for user input then saves in localdata for search_results page
 function saveParameters() {
-    let input = document.getElementById("location").value;
+    let input = localStorage.getItem("userLocSelect");
 
     if (input && date) {
         console.log("setting search parameters");
@@ -32,8 +58,6 @@ function saveParameters() {
         };
         localStorage.setItem("yelpParam", JSON.stringify(param));
         window.location.href = "./search.html";
-    } else {
-        // tell user to input something to make another search
     }
 }
 
