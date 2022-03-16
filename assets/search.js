@@ -74,8 +74,7 @@ function accessYelp(param) {
             localStorage.setItem("yelpData", JSON.stringify(data));
         })
         .catch((error) => {
-            // console.error(error);
-            console.log(error);
+            console.error(error);
             return;
         });
 }
@@ -95,7 +94,7 @@ function checkError(response) {
             // let the user know that something happened and to try again, if it happens again, let the project owners know
             console.log(response.status, response.statusText)
         }
-        throw Error(response);
+        throw Error(response.statusText);
     }
 }
 
