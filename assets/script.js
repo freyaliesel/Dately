@@ -1,6 +1,6 @@
 // set global variables to empty strings
 var date = "";
-var cityArray = [];
+
 
 // datepicker initialization
 document.addEventListener("DOMContentLoaded", function () {
@@ -20,16 +20,14 @@ document.addEventListener("DOMContentLoaded", function () {
         },
     });
 
-    // autocomplete
-    var data = {};
-
     // when user types in a location, it autocompletes based on the list of neighborhoods
     fetch('./assets/neighborhoods.txt')
 	.then((response) => {
   		return response.text();
 	})
 	.then((text) => {
-        cityArray = text.split('\n');
+        let cityArray = text.split('\n');
+        let data = {};
         
         for (const key of cityArray) {
             data[key] = null;
@@ -39,16 +37,14 @@ document.addEventListener("DOMContentLoaded", function () {
             data: data,
             minLength: 3,
             limit: 5,
-            onAutocomplete: function(val) {
-                localStorage.setItem("userLocSelect", val);
-            }
       });
     });
 });
 
 // parses form for user input then saves in localdata for search_results page
 function saveParameters() {
-    let input = localStorage.getItem("userLocSelect");
+    // let input = localStorage.getItem("userLocSelect");
+    let input = document.getElementById("location").value;
 
     if (input && date) {
         console.log("setting search parameters");
