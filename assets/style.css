@@ -162,6 +162,13 @@ footer {
     border-width: 3px;
 }
 
+
+
+::placeholder {
+    color: #9e9e9e;
+    font-style: italic;
+}
+
 /* valid color */
 .input-field input[type=text].valid {
     border-bottom: 1px solid green;
@@ -169,7 +176,7 @@ footer {
   }
 
 /* invalid color */
-.input-field input[type=text].invalid {
+.input-field input[type=text].invalid, input.invalid[type=text]:not(.browser-default):focus {
     border-bottom: 1px solid #9e9e9e;
     box-shadow: 0 1px 0 0 #000;
 }
