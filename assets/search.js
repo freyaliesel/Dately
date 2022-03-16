@@ -67,11 +67,32 @@ function accessYelp(param) {
                 "Bearer DdZGPiM69U6N1FeqeFAXnUK8NSX_7W9ozcMbNxCnJA16g309AiVdccMB2B9PEf8U7-aLoMGc3yp0H6ynxVMrVwgYHYJsMP7tqXt66pwj0kJDkBr4Mb34W-PjwGEpYnYx",
         }),
     })
-        .then((response) => response.json())
+        .then(checkError)
         .then(function (data) {
+            console.log(data);
             populateEventResults(data);
             localStorage.setItem("yelpData", JSON.stringify(data));
+        })
+        .catch((error) => {
+            console.error(error);
+            if (response.status === 400) {
+                // let the user know they need to check their input and try again
+    
+            } else if (response.error === 500) {
+                // let the user know that something is wrong with yelp
+    
+            } else { 
+                // let the user know that something happened and to try again, if it happens again, let the project owners know
+            }
         });
+}
+
+function checkError(response) {
+    if (response.status >= 200 && response.status <= 299) {
+        return response.json();
+    } else {
+        throw Error(response);
+    }
 }
 
 // make cards for yelp results
