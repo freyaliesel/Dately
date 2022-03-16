@@ -74,23 +74,27 @@ function accessYelp(param) {
             localStorage.setItem("yelpData", JSON.stringify(data));
         })
         .catch((error) => {
-            console.error(error);
-            if (response.status === 400) {
-                // let the user know they need to check their input and try again
-    
-            } else if (response.error === 500) {
-                // let the user know that something is wrong with yelp
-    
-            } else { 
-                // let the user know that something happened and to try again, if it happens again, let the project owners know
-            }
+            // console.error(error);
+            console.log(error);
+            return;
         });
 }
 
+// error checking
 function checkError(response) {
     if (response.status >= 200 && response.status <= 299) {
         return response.json();
     } else {
+        if (response.status === 400) {
+            // let the user know they need to check their input and try again
+
+        } else if (response.status === 500) {
+            // let the user know that something is wrong with yelp
+
+        } else { 
+            // let the user know that something happened and to try again, if it happens again, let the project owners know
+            console.log(response.status, response.statusText)
+        }
         throw Error(response);
     }
 }
