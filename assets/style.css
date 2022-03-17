@@ -1,6 +1,6 @@
 /* ====Universal Style==== */
 * {
-    /* font-family: "Montserrat", sans-serif; */
+    font-family: "Montserrat", sans-serif;
     box-sizing: border-box;
     padding: 0;
     margin: 0;
@@ -88,7 +88,7 @@ footer {
 }
 
 .nav-wrapper {
-    font-size: 16px;
+    /* font-size: 16px; */
 }
 
 .row {
@@ -174,15 +174,15 @@ footer {
     box-shadow: 0 1px 0 0 #000;
 }
 
-.datepicker {
-    height: 50%;
-    width: 50%;
-}
+/* .datepicker {
+    max-height: 513px;
+    max-width: 366px;
+} */
 
-.datepicker-modal {
+/* .datepicker-modal {
     min-width: 475px;
     min-height: 360px;
-}
+} */
 
 .datepicker-date-display {
     background-color: black;
