@@ -285,10 +285,11 @@ function populatePlaceResults() {
   console.log("displaying places");
   let placeArray = [];
   let places = JSON.parse(localStorage.getItem("gTextData")).eateries;
+  // only give 10 eatery options
+  places = places.slice(0,10);
   console.log(places);
   let displayEl = document.getElementById("google-results");
   let index = 0;
-  let randomNumCount = 0;
 
   // array for random photos in case an eatery lacks photos
   var eateryPhotos = [];
@@ -313,6 +314,7 @@ function populatePlaceResults() {
     //add logic to not display closed businesses, but keep increasing the index of the array goes up
     if (place.business_status !== "OPERATIONAL") {
       console.log("no card created for closed business");
+      index++;
     } else {
       let cardEl = document.createElement("div");
       cardEl.className = "card search-card";
@@ -320,7 +322,6 @@ function populatePlaceResults() {
       displayEl.appendChild(cardEl);
       //create array for cardEl.id and corresponding place_id
       placeArray.push(place.place_id);
-      index++;
 
       // div for image
       let divEl = document.createElement("div");
@@ -331,10 +332,9 @@ function populatePlaceResults() {
       let imgEl = document.createElement("img");
       imgEl.className = "activator";
       // grab image from eateryPhotos array, using shuffled randomNums array
-      if (randomNumCount != randomNums.length) {
-        let r = randomNums[randomNumCount];
+      if (index != randomNums.length) {
+        let r = randomNums[index];
         imgEl.setAttribute("src", eateryPhotos[r]);
-        randomNumCount++;
       }
       divEl.appendChild(imgEl);
 
@@ -385,6 +385,8 @@ function populatePlaceResults() {
       divEl = document.createElement("div");
       divEl.className = "card-reveal";
       cardEl.appendChild(divEl);
+
+      index++;
     }
   });
   // add placeIDs to local storage for placeDetails search
