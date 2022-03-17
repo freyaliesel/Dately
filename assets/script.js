@@ -62,3 +62,8 @@ document.getElementById("submit-btn").addEventListener("click", function (event)
     event.preventDefault();
     saveParameters();
 });
+
+// responsive nav bar
+  $(document).ready(function(){
+    $('.sidenav').sidenav();
+  });

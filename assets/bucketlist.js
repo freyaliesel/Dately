@@ -5,3 +5,9 @@ function populateBucketList () {
 function clearBucketList() {
     console.log("clearing bucketlist")
 }
+
+
+// responsive nav bar
+$(document).ready(function(){
+    $('.sidenav').sidenav();
+  });

@@ -612,3 +612,11 @@ function show() {
 
     // change to s6 column
 }
+
+
+
+
+// responsive nav bar
+$(document).ready(function(){
+    $('.sidenav').sidenav();
+  });

@@ -17,21 +17,28 @@
 </head>
 
 <body>
-    <header>
         <header>
             <nav>
-              <div class="nav-wrapper black">
-                <img href="#" class="logo" src="assets/links/Dately Logo.png">
-                <ul id="nav-mobile" class="right hide-on-med-and-down">
-                  <li class="waves-effect waves-light"><a href="index.html">home</a></li>
-                  <li class="waves-effect waves-light"><a href="search.html">search</a></li>
-                  <li class="waves-effect waves-light"><a href="bucketlist.html">bucket list</a></li>
-                  <li class="waves-effect waves-light"><a href="about.html">about</a></li>
-                </ul>
-              </div>
+                <div class="nav-wrapper black">
+                    <img href="#" class="brand-logo logo" src="assets/links/Dately Logo.png">
+                    <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+                    <ul class="right hide-on-med-and-down">
+                        <li class="waves-effect waves-light"><a href="index.html">home</a></li>
+                        <li class="waves-effect waves-light"><a href="search.html">search</a></li>
+                        <li class="waves-effect waves-light"><a href="bucketlist.html">bucket list</a></li>
+                        <li class="waves-effect waves-light"><a href="about.html">about</a></li>
+                    </ul>
+                </div>
             </nav>
-          </header>
-    </header>
+
+            <ul class="sidenav" id="mobile-demo">
+                <li><a href="index.html">home</a></li>
+                <li><a href="search.html">search</a></li>
+                <li><a href="bucketlist.html">bucket list</a></li>
+                <li><a href="about.html">about</a></li>
+            </ul>
+        </header>
+   
     <div class="chicago-image">
         <div class="chicago-image-text">
             <h2> Find an Event</h2>
@@ -43,13 +50,13 @@
     <main>
         <div class="row">
             <div class="card-container col l6 s12 flow-text">
-                    <h2 class="white-text">Find Events</h2>
+                <h2 class="white-text">Find Events</h2>
                 <div id="yelp-results" class="card-parent">
                 </div>
 
             </div>
             <div class="card-container col l6 s12 flow-text">
-                    <h2 class="white-text">Find Restaurants</h2>
+                <h2 class="white-text">Find Restaurants</h2>
                 <div id="google-results" class="card-parent">
                 </div>
             </div>
