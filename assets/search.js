@@ -241,22 +241,11 @@ function passEventCoords(event) {
     let coords = {
         latitude: data[index].latitude,
         longitude: data[index].longitude,
-        event_index: index,
+        eventIndex: index,
     };
     initSearch(coords);
     newPair.event = data[index];
 }
-
-// function bucketlistAddEvent(eventDetails) {
-//     console.log("adding to bucket list");
-
-//     let currentPair = {
-//         event: eventDetails,
-//         eatery: []
-//     }
-//     // console.log(getBucketList());
-//     console.log(currentPair);
-// }
 
 // send parameters to google for initial place information
 function initSearch(coords) {
@@ -277,7 +266,7 @@ function initSearch(coords) {
     service = new google.maps.places.PlacesService(elem);
     service.textSearch(request, googleTextSearch);
     let newObject = {
-        event: coords.event_index,
+        event: coords.eventIndex,
         eateries: [],
     };
     localStorage.setItem("gTextData", JSON.stringify(newObject));
@@ -384,7 +373,7 @@ function prepDetailsSearch(event) {
     let card = current.closest(".search-card");
     let detailsEl = card.querySelector(".card-reveal");
     let details = detailsEl.children;
-    let flag = false;
+    let needsSave = false;
 
     function getID() {
         let index = card.getAttribute("id");
@@ -401,8 +390,8 @@ function prepDetailsSearch(event) {
         // if there arent any details yet
         if (details.length == 0) {
             // get the details and save them to the bucketlist
-            flag = true;
-            getPlaceDetails(getID(), flag);
+            needsSave = true;
+            getPlaceDetails(getID(), needsSave);
         } else {
             //pass details to bucketlist function
             console.log("details exist, pass to bucketlist");
@@ -410,13 +399,13 @@ function prepDetailsSearch(event) {
     } else if (current.className.includes("activator")) {
         // check if details exist before making API call
         details.length == 0
-            ? getPlaceDetails(getID(), flag)
+            ? getPlaceDetails(getID(), needsSave)
             : console.log("details exist");
     }
 }
 
 // send parameters to google for detailed information
-function getPlaceDetails(passId, flag) {
+function getPlaceDetails(passId, needsSave) {
     // let service;
     var elem = document.querySelector("#empty");
     console.log("getting place details from place_id");
@@ -439,7 +428,7 @@ function getPlaceDetails(passId, flag) {
 
     let service = new google.maps.places.PlacesService(elem);
 
-    if (flag === true) {
+    if (needsSave === true) {
         console.log("passing to save details");
         service.getDetails(placeRequest, saveDetails);
     } else {
@@ -466,6 +455,7 @@ function googleDetailSearch(placeDetails, status) {
 function populatePlaceDetails(data) {
     // console.log(data);
     let index = localStorage.getItem("resCardIndex");
+    localStorage.removeItem("resCardIndex");
 
     let parentContainer = document.querySelector("#google-results");
 
@@ -551,7 +541,7 @@ function bucketlistAddEatery(event) {
     let data = JSON.parse(localStorage.getItem("gTextData"));
     newPair.eatery.text = data.eateries[index];
     newPair.event = JSON.parse(localStorage.getItem("yelpData"))[data.event];
-    // console.log(newPair);
+
 }
 
 function bucketlistAddDetails(details) {

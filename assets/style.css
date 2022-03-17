@@ -188,6 +188,14 @@ footer {
     background-color: black;
 }
 
+.select-dropdown {
+    color: white;
+}
+
+svg {
+    fill: white;
+}
+
 .mobile-search {
     background-color: dimgray;
 }
