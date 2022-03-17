@@ -37,6 +37,7 @@
         <li><a href="bucketlist.html">bucket list</a></li>
         <li><a href="about.html">about</a></li>
     </ul>
+
 </header>
   <main>
     <div class="row">
@@ -49,38 +50,29 @@
 
         <div>
           <!---Modal-->
-          <button id="modal-launch" data-target="modal1" class="modal-trigger waves-effect waves-light btn-small">
-            <i id="search-icon" class="medium material-icons">search</i>Search
-          </button>
+          <form autocomplete="off" class= "white-text">
+         
+            <div class="input-field black">
+              <input class="datepicker validate black white-text" id="datepicker" type="text" required=""
+                aria-required="true" />
+              <label for="datepicker">Date</label>
+              <span class="helper-text" data-error="Select a date"></span>
+            </div>
+            <div class="input-field">
+              <input id="location" class="autocomplete validate invalid white-text" required="" aria-required="true"
+                type="text">
+              <label for="location">Neighborhood</label>
+              <span class="helper-text" data-error="Enter a location" data-success=""></span>
+              </input>
+            </div>
+            <button id="submit-btn" class="xwaves-effect waves-light btn-small">
+              <i id="search-icon" class="medium material-icons">search</i>Search
+            </button>
+          </form>
 
           <img class="chicago-img" src="assets/links/Chicago.png">
         </div>
 
-        <div id="modal1" class="modal black white-text">
-          <div class="modal-content black white-text">
-            <h5>Search</h5>
-
-            <form autocomplete="off">
-              <div class="input-field black">
-                <input class="datepicker validate black white-text" id="datepicker" type="text" required=""
-                  aria-required="true" />
-                <label for="datepicker">Date</label>
-                <span class="helper-text" data-error="Select a date"></span>
-              </div>
-              <div class="input-field">
-                <input id="location" class="autocomplete validate invalid white-text" required="" aria-required="true"
-                  type="text">
-                <label for="location">Neighborhood</label>
-                <span class="helper-text" data-error="Enter a location" data-success=""></span>
-                </input>
-              </div>
-            </form>
-          </div>
-          <div class="modal-footer black">
-            <a href="#!" class="modal-close waves-effect waves-purple btn-flat">Close</a>
-            <button id="submit-btn" class="waves-effect waves-purple btn-flat">Search</button>
-          </div>
-        </div>
       </div>
       <!-- Mobile -->
       <div class=" hide-on-small-only col s5 pull-s7">
