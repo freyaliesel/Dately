@@ -342,7 +342,8 @@ function populatePlaceResults() {
         // star rating
         pEl = document.createElement("p");
         divEl.appendChild(pEl);
-        var rating = Math.round(place.rating); //round rating to nearest integer
+        var rating = Math.round(place.rating); 
+        //round rating to nearest integer
         if (rating !== 0) {
             for (var i = 1; i <= rating; i++) {
                 pEl.textContent += "✭";
