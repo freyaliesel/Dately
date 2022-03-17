@@ -557,13 +557,15 @@ function saveBucketlist() {
     console.log("saves to bucket list");
 
     let bList = JSON.parse(localStorage.getItem("bucketlist"));
+
+    console.log(bList);
     let newList = [newPair];
 
     // if the bucketlist exists and has entries, return it, else make a new list
     bList && bList.length > 0
-        ? (bList = bList.concat(newList))
+        ? (bList =newList.concat(bList))
         : (bList = newList);
-    localStorage.setItem("bucketList", JSON.stringify(bList));
+    localStorage.setItem("bucketlist", JSON.stringify(bList));
 }
 
 // on page load, parse and pass most recent search data to yelp API

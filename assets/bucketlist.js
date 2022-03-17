@@ -1,6 +1,6 @@
 function checkBucketList() {
     console.log("checking for bucketlist");
-    let list = JSON.parse(localStorage.getItem("bucketList"));
+    let list = JSON.parse(localStorage.getItem("bucketlist"));
     console.log(list);
 
     // if the bucket list exists, do something with it
