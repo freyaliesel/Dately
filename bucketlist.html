@@ -18,23 +18,36 @@
 
 <body>
   <header>
-    <header>
-      <nav>
+    <nav>
         <div class="nav-wrapper black">
-          <img href="#" class="logo" src="assets/links/Dately Logo.png">
-          <ul id="nav-mobile" class="right hide-on-med-and-down">
-            <li class="waves-effect waves-light"><a href="index.html">home</a></li>
-            <li class="waves-effect waves-light"><a href="search.html">search</a></li>
-            <li class="waves-effect waves-light"><a href="bucketlist.html">bucket list</a></li>
-            <li class="waves-effect waves-light"><a href="about.html">about</a></li>
-          </ul>
+            <img href="#" class="brand-logo logo" src="assets/links/Dately Logo.png">
+            <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+            <ul class="right hide-on-med-and-down">
+                <li class="waves-effect waves-light"><a href="index.html">home</a></li>
+                <li class="waves-effect waves-light"><a href="search.html">search</a></li>
+                <li class="waves-effect waves-light"><a href="bucketlist.html">bucket list</a></li>
+                <li class="waves-effect waves-light"><a href="about.html">about</a></li>
+            </ul>
         </div>
-      </nav>
-    </header>
-  </header>
+    </nav>
+
+    <ul class="sidenav" id="mobile-demo">
+        <li><a href="index.html">home</a></li>
+        <li><a href="search.html">search</a></li>
+        <li><a href="bucketlist.html">bucket list</a></li>
+        <li><a href="about.html">about</a></li>
+    </ul>
+</header>
   <main>
-    <div class=" desktop-show hide-mobile row">
-      <div class="card-container col s7 push-s3">
+    <div class="row">
+      <div class="col l4 hide-on-med-and-down">
+        <div class="bucketlist-img">
+          <img class="event-img" src="assets/links/bucketlist.png">
+        </div>
+      </div>
+      <div class="col s12 l8">
+        <div class="card-container">
+
           <h2 class="white-text">Your Top Picks</h2>
 
           <!-- prototype cards -->
@@ -76,37 +89,12 @@
                 </div>
               </div>
             </div>
-
-
-
-
           </div>
-          <!-- prototype cards -->
-      </div>
 
-      <!-- Mobile -->
-      <div class=" hide-mobile col s5 pull-s7"><span class="flow-text"></span><img class="event-img"
-          src="assets/links/bucketlist.png"></div>
-    </div>
-    <div class="mobile-show hide-desktop row">
-      <nav>
-        <div class="nav-wrapper mobile-search ">
-          <form>
-            <div class="input-field">
-              <input id="search" type="search" required>
-              <label class="label-icon" for="search"><i class="material-icons">search</i></label>
-              <i class="material-icons">close</i>
-            </div>
-          </form>
+
         </div>
-
-
-      </nav>
-      <div class="col s12 flow-text">
-
       </div>
-    </div>
-    </div>
+
   </main>
 
 

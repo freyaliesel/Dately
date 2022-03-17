@@ -17,39 +17,46 @@
 </head>
 
 <body>
-    <header>
         <header>
             <nav>
-              <div class="nav-wrapper black">
-                <img href="#" class="logo" src="assets/links/Dately Logo.png">
-                <ul id="nav-mobile" class="right hide-on-med-and-down">
-                  <li class="waves-effect waves-light"><a href="index.html">home</a></li>
-                  <li class="waves-effect waves-light"><a href="search.html">search</a></li>
-                  <li class="waves-effect waves-light"><a href="bucketlist.html">bucket list</a></li>
-                  <li class="waves-effect waves-light"><a href="about.html">about</a></li>
-                </ul>
-              </div>
+                <div class="nav-wrapper black">
+                    <img href="#" class="brand-logo logo" src="assets/links/Dately Logo.png">
+                    <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+                    <ul class="right hide-on-med-and-down">
+                        <li class="waves-effect waves-light"><a href="index.html">home</a></li>
+                        <li class="waves-effect waves-light"><a href="search.html">search</a></li>
+                        <li class="waves-effect waves-light"><a href="bucketlist.html">bucket list</a></li>
+                        <li class="waves-effect waves-light"><a href="about.html">about</a></li>
+                    </ul>
+                </div>
             </nav>
-          </header>
-    </header>
+
+            <ul class="sidenav" id="mobile-demo">
+                <li><a href="index.html">home</a></li>
+                <li><a href="search.html">search</a></li>
+                <li><a href="bucketlist.html">bucket list</a></li>
+                <li><a href="about.html">about</a></li>
+            </ul>
+        </header>
+   
     <div class="chicago-image">
         <div class="chicago-image-text">
             <h2> Find an Event</h2>
-            <h5><b>Pick an event to see restaurants nearby and save to your bucketlist!</b></h5>
+            <h5>Pick an event to see restaurants nearby and save to your bucketlist!</h5>
             <button id="modal-launch" data-target="modal1" class=" modal-trigger waves-effect waves-light btn-small">
                 <i id="search-icon" class="medium material-icons">search</i>search</button>
         </div>
     </div>
     <main>
-        <div class="desktop-show row">
-            <div class="card-container col s12 flow-text">
-                    <h2 class="white-text">Find Events</h2>
+        <div class="row">
+            <div class="card-container col l6 s12 flow-text">
+                <h2 class="white-text">Find Events</h2>
                 <div id="yelp-results" class="card-parent">
                 </div>
 
             </div>
-            <div class="card-container col s12 flow-text">
-                    <h2 class="white-text">Find Restaurants</h2>
+            <div class="card-container col l6 s12 flow-text">
+                <h2 class="white-text">Find Restaurants</h2>
                 <div id="google-results" class="card-parent">
                 </div>
             </div>

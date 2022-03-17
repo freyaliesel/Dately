@@ -2,11 +2,12 @@
 var date = "";
 
 
-
-// event listeners
+// datepicker initialization
 document.addEventListener("DOMContentLoaded", function () {
-    // initialize all Materialize elements
+    // initialize
     M.AutoInit();
+
+    // datepicker elements
     let today = new Date().toISOString().slice(0, 10)
     document.getElementById("datepicker").setAttribute('min', today);
 
@@ -18,10 +19,31 @@ document.addEventListener("DOMContentLoaded", function () {
             document.querySelector("input").value = date;
         },
     });
+
+    // when user types in a location, it autocompletes based on the list of neighborhoods
+    fetch('./assets/neighborhoods.txt')
+	.then((response) => {
+  		return response.text();
+	})
+	.then((text) => {
+        let cityArray = text.split('\n');
+        let data = {};
+        
+        for (const key of cityArray) {
+            data[key] = null;
+        }
+    
+      $('input.autocomplete').autocomplete({
+            data: data,
+            minLength: 3,
+            limit: 5,
+      });
+    });
 });
 
 // parses form for user input then saves in localdata for search_results page
 function saveParameters() {
+    // let input = localStorage.getItem("userLocSelect");
     let input = document.getElementById("location").value;
 
     if (input && date) {
@@ -32,8 +54,6 @@ function saveParameters() {
         };
         localStorage.setItem("yelpParam", JSON.stringify(param));
         window.location.href = "./search.html";
-    } else {
-        // tell user to input something to make another search
     }
 }
 
@@ -42,3 +62,8 @@ document.getElementById("submit-btn").addEventListener("click", function (event)
     event.preventDefault();
     saveParameters();
 });
+
+// responsive nav bar
+  $(document).ready(function(){
+    $('.sidenav').sidenav();
+  });
