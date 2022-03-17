@@ -82,7 +82,7 @@ function accessYelp(param) {
         .then(checkError)
         .then(function (data) {
             console.log(data);
-            populateEventResults(data);
+            populateEventResults(data.events);
             localStorage.setItem("yelpData", JSON.stringify(data.events));
             // console.log(data)
         })
