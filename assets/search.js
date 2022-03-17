@@ -16,10 +16,7 @@ function checkSearchHistory() {
         console.log("populating yelp results based on last search performed");
         // check if there is stored google search data
         let savedEateries = JSON.parse(localStorage.getItem("gTextData"));
-        if (
-            savedEateries.eateries !== null &&
-            savedEateries.eateries.length > 0
-        ) {
+        if (savedEateries && savedEateries.eateries.length > 0) {
             populatePlaceResults();
             console.log("populating restaurants based on last event selected");
         }
@@ -264,12 +261,14 @@ function initSearch(coords) {
         type: ["restaurant"],
     };
     service = new google.maps.places.PlacesService(elem);
-    service.textSearch(request, googleTextSearch);
+
     let newObject = {
         event: coords.eventIndex,
         eateries: [],
     };
     localStorage.setItem("gTextData", JSON.stringify(newObject));
+    
+    service.textSearch(request, googleTextSearch);
 }
 
 // if status is okay, send data to make cards
@@ -541,7 +540,6 @@ function bucketlistAddEatery(event) {
     let data = JSON.parse(localStorage.getItem("gTextData"));
     newPair.eatery.text = data.eateries[index];
     newPair.event = JSON.parse(localStorage.getItem("yelpData"))[data.event];
-
 }
 
 function bucketlistAddDetails(details) {
@@ -561,8 +559,10 @@ function saveBucketlist() {
     let newList = [newPair];
 
     // if the bucketlist exists and has entries, return it, else make a new list
-     bList && bList.length > 0 ? bList = bList.concat(newList) : bList = newList;
-     localStorage.setItem("bucketList", JSON.stringify(bList));
+    bList && bList.length > 0
+        ? (bList = bList.concat(newList))
+        : (bList = newList);
+    localStorage.setItem("bucketList", JSON.stringify(bList));
 }
 
 // on page load, parse and pass most recent search data to yelp API
@@ -613,10 +613,7 @@ function show() {
     // change to s6 column
 }
 
-
-
-
 // responsive nav bar
-$(document).ready(function(){
-    $('.sidenav').sidenav();
-  });
+$(document).ready(function () {
+    $(".sidenav").sidenav();
+});
