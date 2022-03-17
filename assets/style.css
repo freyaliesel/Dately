@@ -87,9 +87,9 @@ footer {
     width: 350px;
 }
 
-.nav-wrapper {
-    /* font-size: 16px; */
-}
+/* .nav-wrapper {
+    font-size: 16px;
+} */
 
 .row {
     padding-top: 80px;
@@ -146,8 +146,6 @@ footer {
 .modal {
     border-width: 3px;
     border-style: solid;
-    height: 50%;
-    width: 50%;
     /* background: linear-gradient(rgb(0, 0, 0) 0 0) padding-box,
         linear-gradient(to right, rgb(0, 221, 250), #8b35fb, #fb3570) border-box; */
     border: 2px solid transparent;
@@ -173,16 +171,6 @@ footer {
     border-bottom: 1px solid #9e9e9e;
     box-shadow: 0 1px 0 0 #000;
 }
-
-/* .datepicker {
-    max-height: 513px;
-    max-width: 366px;
-} */
-
-/* .datepicker-modal {
-    min-width: 475px;
-    min-height: 360px;
-} */
 
 .datepicker-date-display {
     background-color: black;
