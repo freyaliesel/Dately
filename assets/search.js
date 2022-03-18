@@ -2,7 +2,6 @@
 function checkSearchHistory() {
     let yelpParam = JSON.parse(localStorage.getItem("yelpParam"));
     let yelpData = JSON.parse(localStorage.getItem("yelpData"));
-
     // if the search parameters exist
     if (yelpParam !== null && yelpParam.date && yelpParam.location) {
         // send to api, then clear the previous search's stored information
@@ -26,12 +25,10 @@ function checkSearchHistory() {
         // send yelpData to populate event results
         populateEventResults(yelpData);
         console.log("populating yelp results based on last search performed");
-
         let liked = JSON.parse(localStorage.getItem("likedEvent"));
         if (liked) {
             selectCard(liked);
         }
-
         // check if there is stored google search data
         let savedEateries = JSON.parse(localStorage.getItem("gTextData"));
         if (savedEateries && savedEateries.eateries.length > 0) {
@@ -605,8 +602,9 @@ function selectCard(cardID) {
     console.log(cardID);
 
     let current = document.getElementById(cardID);
-    let parent = current.closest(".card-container");
-    let previous = parent.querySelector(".selected");
+    let container = current.closest(".card-container");
+    let previous = container.querySelector(".selected");
+    let parent = current.closest(".card-parent");
 
     current.classList.add("selected");
 
@@ -614,21 +612,17 @@ function selectCard(cardID) {
         previous.classList.remove("selected");
     }
 
-    storeSelectedCard(current, cardID);
+    if (parent.id == "yelp-results") {
+        storeSelectedEvent(cardID);
+    }
 }
 
-function storeSelectedCard(card, cardID) {
+function storeSelectedEvent(cardID) {
     console.log("storing selected card");
 
-    let parent = card.closest(".card-parent");
-
-    if (parent.id == "yelp-results") {
-        localStorage.setItem("likedEvent", JSON.stringify(cardID));
-        console.log("removing stored eatery");
-        localStorage.removeItem("likedEatery");
-    } else if (parent.id == "google-results") {
-        localStorage.setItem("likedEatery", JSON.stringify(cardID));
-    }
+    localStorage.setItem("likedEvent", JSON.stringify(cardID));
+    console.log("removing stored eatery");
+    localStorage.removeItem("likedEatery");
 }
 
 function bucketlistAddEatery(event) {
