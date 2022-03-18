@@ -267,7 +267,7 @@ function initSearch(coords) {
         eateries: [],
     };
     localStorage.setItem("gTextData", JSON.stringify(newObject));
-    
+
     service.textSearch(request, googleTextSearch);
 }
 
@@ -287,82 +287,132 @@ function populatePlaceResults() {
     console.log("displaying places");
     let placeArray = [];
     let places = JSON.parse(localStorage.getItem("gTextData")).eateries;
+    // only give 10 eatery options
+    places = places.slice(0, 10);
     console.log(places);
     let displayEl = document.getElementById("google-results");
     let index = 0;
 
+    // array for random photos in case an eatery lacks photos
+    var eateryPhotos = [];
+    eateryPhotos = [
+        "./assets/eatery-photos/eatery-1.jpg",
+        "./assets/eatery-photos/eatery-2.jpg",
+        "./assets/eatery-photos/eatery-3.jpg",
+        "./assets/eatery-photos/eatery-4.jpg",
+        "./assets/eatery-photos/eatery-5.jpg",
+        "./assets/eatery-photos/eatery-6.jpg",
+        "./assets/eatery-photos/eatery-7.jpg",
+        "./assets/eatery-photos/eatery-8.jpg",
+        "./assets/eatery-photos/eatery-9.jpg",
+        "./assets/eatery-photos/eatery-10.jpg",
+    ];
+
+    var randomNums = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+    shuffle(randomNums);
+
     places.forEach((place) => {
         //create card
         //add logic to not display closed businesses, but keep increasing the index of the array goes up
-        let cardEl = document.createElement("div");
-        cardEl.className = "card search-card";
-        cardEl.id = `card-${index}`;
-        displayEl.appendChild(cardEl);
-        //create array for cardEl.id and corresponding place_id
-        placeArray.push(place.place_id);
-        index++;
-
-        // div for image
-        let divEl = document.createElement("div");
-        divEl.className = "card-image";
-        cardEl.appendChild(divEl);
-
-        // image
-        let imgEl = document.createElement("img");
-        imgEl.className = "activator";
-        imgEl.setAttribute("src", "./assets/links/drinks.jpg");
-        divEl.appendChild(imgEl);
-
-        // add button
-        let buttonEl = document.createElement("button");
-        buttonEl.className =
-            "btn-floating halfway-fab waves-effect waves-light pink";
-        divEl.appendChild(buttonEl);
-        let iEl = document.createElement("i");
-        iEl.className = "material-icons bucketlist-add";
-        iEl.textContent = "favorite_border";
-        buttonEl.appendChild(iEl);
-
-        // create div for content
-        divEl = document.createElement("div");
-        cardEl.appendChild(divEl);
-        divEl.className = "card-content";
-
-        // place name
-        let spanEl = document.createElement("span");
-        spanEl.className = "card-title activator";
-        spanEl.textContent = place.name;
-        divEl.appendChild(spanEl);
-
-        // place address
-        pEl = document.createElement("p");
-        divEl.appendChild(pEl);
-        pEl.textContent = place.formatted_address;
-
-        // star rating
-        pEl = document.createElement("p");
-        divEl.appendChild(pEl);
-        var rating = Math.round(place.rating); 
-        //round rating to nearest integer
-        if (rating !== 0) {
-            for (var i = 1; i <= rating; i++) {
-                pEl.textContent += "✭";
-            }
+        if (place.business_status !== "OPERATIONAL") {
+            console.log("no card created for closed business");
+            index++;
         } else {
-            pEl.textContent = "No rating";
+            let cardEl = document.createElement("div");
+            cardEl.className = "card search-card";
+            cardEl.id = `card-${index}`;
+            displayEl.appendChild(cardEl);
+            //create array for cardEl.id and corresponding place_id
+            placeArray.push(place.place_id);
+
+            // div for image
+            let divEl = document.createElement("div");
+            divEl.className = "card-image";
+            cardEl.appendChild(divEl);
+
+            // image
+            let imgEl = document.createElement("img");
+            imgEl.className = "activator";
+            // grab image from eateryPhotos array, using shuffled randomNums array
+            if (index != randomNums.length) {
+                let r = randomNums[index];
+                imgEl.setAttribute("src", eateryPhotos[r]);
+            }
+            divEl.appendChild(imgEl);
+
+            // add button
+            let buttonEl = document.createElement("button");
+            buttonEl.className =
+                "btn-floating halfway-fab waves-effect waves-light pink";
+            divEl.appendChild(buttonEl);
+            let iEl = document.createElement("i");
+            iEl.className = "material-icons bucketlist-add";
+            iEl.textContent = "favorite_border";
+            buttonEl.appendChild(iEl);
+
+            // create div for content
+            divEl = document.createElement("div");
+            cardEl.appendChild(divEl);
+            divEl.className = "card-content";
+
+            // place name
+            let spanEl = document.createElement("span");
+            spanEl.className = "card-title activator";
+            spanEl.textContent = place.name;
+            divEl.appendChild(spanEl);
+
+            // place address
+            pEl = document.createElement("p");
+            divEl.appendChild(pEl);
+            pEl.textContent = place.formatted_address;
+
+            // star rating
+            pEl = document.createElement("p");
+            divEl.appendChild(pEl);
+            var rating = Math.round(place.rating); //round rating to nearest integer
+            if (rating !== 0) {
+                for (var i = 1; i <= rating; i++) {
+                    pEl.textContent += "✭";
+                }
+            } else {
+                pEl.textContent = "No rating";
+            }
+
+            // create div for links
+            divEl = document.createElement("div");
+            divEl.className = "card-action";
+            cardEl.appendChild(divEl);
+
+            // create div for reveal
+            divEl = document.createElement("div");
+            divEl.className = "card-reveal";
+            cardEl.appendChild(divEl);
+
+            index++;
         }
-
-        // create div for links
-        divEl = document.createElement("div");
-        divEl.className = "card-action";
-        cardEl.appendChild(divEl);
-
-        // create div for reveal
-        divEl = document.createElement("div");
-        divEl.className = "card-reveal";
-        cardEl.appendChild(divEl);
     });
+    // add placeIDs to local storage for placeDetails search
     localStorage.setItem("gIDs", JSON.stringify(placeArray));
+}
+
+// Fisher-Yates shuffle to randomize arrays
+function shuffle(array) {
+    let currentIndex = array.length,
+        randomIndex;
+
+    // While there remain elements to shuffle...
+    while (currentIndex != 0) {
+        // Pick a remaining element...
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex--;
+
+        // And swap it with the current element.
+        [array[currentIndex], array[randomIndex]] = [
+            array[randomIndex],
+            array[currentIndex],
+        ];
+    }
+    return array;
 }
 
 // prepare parameters for details search
@@ -563,7 +613,7 @@ function saveBucketlist() {
 
     // if the bucketlist exists and has entries, return it, else make a new list
     bList && bList.length > 0
-        ? (bList =newList.concat(bList))
+        ? (bList = newList.concat(bList))
         : (bList = newList);
     localStorage.setItem("bucketlist", JSON.stringify(bList));
 }
@@ -594,7 +644,6 @@ document.querySelector("body").addEventListener("click", function (event) {
         }
     }
 });
-
 
 function hide() {
     console.log("hiding");
