@@ -723,28 +723,23 @@ document.querySelector("body").addEventListener("click", function (event) {
     }
 });
 
-function hide() {
-    console.log("hiding");
-    var display = document.getElementById("hide");
-    if (display.style.display === "none") {
-        display.style.display = "block";
-    } else {
-        display.style.display = "none";
-    }
-    show();
-}
-
-// button click
-function show() {
-    var display = document.getElementsByClassName("s12");
-    if (display.style.display === "show") {
-        display.style.display = "none";
-    }
-
-    // change to s6 column
-}
 
 // responsive nav bar
 $(document).ready(function () {
     $(".sidenav").sidenav();
 });
+
+// events show hide function
+
+jQuery(document).ready(function(){              
+$("#click").click(function() {
+    $("#bucketlist-add").slideDown('fast').hide();
+    $(this).removeClass('l12').addClass('l6');
+    $("#close").show();
+});
+$("#closed").click(function() {
+  $("#close").hide();
+  $("#click").removeClass('l6').addClass('l12');
+});
+});
+
