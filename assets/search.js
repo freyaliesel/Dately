@@ -659,7 +659,7 @@ function createSaveButton() {
 
     let btn = document.createElement("button");
     btn.className = "btn-large pink waves-effect waves-purple";
-    btn.id = "buttonlist-btn";
+    btn.id = "bucketlist-save-btn";
     btn.textContent = "Add to Bucketlist";
     divEl.appendChild(btn);
 
@@ -690,11 +690,11 @@ checkSearchHistory();
 // click query selector event delegator
 document.querySelector("body").addEventListener("click", function (event) {
     let container = event.target.closest(".card-parent");
-    let card = event.target;
-    card = card.closest(".card");
-    let cardID = card.id;
 
     if (container !== null) {
+        let card = event.target;
+        card = card.closest(".card");
+        let cardID = card.id;
         if (container.id == "yelp-results") {
             if (event.target.className.includes("bucketlist-add")) {
                 console.log("button clicked");
