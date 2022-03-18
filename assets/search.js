@@ -148,7 +148,11 @@ function populateEventResults(events) {
         // image
         let imgEl = document.createElement("img");
         imgEl.className = "activator";
-        imgEl.setAttribute("src", event.image_url);
+        if (event.image_url) {
+            imgEl.setAttribute("src", event.image_url);
+        } else {
+          imgEl.setAttribute("src", "https://s3-media0.fl.yelpcdn.com/assets/srv0/yelp_styleguide/fd429e4199e6/assets/img/default_avatars/event_300_square.png")
+        }
         divEl.appendChild(imgEl);
 
         // add button
@@ -627,7 +631,7 @@ function toggleHeartIcon(current) {
     let previous = container.querySelector(".selected");
 
     if (previous) {
-      let fullHearts = previous.querySelectorAll(".bucketlist-add");
+        let fullHearts = previous.querySelectorAll(".bucketlist-add");
         if (fullHearts !== null && fullHearts.length > 0) {
             console.log(fullHearts);
             for (let i = 0; i < fullHearts.length; i++) {
