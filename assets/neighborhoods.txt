@@ -70,7 +70,6 @@ Fuller Park
 Fulton River District
 Gage Park
 Galewood
-The Gap
 Garfield Ridge
 Gladstone Park
 Gold Coast
@@ -120,7 +119,7 @@ Little Italy
 Little Village
 Logan Square
 Longwood Manor
-The Loop
+Loop
 Lower West Side
 Loyola
 Magnificent Mile
@@ -216,7 +215,6 @@ Ukrainian Village
 Union Ridge
 University Village
 Uptown
-The Villa
 Vittum Park
 Wacławowo
 Washington Heights
