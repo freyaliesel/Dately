@@ -13,7 +13,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400;700&display=swap" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="./assets/style.css" />
-    <title>Dately - Search Results</title>
+    <title>Dately - Search</title>
 </head>
 
 <body>
@@ -43,26 +43,25 @@
         <div class="chicago-image-text">
             <h2> Find an Event</h2>
             <h5>Pick an event to see restaurants nearby and save to your bucketlist!</h5>
-            <button id="modal-launch" data-target="modal1" class=" modal-trigger waves-effect waves-light btn-small">
-                <i id="search-icon" class="medium material-icons">search</i>search</button>
         </div>
     </div>
-    <main>
+    <main class="search-page">
         <div class="row">
             <div class="card-container col l6 s12 flow-text">
-                <h2 class="white-text">Find Events</h2>
+                <h2 class="white-text">Events</h2>
+                <p class="white-text flow-text">Like an event to find nearby restaurants</p>
                 <div id="yelp-results" class="card-parent">
                 </div>
 
             </div>
             <div class="card-container col l6 s12 flow-text">
-                <h2 class="white-text">Find Restaurants</h2>
+                <h2 class="white-text">Eateries</h2>
+                <p class="white-text flow-text">Like an eatery to save both to your Bucketlist</p>
                 <div id="google-results" class="card-parent">
                 </div>
             </div>
             <div id="empty"></div>
     </main>
-
 
     <!--Scripts Go Here-->
     <script
@@ -81,6 +80,7 @@
     <div>
         © 2022 Copyright Gitgals
     </div>
+    <img src="assets/links/powered_by_google_on_non_white.png">
 </footer>
 
 </html>

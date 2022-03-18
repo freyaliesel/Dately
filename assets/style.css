@@ -64,9 +64,9 @@ nav li {
 nav li,
 .btn-small,
 .modal,
-.card-container {
+.card-container{
     background: linear-gradient(rgb(0, 0, 0) 0 0) padding-box,
-        linear-gradient(to right, rgb(0, 221, 250), #8b35fb, #fb3570) border-box;
+        linear-gradient(to right, rgb(0, 221, 250), #8b35fb, #fb3570) border-box
 }
 
 /*===========*/
@@ -74,6 +74,11 @@ main {
     width: 80%;
     margin: auto;
 }
+.search-page{
+    width: 90%;
+    margin: auto;
+}
+
 
 footer {
     margin-top: 50px;
@@ -87,9 +92,9 @@ footer {
     width: 350px;
 }
 
-.nav-wrapper {
+/* .nav-wrapper {
     font-size: 16px;
-}
+} */
 
 .row {
     padding-top: 80px;
@@ -125,7 +130,7 @@ footer {
     font-weight: 100;
 }
 
-#modal-launch {
+#submit-btn {
     text-align: left;
     font-size: 16px;
     /* background: linear-gradient(rgb(0, 0, 0) 0 0) padding-box,
@@ -146,8 +151,6 @@ footer {
 .modal {
     border-width: 3px;
     border-style: solid;
-    height: 50%;
-    width: 50%;
     /* background: linear-gradient(rgb(0, 0, 0) 0 0) padding-box,
         linear-gradient(to right, rgb(0, 221, 250), #8b35fb, #fb3570) border-box; */
     border: 2px solid transparent;
@@ -174,16 +177,6 @@ footer {
     box-shadow: 0 1px 0 0 #000;
 }
 
-.datepicker {
-    height: 50%;
-    width: 50%;
-}
-
-.datepicker-modal {
-    min-width: 475px;
-    min-height: 360px;
-}
-
 .datepicker-date-display {
     background-color: black;
 }
@@ -196,10 +189,6 @@ svg {
     fill: white;
 }
 
-.mobile-search {
-    background-color: dimgray;
-}
-
 .banner {
     width: 100%;
 }
@@ -209,9 +198,9 @@ svg {
 }
 
 .chicago-image {
-    background-image: url("./links/chicago-banner.jpg");
+    background-image: url("./links/chicago_image.jpg");
     background-color: #cccccc;
-    height: 500px;
+    height: 250px;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -235,9 +224,16 @@ svg {
     border: 2px solid transparent;
     border-radius: 10px;
     overflow: scroll;
-    min-height: 760px;
+    max-height: 760px;
 }
 
+.selected{
+-webkit-box-shadow:0px 0px 20px 10px rgba(251, 53, 113, 0.8) ;
+-moz-box-shadow: 0px 0px 20px 10px rgba(251,53,113,0.8);
+box-shadow: 0px 0px 20px 10px rgba(251,53,113,0.8);
+
+    
+}
 .card:hover {
     transform: scale(1.08);
 }
@@ -287,7 +283,7 @@ svg {
     display: flex;
     width: 300px;
     flex-wrap: wrap;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
     margin: 20px;
     font-size: 12px;
