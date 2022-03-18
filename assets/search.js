@@ -523,6 +523,7 @@ function getPlaceDetails(passId, needsSave) {
         service.getDetails(placeRequest, googleDetailSearch);
     }
 }
+
 // because google doesnt let us handle the api call ourselves, this has to be a separate function
 function saveDetails(details, status) {
     if (status == google.maps.places.PlacesServiceStatus.OK) {
