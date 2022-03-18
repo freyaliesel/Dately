@@ -149,7 +149,7 @@ function populateEventResults(events) {
     events.forEach((event) => {
         // create card
         let cardEl = document.createElement("div");
-        cardEl.className = "card sticky-action search-card";
+        cardEl.className = "card sticky-action search-card event";
         cardEl.id = `event-${index}`;
         displayEl.appendChild(cardEl);
         index++;
@@ -190,7 +190,15 @@ function populateEventResults(events) {
         // event name
         let spanEl = document.createElement("span");
         spanEl.className = "card-title activator";
-        spanEl.textContent = event.name;
+
+        if ((event.name).length > 45) {
+            spanEl.textContent = event.name.slice(0,45) + "...";
+        } else {
+            spanEl.textContent = event.name;
+        }
+
+
+
         divEl.appendChild(spanEl);
 
         // create div for links

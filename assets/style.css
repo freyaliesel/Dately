@@ -199,13 +199,40 @@ svg {
     justify-content: center;
 }
 
+.card:hover {
+    transform: scale(1.08);
+}
+
 .search-card {
+    display: flex;
     width: 300px;
     flex-wrap: wrap;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     margin: 20px;
     font-size: 12px;
+}
+
+.search-card img {
+    height: 200px;
+    width: 300px;
+    object-fit: cover;
+}
+
+.search-card.event .card-image {
+    background: rgb(1, 8, 13);
+    background: radial-gradient(
+        circle,
+        rgba(1, 8, 13, 1) 8%,
+        rgba(21, 47, 64, 1) 38%,
+        rgba(63, 177, 251, 1) 61%,
+        rgba(104, 21, 152, 1) 84%,
+        rgba(60, 10, 89, 1) 99%
+    );
+}
+
+.search-card.event .card-image img {
+    object-fit: contain;
 }
 
 .card .selected {
@@ -214,16 +241,12 @@ svg {
     box-shadow: 0px 0px 20px 10px rgba(251, 53, 113, 0.8);
 }
 
-.card:hover {
-    transform: scale(1.08);
-}
-
 .card .activator:hover {
     cursor: pointer;
 }
 
 .card-title {
-    font-size: 20px;
+    font-size: 20px !important;
     font-weight: bold !important;
 }
 
@@ -232,16 +255,19 @@ svg {
 }
 
 .card .card-action {
+    align-self: flex-end;
     display: flex;
-    justify-content: center;
+    flex-direction: row;
+    justify-content: space-evenly;
 }
 
-.card-action:last-child {
+.card .card-action:last-child {
     align-self: flex-end;
 }
 
 .bucketlist-card {
     display: flex;
+    background-color:#000;
 }
 
 /* scroll bar */
