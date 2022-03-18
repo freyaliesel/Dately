@@ -61,10 +61,7 @@ nav li {
     line-height: 2.5;
 }
 
-nav li,
-.btn-small,
-.modal,
-.card-container{
+nav li {
     background: linear-gradient(rgb(0, 0, 0) 0 0) padding-box,
         linear-gradient(to right, rgb(0, 221, 250), #8b35fb, #fb3570) border-box
 }
@@ -92,25 +89,14 @@ footer {
     width: 350px;
 }
 
-/* .nav-wrapper {
-    font-size: 16px;
-} */
-
 .row {
-    padding-top: 80px;
+    padding-top: 60px;
 }
 
-.event-img {
-    height: 760px;
+.branding-img {
+    height: 750px;
     transition-delay: 1s;
-    animation: fadeInAnimation ease 4s;
-}
-
-.bucketlist-img {
-    /* height: 760px; */
-    height: 50px;
-    transition-delay: 1s;
-    animation: fadeInAnimation ease 4s;
+    animation: fadeInAnimation ease .15s;
 }
 
 
@@ -133,8 +119,8 @@ footer {
 #submit-btn {
     text-align: left;
     font-size: 16px;
-    /* background: linear-gradient(rgb(0, 0, 0) 0 0) padding-box,
-        linear-gradient(to right, rgb(0, 221, 250), #8b35fb, #fb3570) border-box; */
+    background: linear-gradient(rgb(0, 0, 0) 0 0) padding-box,
+        linear-gradient(to right, rgb(0, 221, 250), #8b35fb, #fb3570) border-box;
     width: 200px;
     border: 2px solid transparent;
     border-radius: 10px;
@@ -151,8 +137,8 @@ footer {
 .modal {
     border-width: 3px;
     border-style: solid;
-    /* background: linear-gradient(rgb(0, 0, 0) 0 0) padding-box,
-        linear-gradient(to right, rgb(0, 221, 250), #8b35fb, #fb3570) border-box; */
+    background: linear-gradient(rgb(0, 0, 0) 0 0) padding-box,
+        linear-gradient(to right, rgb(0, 221, 250), #8b35fb, #fb3570) border-box;
     border: 2px solid transparent;
     border-radius: 10px;
 }
@@ -219,8 +205,8 @@ svg {
 
 /* Cards */
 .card-container {
-    /* background: linear-gradient(rgb(0, 0, 0) 0 0) padding-box,
-        linear-gradient(to right, rgb(0, 221, 250), #8b35fb, #fb3570) border-box; */
+    background: linear-gradient(rgb(0, 0, 0) 0 0) padding-box,
+        linear-gradient(to right, rgb(0, 221, 250), #8b35fb, #fb3570) border-box;
     border: 2px solid transparent;
     border-radius: 10px;
     overflow: scroll;
