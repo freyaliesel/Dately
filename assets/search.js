@@ -86,7 +86,7 @@ function accessYelp(param) {
     // accepts object with properties "location" value string with no spaces and "date" value unix time stamp
     let url =
         "https://cors-anywhere-bc.herokuapp.com/https://api.yelp.com/v3/events?";
-    let location = "location=" + param.location;
+    let location = "location=" + param.location + ",Chicago";
     let radius = "&radius=1609";
     let categories =
         "&categories=" +
