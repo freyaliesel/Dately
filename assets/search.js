@@ -566,7 +566,7 @@ function populatePlaceDetails(data) {
     dEl.appendChild(buttonEl);
     buttonEl.className =
       "waves-effect waves-light white-text btn-flat pink center-align";
-    buttonEl.textContent = "Add to Bucketlist";
+    buttonEl.textContent = "Like Eatery";
     iEl = document.createElement("i");
     buttonEl.appendChild(iEl);
     iEl.className = "material-icons left bucketlist-add";
@@ -609,8 +609,29 @@ function bucketlistAddDetails(details) {
   newPair.eatery.details = details;
   console.log(newPair);
 
-  // this needs to be moved out and onto a button for intentional saving
-  saveBucketlist();
+  createSaveButton()
+}
+
+function createSaveButton() {
+  console.log("adding save button");
+
+  let main = document.querySelector("main");
+
+  let divEl = document.createElement("div");
+  divEl.className = "fixed-action-btn";
+  main.appendChild(divEl);
+
+  let btn = document.createElement("button");
+  btn.className = "btn-large pink waves-effect waves-purple";
+  btn.id = "buttonlist-btn";
+  btn.textContent = "Add to Bucketlist"
+  divEl.appendChild(btn);
+
+  let icon = document.createElement("i")
+  icon.className = "material-icons left";
+  icon.textContent = "file_download"
+  btn.appendChild(icon);
+
 }
 
 function saveBucketlist() {
