@@ -595,6 +595,7 @@ document.querySelector("body").addEventListener("click", function (event) {
     }
 });
 
+
 function hide() {
     console.log("hiding");
     var display = document.getElementById("hide");
