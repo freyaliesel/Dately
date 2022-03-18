@@ -5,9 +5,21 @@ function checkSearchHistory() {
 
     // if the search parameters exist
     if (yelpParam !== null && yelpParam.date && yelpParam.location) {
-        // send to api, then clear the storage
+        // send to api, then clear the previous search's stored information
         parseLocation(yelpParam);
         localStorage.removeItem("yelpParam");
+        if (localStorage.getItem("gTextData")) {
+            localStorage.removeItem("gTextData");
+        }
+        if (localStorage.getItem("likedEvent")) {
+            localStorage.removeItem("likedEvent");
+        }
+        if (localStorage.getItem("likedEatery")) {
+            localStorage.removeItem("likedEatery");
+        }
+        if (localStorage.getItem("gIDs")) {
+            localStorage.removeItem("gIDs");
+        }
         console.log("performing new yelp search");
     } // if not, check if there is valid stored search data
     else if (yelpData !== null && yelpData.length > 0) {
@@ -25,10 +37,12 @@ function checkSearchHistory() {
         if (savedEateries && savedEateries.eateries.length > 0) {
             populatePlaceResults();
             console.log("populating restaurants based on last event selected");
-
+        } else {
+            // remove liked eatery from memory
             liked = JSON.parse(localStorage.getItem("likedEatery"));
-            if (liked) {selectCard(liked)};
-
+            if (liked) {
+                localStorage.removeItem(liked);
+            }
         }
     } // something went wrong and alert the user
     else {
@@ -599,6 +613,7 @@ function selectCard(cardID) {
     if (previous) {
         previous.classList.remove("selected");
     }
+
     storeSelectedCard(current, cardID);
 }
 
@@ -609,6 +624,8 @@ function storeSelectedCard(card, cardID) {
 
     if (parent.id == "yelp-results") {
         localStorage.setItem("likedEvent", JSON.stringify(cardID));
+        console.log("removing stored eatery");
+        localStorage.removeItem("likedEatery");
     } else if (parent.id == "google-results") {
         localStorage.setItem("likedEatery", JSON.stringify(cardID));
     }
