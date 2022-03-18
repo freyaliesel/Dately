@@ -74,7 +74,12 @@ function populateEventSide(parent, event) {
     // event name
     let spanEl = document.createElement("span");
     spanEl.className = "card-title activator";
-    spanEl.textContent = event.name;
+
+    if (event.name.length > 45) {
+        spanEl.textContent = event.name.slice(0, 45) + "...";
+    } else {
+        spanEl.textContent = event.name;
+    }
     divEl.appendChild(spanEl);
 
     // create div for links
@@ -122,10 +127,15 @@ function populateEventSide(parent, event) {
     // event address
     pEl = document.createElement("p");
     divEl.appendChild(pEl);
-    pEl.textContent = event.location.address1
+    pEl.textContent = event.location.address1;
     pEl = document.createElement("p");
     divEl.appendChild(pEl);
-    pEl.textContent = event.location.city + ", " + event.location.state + ", " + event.location.zip_code;
+    pEl.textContent =
+        event.location.city +
+        ", " +
+        event.location.state +
+        ", " +
+        event.location.zip_code;
 
     // event description
     pEl = document.createElement("p");
@@ -176,7 +186,7 @@ function populateEaterySide(parent, eatery) {
     divEl.appendChild(pEl);
 
     // possibly change this to star icons
-    let rating = Math.round(text.rating); 
+    let rating = Math.round(text.rating);
     // round rating to nearest integer
     if (rating !== 0) {
         for (var i = 1; i <= rating; i++) {
@@ -196,8 +206,6 @@ function populateEaterySide(parent, eatery) {
     aEl.setAttribute("href", dets.website);
     aEl.textContent = "Visit Website";
 
-
-
     // create div for reveal
     divEl = document.createElement("div");
     divEl.className = "card-reveal";
@@ -205,23 +213,22 @@ function populateEaterySide(parent, eatery) {
 
     // eatery name
     spanEl = document.createElement("span");
-        divEl.appendChild(spanEl);
-        spanEl.className = "card-title";
-        spanEl.textContent = text.name;
-        let iEl = document.createElement("i");
-        spanEl.appendChild(iEl);
-        iEl.className = "material-icons right";
-        iEl.textContent = "close";
+    divEl.appendChild(spanEl);
+    spanEl.className = "card-title";
+    spanEl.textContent = text.name;
+    let iEl = document.createElement("i");
+    spanEl.appendChild(iEl);
+    iEl.className = "material-icons right";
+    iEl.textContent = "close";
 
-        pEl = document.createElement("p");
-        divEl.appendChild(pEl);
-        pEl.textContent = "Opening Hours: ";
+    pEl = document.createElement("p");
+    divEl.appendChild(pEl);
+    pEl.textContent = "Opening Hours: ";
 
-        aEl = document.createElement("a");
-        divEl.appendChild(aEl);
-        aEl.setAttribute("href", "tel:" + dets.international_phone_number);
-        aEl.textContent = dets.formatted_phone_number;
-
+    aEl = document.createElement("a");
+    divEl.appendChild(aEl);
+    aEl.setAttribute("href", "tel:" + dets.international_phone_number);
+    aEl.textContent = dets.formatted_phone_number;
 }
 
 function clearBucketList() {
