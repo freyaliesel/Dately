@@ -11,3 +11,5 @@ function clearBucketList() {
 $(document).ready(function(){
     $('.sidenav').sidenav();
   });
+
+
