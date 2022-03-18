@@ -608,13 +608,40 @@ function selectCard(cardID) {
 
     current.classList.add("selected");
 
-    if (previous) {
-        let prevID = previous.id;
-        if (prevID !== cardID) previous.classList.remove("selected");
-    }
-
     if (parent.id == "yelp-results") {
         storeSelectedEvent(cardID);
+    }
+
+    if (previous) {
+        let prevID = previous.id;
+        if (prevID !== cardID) {
+            previous.classList.remove("selected");
+        }
+    }
+    toggleHeartIcon(current, previous);
+}
+
+function toggleHeartIcon(current) {
+    console.log("toggling heart icon");
+    let container = current.closest(".card-container");
+    let previous = container.querySelector(".selected");
+
+    if (previous) {
+      let fullHearts = previous.querySelectorAll(".bucketlist-add");
+        if (fullHearts !== null && fullHearts.length > 0) {
+            console.log(fullHearts);
+            for (let i = 0; i < fullHearts.length; i++) {
+                fullHearts[i].textContent = "favorite_border";
+            }
+        }
+    }
+
+    let emptyHearts = current.querySelectorAll(".bucketlist-add");
+    if (emptyHearts && emptyHearts !== null && emptyHearts.length > 0) {
+        console.log(emptyHearts);
+        for (let i = 0; i < emptyHearts.length; i++) {
+            emptyHearts[i].textContent = "favorite";
+        }
     }
 }
 
