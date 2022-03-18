@@ -280,7 +280,6 @@ box-shadow: 0px 0px 20px 10px rgba(251,53,113,0.8);
 
 /* Event Cards on Search Page */
 .search-card {
-    display: flex;
     width: 300px;
     flex-wrap: wrap;
     flex-direction: column;
@@ -306,9 +305,9 @@ box-shadow: 0px 0px 20px 10px rgba(251,53,113,0.8);
     justify-content: center;
 }
 
-.card-image {
+/* .card-image {
     height: fit-content;
-}
+} */
 
 @keyframes fadeInAnimation {
     0% {
