@@ -538,12 +538,11 @@ function populatePlaceDetails(data) {
     localStorage.removeItem("resCardIndex");
 
     let parentContainer = document.querySelector("#google-results");
-
     let cards = parentContainer.children;
     //console.log(cards);
 
-    let reveal = cards[index].children[3];
-
+    let card = cards[index];
+    let reveal = card.children[3];
     let cardEls = reveal.children;
 
     if (cardEls.length == 0) {
@@ -595,6 +594,7 @@ function populatePlaceDetails(data) {
         iEl.className = "material-icons left bucketlist-add";
         iEl.textContent = "favorite_border";
     }
+    toggleHeartIcon(card);
 }
 
 function selectCard(cardID) {
