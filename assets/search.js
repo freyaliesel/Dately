@@ -609,7 +609,8 @@ function selectCard(cardID) {
     current.classList.add("selected");
 
     if (previous) {
-        previous.classList.remove("selected");
+        let prevID = previous.id;
+        if (prevID !== cardID) previous.classList.remove("selected");
     }
 
     if (parent.id == "yelp-results") {
@@ -723,23 +724,20 @@ document.querySelector("body").addEventListener("click", function (event) {
     }
 });
 
-
 // responsive nav bar
 $(document).ready(function () {
     $(".sidenav").sidenav();
 });
 
 // events show hide function
-
-jQuery(document).ready(function(){              
-$("#click").click(function() {
-    $("#bucketlist-add").slideDown('fast').hide();
-    $(this).removeClass('l12').addClass('l6');
-    $("#close").show();
+jQuery(document).ready(function () {
+    $("#click").click(function () {
+        $("#bucketlist-add").slideDown("fast").hide();
+        $(this).removeClass("l12").addClass("l6");
+        $("#close").show();
+    });
+    $("#closed").click(function () {
+        $("#close").hide();
+        $("#click").removeClass("l6").addClass("l12");
+    });
 });
-$("#closed").click(function() {
-  $("#close").hide();
-  $("#click").removeClass('l6').addClass('l12');
-});
-});
-
