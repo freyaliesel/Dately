@@ -31,19 +31,6 @@ body {
     );
 }
 
-/* html {
-  background: rgb(34, 12, 33);
-  background: linear-gradient(
-    130deg,
-    rgba(34, 12, 33, 1) 0%,
-    rgba(15, 30, 41, 1) 13%,
-    rgba(0, 0, 0, 1) 24%,
-    rgba(0, 0, 0, 1) 68%,
-    rgba(15, 30, 41, 1) 87%,
-    rgba(34, 12, 33, 1) 100%
-  );
-  background-attachment: fixed;
-} */
 /*===========*/
 nav {
     height: 120px;
@@ -71,6 +58,7 @@ main {
     width: 80%;
     margin: auto;
 }
+
 .search-page {
     width: 90%;
     margin: auto;
@@ -97,12 +85,6 @@ footer {
     transition-delay: 1s;
     animation: fadeInAnimation ease 0.15s;
 }
-
-/* .bucketlist-img {
-    height: 50px;
-    transition-delay: 1s;
-    animation: fadeInAnimation ease .15s;
-} */
 
 .chicago-img {
     width: 650px;
