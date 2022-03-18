@@ -208,14 +208,36 @@ svg {
     font-size: 12px;
 }
 
-.card .selected {
-    -webkit-box-shadow: 0px 0px 20px 10px rgba(251, 53, 113, 0.8);
-    -moz-box-shadow: 0px 0px 20px 10px rgba(251, 53, 113, 0.8);
-    box-shadow: 0px 0px 20px 10px rgba(251, 53, 113, 0.8);
+.search-card img {
+    height: 250px;
+    width: 300px;
+    object-fit: cover;
+}
+
+.search-card.event .card-image {
+    background: rgb(1, 8, 13);
+    background: radial-gradient(
+        circle,
+        rgba(1, 8, 13, 1) 8%,
+        rgba(21, 47, 64, 1) 38%,
+        rgba(63, 177, 251, 1) 61%,
+        rgba(104, 21, 152, 1) 84%,
+        rgba(60, 10, 89, 1) 99%
+    );
+}
+
+.search-card.event .card-image img {
+    object-fit: contain;
 }
 
 .card:hover {
     transform: scale(1.08);
+}
+
+.card .selected {
+    -webkit-box-shadow: 0px 0px 20px 10px rgba(251, 53, 113, 0.8);
+    -moz-box-shadow: 0px 0px 20px 10px rgba(251, 53, 113, 0.8);
+    box-shadow: 0px 0px 20px 10px rgba(251, 53, 113, 0.8);
 }
 
 .card .activator:hover {
@@ -233,15 +255,16 @@ svg {
 
 .card .card-action {
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
 }
 
-.card-action:last-child {
+.card .card-action:last-child {
     align-self: flex-end;
 }
 
 .bucketlist-card {
     display: flex;
+    background-color:#000;
 }
 
 /* scroll bar */

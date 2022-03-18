@@ -51,7 +51,7 @@ function populateEventSide(parent, event) {
     console.log(event);
 
     let cardEl = document.createElement("div");
-    cardEl.className = "card sticky-action search-card";
+    cardEl.className = "card sticky-action search-card event";
 
     parent.appendChild(cardEl);
 

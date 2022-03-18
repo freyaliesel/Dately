@@ -149,7 +149,7 @@ function populateEventResults(events) {
     events.forEach((event) => {
         // create card
         let cardEl = document.createElement("div");
-        cardEl.className = "card sticky-action search-card";
+        cardEl.className = "card sticky-action search-card event";
         cardEl.id = `event-${index}`;
         displayEl.appendChild(cardEl);
         index++;
