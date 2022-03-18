@@ -51,7 +51,9 @@ function checkSearchHistory() {
             // needs a modal or pop up to alert user something went wrong
         } else if (document.querySelectorAll(".card").length > 0) {
             // Need an alert of some kind, either text in-line or modal
-            console.log("checkHistory: something went wrong on secondary search");
+            console.log(
+                "checkHistory: something went wrong on secondary search"
+            );
         } else {
             // user has not yet performed a search
             let textEl = document.createElement("h4");
@@ -191,14 +193,11 @@ function populateEventResults(events) {
         let spanEl = document.createElement("span");
         spanEl.className = "card-title activator";
 
-        if ((event.name).length > 45) {
-            spanEl.textContent = event.name.slice(0,45) + "...";
+        if (event.name.length > 45) {
+            spanEl.textContent = event.name.slice(0, 45) + "...";
         } else {
             spanEl.textContent = event.name;
         }
-
-
-
         divEl.appendChild(spanEl);
 
         // create div for links
@@ -282,9 +281,9 @@ function populateEventResults(events) {
 }
 
 function emptyElement(element) {
-  if (element.children.length > 0) {
-    $(element).empty()
-  }
+    if (element.children.length > 0) {
+        $(element).empty();
+    }
 }
 
 // prepare and pass parameters for google search

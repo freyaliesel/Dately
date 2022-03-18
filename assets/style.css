@@ -255,6 +255,7 @@ svg {
 }
 
 .card .card-action {
+    width: 100%;
     align-self: flex-end;
     display: flex;
     flex-direction: row;
