@@ -658,7 +658,7 @@ function createSaveButton() {
     main.appendChild(divEl);
 
     let btn = document.createElement("button");
-    btn.className = "btn-large pink waves-effect waves-purple";
+    btn.className = "btn-large pink waves-effect waves-light";
     btn.id = "bucketlist-save-btn";
     btn.textContent = "Add to Bucketlist";
     divEl.appendChild(btn);
