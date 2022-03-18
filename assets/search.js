@@ -5,6 +5,7 @@ function checkSearchHistory() {
     // if the search parameters exist
     if (yelpParam !== null && yelpParam.date && yelpParam.location) {
         // send to api, then clear the previous search's stored information
+        console.log("performing new yelp search");
         parseLocation(yelpParam);
         localStorage.removeItem("yelpParam");
         if (localStorage.getItem("gTextData")) {
@@ -19,12 +20,11 @@ function checkSearchHistory() {
         if (localStorage.getItem("gIDs")) {
             localStorage.removeItem("gIDs");
         }
-        console.log("performing new yelp search");
     } // if not, check if there is valid stored search data
     else if (yelpData !== null && yelpData.length > 0) {
         // send yelpData to populate event results
-        populateEventResults(yelpData);
         console.log("populating yelp results based on last search performed");
+        populateEventResults(yelpData);
         let liked = JSON.parse(localStorage.getItem("likedEvent"));
         if (liked) {
             selectCard(liked);
@@ -44,7 +44,6 @@ function checkSearchHistory() {
     } // something went wrong and alert the user
     else {
         let displayEl = document.getElementById("yelp-results");
-
         if (document.getElementsByTagName("h4").length > 0) {
             console.log(
                 "checkHistory: something went wrong on first search on page"
@@ -52,7 +51,7 @@ function checkSearchHistory() {
             // needs a modal or pop up to alert user something went wrong
         } else if (document.querySelectorAll(".card").length > 0) {
             // Need an alert of some kind, either text in-line or modal
-            console.log("checkHistory: something went wrong");
+            console.log("checkHistory: something went wrong on secondary search");
         } else {
             // user has not yet performed a search
             let textEl = document.createElement("h4");
@@ -86,23 +85,28 @@ function accessYelp(param) {
     let url =
         "https://cors-anywhere-bc.herokuapp.com/https://api.yelp.com/v3/events?";
     let location = "location=" + param.location;
+    let radius = "&radius=1609";
+    let categories =
+        "&categories=" +
+        "music,visual-arts,film,fashion,festivals-fairs,sports-active-life,nightlife";
     let startDate = "&start_date=" + param.date;
     let results = "&limit=10";
     let excluded =
         "&excluded_events=chicago-chicago-bachelor-party-exotic-dancers-topless-nudy-waitresses-call-us-312-488-4673";
-    fetch(url + location + startDate + results + excluded, {
-        method: "get",
-        headers: new Headers({
-            Authorization:
-                "Bearer DdZGPiM69U6N1FeqeFAXnUK8NSX_7W9ozcMbNxCnJA16g309AiVdccMB2B9PEf8U7-aLoMGc3yp0H6ynxVMrVwgYHYJsMP7tqXt66pwj0kJDkBr4Mb34W-PjwGEpYnYx",
-        }),
-    })
+    fetch(
+        url + location + radius + categories + startDate + results + excluded,
+        {
+            method: "get",
+            headers: new Headers({
+                Authorization:
+                    "Bearer DdZGPiM69U6N1FeqeFAXnUK8NSX_7W9ozcMbNxCnJA16g309AiVdccMB2B9PEf8U7-aLoMGc3yp0H6ynxVMrVwgYHYJsMP7tqXt66pwj0kJDkBr4Mb34W-PjwGEpYnYx",
+            }),
+        }
+    )
         .then(checkError)
         .then(function (data) {
             console.log(data);
-            populateEventResults(data.events);
-            localStorage.setItem("yelpData", JSON.stringify(data.events));
-            // console.log(data)
+            parseEventResults(data);
         })
         .catch((error) => {
             console.error(error);
@@ -127,10 +131,20 @@ function checkError(response) {
     }
 }
 
+function parseEventResults(data) {
+    if (data.events.length > 0) {
+        populateEventResults(data.events);
+        localStorage.setItem("yelpData", JSON.stringify(data.events));
+    } else {
+        //let the user know something went wrong
+    }
+}
+
 // make cards for yelp results
 function populateEventResults(events) {
     console.log("displaying results");
     let displayEl = document.getElementById("yelp-results");
+    emptyElement(displayEl);
     let index = 0;
     events.forEach((event) => {
         // create card
@@ -151,7 +165,10 @@ function populateEventResults(events) {
         if (event.image_url) {
             imgEl.setAttribute("src", event.image_url);
         } else {
-          imgEl.setAttribute("src", "https://s3-media0.fl.yelpcdn.com/assets/srv0/yelp_styleguide/fd429e4199e6/assets/img/default_avatars/event_300_square.png")
+            imgEl.setAttribute(
+                "src",
+                "https://s3-media0.fl.yelpcdn.com/assets/srv0/yelp_styleguide/fd429e4199e6/assets/img/default_avatars/event_300_square.png"
+            );
         }
         divEl.appendChild(imgEl);
 
@@ -221,10 +238,15 @@ function populateEventResults(events) {
         // event address
         pEl = document.createElement("p");
         divEl.appendChild(pEl);
-        pEl.textContent = event.location.address1
+        pEl.textContent = event.location.address1;
         pEl = document.createElement("p");
         divEl.appendChild(pEl);
-        pEl.textContent = event.location.city + ", " + event.location.state + ", " + event.location.zip_code;
+        pEl.textContent =
+            event.location.city +
+            ", " +
+            event.location.state +
+            ", " +
+            event.location.zip_code;
 
         // event description
         pEl = document.createElement("p");
@@ -249,6 +271,12 @@ function populateEventResults(events) {
         iEl.textContent = "favorite_border";
         buttonEl.appendChild(iEl);
     });
+}
+
+function emptyElement(element) {
+  if (element.children.length > 0) {
+    $(element).empty()
+  }
 }
 
 // prepare and pass parameters for google search
@@ -319,6 +347,7 @@ function populatePlaceResults() {
     places = places.slice(0, 10);
     console.log(places);
     let displayEl = document.getElementById("google-results");
+    emptyElement(displayEl);
     let index = 0;
 
     // array for random photos in case an eatery lacks photos
