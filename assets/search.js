@@ -221,7 +221,10 @@ function populateEventResults(events) {
         // event address
         pEl = document.createElement("p");
         divEl.appendChild(pEl);
-        pEl.textContent = event.location.address1;
+        pEl.textContent = event.location.address1
+        pEl = document.createElement("p");
+        divEl.appendChild(pEl);
+        pEl.textContent = event.location.city + ", " + event.location.state + ", " + event.location.zip_code;
 
         // event description
         pEl = document.createElement("p");
