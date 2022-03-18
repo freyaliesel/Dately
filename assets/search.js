@@ -669,7 +669,8 @@ function createSaveButton() {
     btn.appendChild(icon);
 }
 
-function saveBucketlist() {
+function saveBucketlist(event) {
+    event.preventDefault();
     console.log("saves to bucket list");
 
     let bList = JSON.parse(localStorage.getItem("bucketlist"));
@@ -682,6 +683,8 @@ function saveBucketlist() {
         ? (bList = newList.concat(bList))
         : (bList = newList);
     localStorage.setItem("bucketlist", JSON.stringify(bList));
+
+    window.location.href = "./bucketlist.html";
 }
 
 // on page load, parse and pass most recent search data to yelp API
@@ -689,6 +692,12 @@ checkSearchHistory();
 
 // click query selector event delegator
 document.querySelector("body").addEventListener("click", function (event) {
+    let bListSave = document.querySelector("#bucketlist-save-btn");
+
+    if (bListSave && event.target == bListSave) {
+        saveBucketlist(event);
+    }
+
     let container = event.target.closest(".card-parent");
 
     if (container !== null) {
