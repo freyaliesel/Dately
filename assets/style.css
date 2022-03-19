@@ -261,6 +261,10 @@ svg {
     justify-content: space-evenly;
 }
 
+.card.about-card.search-card .card-action {
+    flex-direction: column;
+    width: 100%;
+}
 .card .card-action:last-child {
     align-self: flex-end;
 }
