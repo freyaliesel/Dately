@@ -567,7 +567,7 @@ function populatePlaceDetails(data) {
     let parentContainer = document.querySelector("#google-results");
     let cards = parentContainer.children;
     let card = cards[index];
-    let reveal = cards[index].children[2];
+    let reveal = card.children[2];
     let cardEls = reveal.children;
 
     if (cardEls.length == 0) {
@@ -621,7 +621,6 @@ function populatePlaceDetails(data) {
         heart.textContent == "favorite"
             ? (iEl.textContent = "favorite")
             : (iEl.textContent = "favorite_border");
-
         iEl.className = "material-icons left heart";
     }
 }
@@ -652,7 +651,6 @@ function selectCard(cardID) {
 function toggleHeartIcon(current) {
     console.log("toggling heart icon");
     let container = current.closest(".card-container");
-    // let previous = container.querySelector(".selected");
 
     let fullHearts = container.querySelectorAll(".heart");
     if (fullHearts !== null && fullHearts.length > 0) {
@@ -755,8 +753,6 @@ document.querySelector("body").addEventListener("click", function (event) {
     if (container !== null) {
         let click = event.target;
         let btn = click.parentElement;
-        console.log(click);
-        console.log(btn);
         card = click.closest(".card");
         let cardID = card.id;
         if (container.id == "yelp-results") {
