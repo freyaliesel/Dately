@@ -78,17 +78,18 @@ document.getElementById("submit-btn").addEventListener("click", function (event)
 });
 
 
-function toggleSubmitButton () {
-  let button = document.getElementById("submit-btn");
-  let date = document.getElementById("datepicker").checkValidity();
-  if (checkValidInput() && date ){
-    button.classList.remove("disabled");
-  } else {
-    if (!button.className.includes("disabled"))  {
-      button.classList.add("disabled");
-    }
-  }
-}
+// function toggleSubmitButton () {
+//   let button = document.getElementById("submit-btn");
+//   let date = document.getElementById("datepicker").checkValidity();
+//   if (checkValidInput() && date ){
+//     button.classList.remove("disabled");
+
+//   } else {
+//     if (!button.className.includes("disabled"))  {
+//       button.classList.add("disabled");
+//     }
+//   }
+// }
 
 document.querySelector("body").addEventListener("keydown", toggleSubmitButton());
 
