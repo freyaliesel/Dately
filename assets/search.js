@@ -574,15 +574,17 @@ function googleDetailSearch(placeDetails, status) {
 function populatePlaceDetails(data) {
     // console.log(data);
     let index = localStorage.getItem("resCardIndex");
-    localStorage.removeItem("resCardIndex");
+    // localStorage.removeItem("resCardIndex");
 
     let parentContainer = document.querySelector("#google-results");
     let cards = parentContainer.children;
-    //console.log(cards);
+    console.log(cards);
 
     let card = cards[index];
-    let reveal = card.children[3];
+    console.log(card);
+    let reveal = cards[index].children[2];
     let cardEls = reveal.children;
+    console.log(reveal);
 
     if (cardEls.length == 0) {
         // restaurant name
@@ -754,7 +756,7 @@ function saveBucketlist(event) {
     window.location.href = "./bucketlist.html";
 }
 
-function openEateriesContainer (){
+function openEateriesContainer() {
     console.log("opening Eateries Container");
 
     let div = document.querySelector("#yelp-container");
