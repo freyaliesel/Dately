@@ -325,7 +325,6 @@ function initSearch(coords) {
         eateries: [],
     };
     localStorage.setItem("gTextData", JSON.stringify(newObject));
-
     service.textSearch(request, googleTextSearch);
 }
 
@@ -335,9 +334,33 @@ function googleTextSearch(request, status) {
         console.log("processing places");
         let newObject = JSON.parse(localStorage.getItem("gTextData"));
         newObject.eateries = request;
-        localStorage.setItem("gTextData", JSON.stringify(newObject));
+        saveTextResults(newObject);
         populatePlaceResults();
     }
+}
+
+function saveTextResults(object) {
+
+    let newArray = [];
+    let newObject = {};
+    object.eateries.forEach((place) => {
+        newObject.business_status = place.business_status;
+        newObject.formatted_address = place.formatted_address;
+        newObject.name = place.name;
+        newObject.place_id = place.place_id;
+        newObject.price_level = place.price_level;
+        newObject.rating = place.rating;
+        newObject.reference = place.reference;
+        newObject.user_ratings_total = place.user_ratings_total;
+        let categories = [];
+        for (let i = 0; i < place.types.length; i++) {
+            categories.push(place.types[i]);
+        };
+        newObject.types = categories;
+        newArray.push(newObject);
+    })
+    object.eateries = newArray;
+    localStorage.setItem("gTextData", JSON.stringify(object));
 }
 
 // make cards for google results
@@ -659,7 +682,6 @@ function toggleHeartIcon(current) {
     }
 
     let emptyHearts = current.querySelectorAll(".heart");
-    console.log(emptyHearts);
     if (emptyHearts && emptyHearts !== null && emptyHearts.length > 0) {
         for (let i = 0; i < emptyHearts.length; i++) {
             console.log("changing only this card's hearts to full");
