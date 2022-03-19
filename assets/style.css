@@ -209,7 +209,7 @@ svg {
 
 .card.bucketlist-card {
     display: flex;
-    background-color:#000;
+    background-color: #000;
 }
 
 .card.search-card {
@@ -222,11 +222,14 @@ svg {
     font-size: 12px;
 }
 
-.card-content, .card-action {
+.card-content,
+.card-action {
     padding-top: 0;
 }
 
-#about-lea img, #about-jenni img, #about-kit img {
+#about-lea img,
+#about-jenni img,
+#about-kit img {
     height: 250px;
     object-fit: cover;
     object-position: 0 0;
@@ -290,7 +293,6 @@ svg {
     align-self: flex-end;
 }
 
-
 /* scroll bar */
 
 /* width */
@@ -319,7 +321,6 @@ svg {
     }
 }
 
-
 @media only screen and (max-width: 600px) {
     .chicago-img {
         width: 450px;
@@ -328,20 +329,4 @@ svg {
     }
 }
 
-@media only screen and (max-width: 600px) {
-    .hide-mobile {
-        display: none;
-    }
-    .mobile-show {
-        display: show;
-    }
-}
 
-@media only screen and (min-width: 600px) {
-    .desktop-show {
-        display: show;
-    }
-    .hide-desktop {
-        display: none;
-    }
-}
