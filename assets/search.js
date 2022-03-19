@@ -280,9 +280,7 @@ function populateEventResults(events) {
 }
 
 function emptyElement(element) {
-    if (element.children.length > 0) {
         $(element).empty();
-    }
 }
 
 // prepare and pass parameters for google search
