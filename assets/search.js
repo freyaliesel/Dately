@@ -756,6 +756,11 @@ function bucketlistAddDetails(details) {
 
 // insert a save button onto the page
 function createSaveButton() {
+
+    let selectedCards = document.getElementsByClassName("selected")
+
+    if (selectedCards.length == 2) {
+
     console.log("adding save button");
     let main = document.querySelector("main");
 
@@ -773,6 +778,7 @@ function createSaveButton() {
     icon.className = "material-icons left";
     icon.textContent = "file_download";
     btn.appendChild(icon);
+    }
 }
 
 // save the bucketlist and send the user to the bucketlist page
