@@ -42,7 +42,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
   
   // checks for valid input for location
-  function checkValidity() {
+  function checkValidInput() {
       let input = document.getElementById("location").value;
       if (cityArray.includes(input) == true) {
           return true;
@@ -70,13 +70,31 @@ function saveParameters() {
 // event listener - submits form and sends user to search_results
 document.getElementById("submit-btn").addEventListener("click", function (event) {
     event.preventDefault();
-    let validInput = checkValidity();
+    let validInput = checkValidInput();
     if (validInput == true) {
         saveParameters();
     } else {
         console.log("invalid location");
-        document.getElementById("location").style.borderBottom = "1px solid red";
     }
+});
+
+
+function toggleSubmitButton () {
+  let button = document.getElementById("submit-btn");
+  let date = document.getElementById("datepicker").checkValidity();
+  if (checkValidInput() && date ){
+    button.classList.remove("disabled");
+  } else {
+    if (!button.className.includes("disabled"))  {
+      button.classList.add("disabled");
+    }
+  }
+}
+
+document.querySelector("body").addEventListener("keydown", toggleSubmitButton());
+
+document.querySelector("body").addEventListener("click", function(){
+  toggleSubmitButton();
 });
 
 // responsive nav bar

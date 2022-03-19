@@ -108,6 +108,10 @@ footer {
     box-shadow: 0px 0px 10px #ff009d;
 }
 
+.disabled {
+    box-shadow: none !important;
+}
+
 #search-icon {
     margin-right: 45px;
 }
