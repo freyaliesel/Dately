@@ -135,15 +135,26 @@ function accessYelp(param) {
 
 // yelp response error checking
 function checkError(response) {
+    let modal = document.getElementById("alert-modal");
+    let mTitle = modal.querySelector("h4");
+    let mContent = modal.querySelector("p");
     if (response.status >= 200 && response.status <= 299) {
         return response.json();
     } else {
         if (response.status === 400) {
             // let the user know they need to check their input and try again
+            mTitle.textContent = "400 Error";
+            mContent.textContent = "Search error, please try another location"
+            callModal();
         } else if (response.status === 500) {
             // let the user know that something is wrong with yelp
+            mTitle.textContent = "500 Error";
+            mContent.textContent = "Yelp is experiencing difficulties, please try again, and if the problems persist, come back later.";
+            callModal()
         } else {
             // let the user know that something happened and to try again, if it happens again, let the project owners know
+            mTitle.textContent = "Unexpected Error";
+            mContent.textContent = "Something went wrong, please try again.";
             console.log(response.status, response.statusText);
         }
         throw Error(response.statusText);
@@ -152,11 +163,17 @@ function checkError(response) {
 
 // store yelp data if returned, else alert the user
 function parseEventResults(data) {
+    let modal = document.getElementById("alert-modal");
+    let mTitle = modal.querySelector("h4");
+    let mContent = modal.querySelector("p");
     if (data.events.length > 0) {
         populateEventResults(data.events);
         localStorage.setItem("yelpData", JSON.stringify(data.events));
     } else {
         //let the user know something went wrong
+        mTitle.textContent = "No Results";
+        mContent.textContent = "Unfortunately, your search returned no results. Please make another search";
+        callModal();
     }
 }
 
