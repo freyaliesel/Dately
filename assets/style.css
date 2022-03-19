@@ -329,4 +329,17 @@ svg {
     }
 }
 
+@media only screen and (max-width: 450px) {
+    .card {
+        flex: 0 0 auto;
+    }
 
+    .card-parent {
+        overflow-x: auto;
+        flex-wrap: nowrap;
+    }
+
+    .card-parent::-webkit-scrollbar {
+        display: none;
+    }
+}
