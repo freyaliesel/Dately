@@ -70,8 +70,7 @@ function saveParameters() {
 // event listener - submits form and sends user to search_results
 document.getElementById("submit-btn").addEventListener("click", function (event) {
     event.preventDefault();
-    let validInput = checkValidInput();
-    if (validInput == true) {
+      if(checkValidInput()) {
         saveParameters();
     } else {
         console.log("invalid location");
