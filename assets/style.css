@@ -255,6 +255,7 @@ svg {
 }
 
 .card .card-action {
+    width: 100%;
     align-self: flex-end;
     display: flex;
     flex-direction: row;
@@ -304,6 +305,29 @@ svg {
 
 /* Media Queries */
 
+@media only screen and (max-width: 400px) {
+    .card-container {
+            max-height: 70vh;
+            /* overflow-y: hidden; */
+            /* overflow-x: auto; */
+            /* white-space: nowrap; */
+    }
+
+    .card-parent {
+        /* width: 1000px; */
+        margin: 0;
+
+        -moz-transform: scale(0.5);
+        transform: scale(0.4);
+    }
+
+    /* .bucketlist-card {
+        -moz-transform: scale(0.5);
+        transform: scale(0.5);
+    } */
+
+}
+
 @media only screen and (max-width: 600px) {
     .chicago-img {
         width: 450px;
@@ -328,8 +352,4 @@ svg {
     .hide-desktop {
         display: none;
     }
-}
-
-#close {
-    display: none;
 }
