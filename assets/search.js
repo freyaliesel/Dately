@@ -176,10 +176,10 @@ function populateEventResults(events) {
         // add button
         let buttonEl = document.createElement("button");
         buttonEl.className =
-            "btn-floating halfway-fab waves-effect waves-light pink";
+            "btn-floating halfway-fab waves-effect waves-light pink bucketlist-add";
         divEl.appendChild(buttonEl);
         let iEl = document.createElement("i");
-        iEl.className = "material-icons bucketlist-add";
+        iEl.className = "material-icons heart";
         iEl.textContent = "favorite_border";
         buttonEl.appendChild(iEl);
 
@@ -270,10 +270,10 @@ function populateEventResults(events) {
         buttonEl = document.createElement("button");
         dEl.appendChild(buttonEl);
         buttonEl.className =
-            "waves-effect waves-light white-text btn-flat pink center-align";
+            "waves-effect waves-light white-text btn-flat pink center-align bucketlist-add";
         buttonEl.textContent = "Find Eateries";
         iEl = document.createElement("i");
-        iEl.className = "material-icons left bucketlist-add";
+        iEl.className = "material-icons heart left";
         iEl.textContent = "favorite_border";
         buttonEl.appendChild(iEl);
     });
@@ -403,10 +403,10 @@ function populatePlaceResults() {
             // add button
             let buttonEl = document.createElement("button");
             buttonEl.className =
-                "btn-floating halfway-fab waves-effect waves-light pink";
+                "btn-floating halfway-fab waves-effect waves-light pink bucketlist-add";
             divEl.appendChild(buttonEl);
             let iEl = document.createElement("i");
-            iEl.className = "material-icons bucketlist-add";
+            iEl.className = "material-icons heart";
             iEl.textContent = "favorite_border";
             buttonEl.appendChild(iEl);
 
@@ -612,14 +612,18 @@ function populatePlaceDetails(data) {
         buttonEl = document.createElement("button");
         dEl.appendChild(buttonEl);
         buttonEl.className =
-            "waves-effect waves-light white-text btn-flat pink center-align";
+            "waves-effect waves-light white-text btn-flat pink center-align bucketlist-add";
         buttonEl.textContent = "Like Eatery";
         iEl = document.createElement("i");
         buttonEl.appendChild(iEl);
-        iEl.className = "material-icons left bucketlist-add";
-        iEl.textContent = "favorite_border";
+
+        let heart = card.querySelector(".heart");
+        heart.textContent == "favorite"
+            ? (iEl.textContent = "favorite")
+            : (iEl.textContent = "favorite_border");
+
+        iEl.className = "material-icons left heart";
     }
-    toggleHeartIcon(card);
 }
 
 function selectCard(cardID) {
@@ -648,20 +652,21 @@ function selectCard(cardID) {
 function toggleHeartIcon(current) {
     console.log("toggling heart icon");
     let container = current.closest(".card-container");
-    let previous = container.querySelector(".selected");
+    // let previous = container.querySelector(".selected");
 
-    if (previous) {
-        let fullHearts = previous.querySelectorAll(".bucketlist-add");
-        if (fullHearts !== null && fullHearts.length > 0) {
-            for (let i = 0; i < fullHearts.length; i++) {
-                fullHearts[i].textContent = "favorite_border";
-            }
+    let fullHearts = container.querySelectorAll(".heart");
+    if (fullHearts !== null && fullHearts.length > 0) {
+        for (let i = 0; i < fullHearts.length; i++) {
+            console.log("setting all hearts in container to empty");
+            fullHearts[i].textContent = "favorite_border";
         }
     }
 
-    let emptyHearts = current.querySelectorAll(".bucketlist-add");
+    let emptyHearts = current.querySelectorAll(".heart");
+    console.log(emptyHearts);
     if (emptyHearts && emptyHearts !== null && emptyHearts.length > 0) {
         for (let i = 0; i < emptyHearts.length; i++) {
+            console.log("changing only this card's hearts to full");
             emptyHearts[i].textContent = "favorite";
         }
     }
@@ -741,7 +746,6 @@ checkSearchHistory();
 // click query selector event delegator
 document.querySelector("body").addEventListener("click", function (event) {
     let bListSave = document.querySelector("#bucketlist-save-btn");
-
     if (bListSave && event.target == bListSave) {
         saveBucketlist(event);
     }
@@ -749,24 +753,32 @@ document.querySelector("body").addEventListener("click", function (event) {
     let container = event.target.closest(".card-parent");
 
     if (container !== null) {
-        let card = event.target;
-        card = card.closest(".card");
+        let click = event.target;
+        let btn = click.parentElement;
+        console.log(click);
+        console.log(btn);
+        card = click.closest(".card");
         let cardID = card.id;
         if (container.id == "yelp-results") {
-            if (event.target.className.includes("bucketlist-add")) {
+            if (
+                click.className.includes("bucketlist-add") ||
+                btn.className.includes("bucketlist-add")
+            ) {
                 console.log("button clicked");
                 passEventCoords(event);
                 selectCard(cardID);
                 openEateriesContainer();
             }
         } else if (container.id == "google-results") {
+            console.log("google container clicked");
             // prep details search regardless, but if bucketlist add, select card
-            if (event.target.closest(".card")) {
-                if (event.target.className.includes("bucketlist-add")) {
-                    selectCard(cardID);
-                    bucketlistAddEatery(event);
-                }
-                prepDetailsSearch(event);
+            prepDetailsSearch(event);
+            if (
+                click.className.includes("bucketlist-add") ||
+                btn.className.includes("bucketlist-add")
+            ) {
+                selectCard(cardID);
+                bucketlistAddEatery(event);
             }
         }
     }
