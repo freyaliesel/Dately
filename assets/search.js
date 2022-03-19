@@ -813,20 +813,7 @@ document.querySelector("body").addEventListener("click", function (event) {
     }
 });
 
-// // responsive nav bar
-// $(document).ready(function () {
-//     $(".sidenav").sidenav();
-// });
-
-// // events show hide function
-// jQuery(document).ready(function () {
-//     $("#click").click(function () {
-//         $("#bucketlist-add").slideDown("fast").hide();
-//         $(this).removeClass("l12").addClass("l6");
-//         $("#close").show();
-//     });
-//     $("#closed").click(function () {
-//         $("#close").hide();
-//         $("#click").removeClass("l6").addClass("l12");
-//     });
-// });
+// responsive nav bar
+$(document).ready(function () {
+    $(".sidenav").sidenav();
+});
