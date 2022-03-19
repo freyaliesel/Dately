@@ -4,7 +4,7 @@ Dately is a web application that provides local event and restaurant information
 
 **Authors:** Kit Glidden, Lea Guerrero, Jenni Hartman
 
-[Link to Application](https://gitgals.github.io/dately/)
+[Link to Application](https://gitgals.github.io/Dately/)
 
 ---
 
