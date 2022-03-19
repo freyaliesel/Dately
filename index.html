@@ -14,58 +14,57 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="./assets/style.css" />
   <title>Dately - Home</title>
+  <link rel="fav icon" type="image/png" href="./assets/links/Dately Logo_v3.png">
 </head>
 
 <body>
   <header>
     <nav>
-        <div class="nav-wrapper black">
-            <img href="#" class="brand-logo logo" src="assets/links/Dately Logo.png">
-            <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-            <ul class="right hide-on-med-and-down">
-                <li class="waves-effect waves-light"><a href="index.html">home</a></li>
-                <li class="waves-effect waves-light"><a href="search.html">search</a></li>
-                <li class="waves-effect waves-light"><a href="bucketlist.html">bucket list</a></li>
-                <li class="waves-effect waves-light"><a href="about.html">about</a></li>
-            </ul>
-        </div>
+      <div class="nav-wrapper black">
+        <img href="#" class="brand-logo logo" src="assets/links/Dately Logo.png">
+        <a href="#" data-target="mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+        <ul class="right hide-on-med-and-down">
+          <li class="waves-effect waves-light"><a href="index.html">home</a></li>
+          <li class="waves-effect waves-light"><a href="search.html">search</a></li>
+          <li class="waves-effect waves-light"><a href="bucketlist.html">bucket list</a></li>
+          <li class="waves-effect waves-light"><a href="about.html">about</a></li>
+        </ul>
+      </div>
     </nav>
 
-    <ul class="sidenav" id="mobile-demo">
-        <li><a href="index.html">home</a></li>
-        <li><a href="search.html">search</a></li>
-        <li><a href="bucketlist.html">bucket list</a></li>
-        <li><a href="about.html">about</a></li>
+    <ul class="sidenav black white-text" id="mobile">
+      <li><a class="white-text" href="index.html">home</a></li>
+      <li><a class="white-text" href="search.html">search</a></li>
+      <li><a class="white-text" href="bucketlist.html">bucket list</a></li>
+      <li><a class="white-text" href="about.html">about</a></li>
     </ul>
 
-</header>
+  </header>
   <main>
     <div class="row">
       <div class="col l7  push-l5">
         <h1 class="white-text">EXPERIENCE CHICAGO</h1>
-        <h5 class="white-text flow-text light-weight">For all your local date night experiences in chicago. Find local
-          bars, restaurants and events near you.
-          Love more than one? No worries! Like and add to your bucket list and save for later.</h5>
+        <h5 class="white-text flow-text light-weight">For your local date night experiences in Chicago. Find upcoming
+          events in your neighborhood, then find nearby eateries!
+          Love more than one? Like to add to your bucketlist and save for later.</h5>
         <br>
 
         <div>
-          <!---Modal-->
-          <form autocomplete="off" class= "white-text">
-         
-            <div class="input-field black">
-              <input class="datepicker validate black white-text" id="datepicker" type="text" required=""
+          <form autocomplete="off" class="white-text">
+            <div class="input-field">
+              <input class="datepicker validate white-text" id="datepicker" type="text" required=""
                 aria-required="true" />
               <label for="datepicker">Date</label>
               <span class="helper-text" data-error="Select a date"></span>
             </div>
             <div class="input-field">
-              <input id="location" class="autocomplete validate invalid white-text" required="" aria-required="true"
+              <input id="location" class="autocomplete validate white-text" required="" aria-required="true"
                 type="text">
               <label for="location">Neighborhood</label>
               <span class="helper-text" data-error="Enter a location" data-success=""></span>
               </input>
             </div>
-            <button id="submit-btn" class="xwaves-effect waves-light btn-small">
+            <button id="submit-btn" class="xwaves-effect waves-light btn-small disabled">
               <i id="search-icon" class="medium material-icons">search</i>Search
             </button>
           </form>
@@ -76,7 +75,7 @@
       </div>
       <!-- Mobile -->
       <div class=" hide-on-small-only col s5 pull-s7">
-        <img class="event-img" src="assets/links/Events.png">
+        <img class="branding-img" src="assets/links/Events.png">
       </div>
     </div>
 

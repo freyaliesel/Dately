@@ -11,71 +11,105 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400;700&display=swap" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
   <link rel="stylesheet" href="./assets/style.css" />
+  <link rel="fav icon" type="image/png" href="./assets/links/Dately Logo_v3.png">
   <title>Dately - About Us</title>
 </head>
 
 <body>
   <header>
     <nav>
-        <div class="nav-wrapper black">
-            <img href="#" class="brand-logo logo" src="assets/links/Dately Logo.png">
-            <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-            <ul class="right hide-on-med-and-down">
-                <li class="waves-effect waves-light"><a href="index.html">home</a></li>
-                <li class="waves-effect waves-light"><a href="search.html">search</a></li>
-                <li class="waves-effect waves-light"><a href="bucketlist.html">bucket list</a></li>
-                <li class="waves-effect waves-light"><a href="about.html">about</a></li>
-            </ul>
-        </div>
+      <div class="nav-wrapper black">
+        <img href="#" class="brand-logo logo" src="assets/links/Dately Logo.png" />
+        <a href="#" data-target="mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+        <ul class="right hide-on-med-and-down">
+          <li class="waves-effect waves-light">
+            <a href="index.html">home</a>
+          </li>
+          <li class="waves-effect waves-light">
+            <a href="search.html">search</a>
+          </li>
+          <li class="waves-effect waves-light">
+            <a href="bucketlist.html">bucket list</a>
+          </li>
+          <li class="waves-effect waves-light">
+            <a href="about.html">about</a>
+          </li>
+        </ul>
+      </div>
     </nav>
 
-    <ul class="sidenav" id="mobile-demo">
-        <li><a href="index.html">home</a></li>
-        <li><a href="search.html">search</a></li>
-        <li><a href="bucketlist.html">bucket list</a></li>
-        <li><a href="about.html">about</a></li>
+    <ul class="sidenav black white-text" id="mobile">
+      <li><a class="white-text" href="index.html">home</a></li>
+      <li><a class="white-text" href="search.html">search</a></li>
+      <li><a class="white-text" href="bucketlist.html">bucket list</a></li>
+      <li><a class="white-text" href="about.html">about</a></li>
     </ul>
-</header>
+  </header>
   <main>
-    <div class=" row">
-        
-        <h1 class="white-text">ABOUT</h1>
-          <h5 class="flow-text white-text light-weight">Dately was built using <a href="https://materializecss.com/">Materialize CSS Framework</a> and access Yelp's Fusion
-            API and Google Maps API. GitGals is comprised of 3 junior Web Developers taking Northwestern University's
-            Full-Stack Coding Bootcamp. </h5>
-
-          <div class="col s12 l4">
-            <div class="card">
-              <img src="assets/links/drinks.jpg" style="width:100%">
-              <div class="card-content">
-                <h4><b>Lea</b></h4>
-                <p>Information about developer</p>
-              </div>
+    <div class="row">
+      <h1 class="white-text">About Us</h1>
+      <h5 class="flow-text white-text light-weight">
+        Dately was built using
+        <a href="https://materializecss.com/">Materialize CSS Framework</a>
+        and access Yelp's Fusion API and Google Maps API.
+        <span style="font-weight: bold">GitGals</span> is comprised of 3
+        junior Web Developers taking Northwestern University's Full-Stack
+        Coding Bootcamp.
+      </h5>
+      <div class="card-container">
+        <div class="card-parent">
+          <div id= "about-lea" class="card search-card about-card">
+            <img src="assets/images/Lea_photo.JPG" style="width: 100%" />
+            <div class="card-content">
+              <h4><b>Lea</b></h4>
+              <p>Hey, It's Lea. Design is my passion whether its the creation of print or web. I am excited to broaden my skillsets on a different platform and learn the user interface and user experience side of web development.  </p>
             </div>
-          </div>
-          <div class="col s12 l4">
-            <div class="card">
-              <img src="assets/links/drinks.jpg" style="width:100%">
-              <div class="card-content">
-                <h4><b>Jenni</b></h4>
-                <p>Information about developer</p>
-              </div>
-            </div>
-          </div>
-          <div class="col l4 s12">
-            <div class="card">
-              <img src="assets/links/drinks.jpg" style="width:100%">
-              <div class="card-content">
-                <h4><b>Kit</b></h4>
-                <p>Information about developer</p>
-              </div>
+            <div class="card-action">
+              <a class="btn-flat center" href="https://github.com/lealinnea">Github</a>
+              <a class="btn-flat center" href="https://lealinnea.github.io/portfolio/">Portfolio</a>
+              <!-- <a class="btn-flat center" href="#">LinkedIn</a> -->
             </div>
           </div>
 
+          <div id="about-jenni" class="card search-card about-card">
+            <img src="assets/images/jenni.jpg" style="width: 100%" />
+            <div class="card-content">
+              <h4><b>Jenni</b></h4>
+              <p>
+                I am making a career switch from Linux systems administration to
+                web development. Learning a new side of tech has been challenging
+                and fun!
+              </p>
+            </div>
+            <div class="card-action">
+              <a class="btn-flat center" href="https://github.com/jenniwritescode">Github</a>
+              <a class="btn-flat center" href="https://jenniwritescode.github.io/portfolio/">Portfolio</a>
+              <a class="btn-flat center" href="https://www.linkedin.com/in/jennihartman/">LinkedIn</a>
+            </div>
+          </div>
+
+          <div id="about-kit" class="card search-card about-card">
+            <img src="assets/images/kit.png" style="width: 100%" />
+            <div class="card-content">
+              <h4><b>Kit</b></h4>
+              <p>
+                I can't wait to enter the exciting world of web development. Every
+                task is a fun challenge to see just what I can accomplish, and how
+                efficiently I can do it!
+              </p>
+            </div>
+            <div class="card-action">
+              <a class="btn-flat center" href="https://github.com/freyaliesel">Github</a>
+              <a class="btn-flat center" href="https://freyaliesel.github.io/Portfolio/">Portfolio</a>
+              <a class="btn-flat center" href="https://www.linkedin.com/in/kelsea-glidden-907490126/">LinkedIn</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </main>
-
 
   <!--Scripts Go Here-->
   <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
@@ -86,9 +120,7 @@
 </body>
 
 <footer>
-  <div>
-    © 2022 Copyright Gitgals
-  </div>
+  <div>© 2022 Copyright Gitgals</div>
 </footer>
 
 </html>
