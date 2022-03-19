@@ -199,11 +199,20 @@ svg {
     justify-content: center;
 }
 
+.card h4 {
+    margin-top: 0;
+}
+
 .card:hover {
     transform: scale(1.08);
 }
 
-.search-card {
+.card.bucketlist-card {
+    display: flex;
+    background-color:#000;
+}
+
+.card.search-card {
     display: flex;
     width: 300px;
     flex-wrap: wrap;
@@ -213,7 +222,28 @@ svg {
     font-size: 12px;
 }
 
-.search-card img {
+.card-content, .card-action {
+    padding-top: 0;
+}
+
+#about-lea img, #about-jenni img, #about-kit img {
+    height: 250px;
+    object-fit: cover;
+    object-position: 0 0;
+}
+
+.card.about-card.search-card .card-action {
+    flex-direction: column;
+    width: 100%;
+}
+
+.card.selected {
+    -webkit-box-shadow: 0px 0px 20px 10px rgba(251, 53, 113, 0.8);
+    -moz-box-shadow: 0px 0px 20px 10px rgba(251, 53, 113, 0.8);
+    box-shadow: 0px 0px 20px 10px rgba(251, 53, 113, 0.8);
+}
+
+.card img {
     height: 200px;
     width: 300px;
     object-fit: cover;
@@ -233,12 +263,6 @@ svg {
 
 .search-card.event .card-image img {
     object-fit: contain;
-}
-
-.card .selected {
-    -webkit-box-shadow: 0px 0px 20px 10px rgba(251, 53, 113, 0.8);
-    -moz-box-shadow: 0px 0px 20px 10px rgba(251, 53, 113, 0.8);
-    box-shadow: 0px 0px 20px 10px rgba(251, 53, 113, 0.8);
 }
 
 .card .activator:hover {
@@ -262,18 +286,10 @@ svg {
     justify-content: space-evenly;
 }
 
-.card.about-card.search-card .card-action {
-    flex-direction: column;
-    width: 100%;
-}
 .card .card-action:last-child {
     align-self: flex-end;
 }
 
-.bucketlist-card {
-    display: flex;
-    background-color:#000;
-}
 
 /* scroll bar */
 
@@ -302,7 +318,6 @@ svg {
         opacity: 1;
     }
 }
-
 
 
 @media only screen and (max-width: 600px) {

@@ -107,7 +107,6 @@ function accessYelp(param) {
     )
         .then(checkError)
         .then(function (data) {
-            console.log(data);
             parseEventResults(data);
         })
         .catch((error) => {
@@ -290,10 +289,8 @@ function emptyElement(element) {
 function passEventCoords(event) {
     event.stopPropagation();
     let current = event.target;
-    let parentEl = document.getElementById("yelp-results");
     let card = current.closest(".search-card");
 
-    console.log(card);
     let index = card.getAttribute("id");
     index = index.substring(index.indexOf("-") + 1);
 
@@ -352,7 +349,6 @@ function populatePlaceResults() {
     let places = JSON.parse(localStorage.getItem("gTextData")).eateries;
     // only give 10 eatery options
     places = places.slice(0, 10);
-    console.log(places);
     let displayEl = document.getElementById("google-results");
     emptyElement(displayEl);
     let index = 0;
@@ -451,11 +447,6 @@ function populatePlaceResults() {
                 iEl.textContent = "No rating";
             }
 
-            // create div for links
-            divEl = document.createElement("div");
-            divEl.className = "card-action";
-            cardEl.appendChild(divEl);
-
             // create div for reveal
             divEl = document.createElement("div");
             divEl.className = "card-reveal";
@@ -490,9 +481,7 @@ function shuffle(array) {
 
 // prepare parameters for details search
 function prepDetailsSearch(event) {
-    // console.log(event);
     let current = event.target;
-    // console.log(current);
     let card = current.closest(".search-card");
     let detailsEl = card.querySelector(".card-reveal");
     let details = detailsEl.children;
@@ -507,7 +496,6 @@ function prepDetailsSearch(event) {
     }
 
     // check origin of function call
-
     // if event came from the add to bucketlist button,
     if (current.className.includes("bucketlist-add")) {
         // if there arent any details yet
@@ -532,10 +520,6 @@ function getPlaceDetails(passId, needsSave) {
     // let service;
     var elem = document.querySelector("#empty");
     console.log("getting place details from place_id");
-
-    // get place_id for the specific card user clicked
-    // let placeId = passId;
-    // console.log(placeId);
 
     var placeRequest = {
         placeId: passId,
@@ -577,16 +561,13 @@ function googleDetailSearch(placeDetails, status) {
 
 // populate details on card if not already present
 function populatePlaceDetails(data) {
-    // console.log(data);
     let index = localStorage.getItem("resCardIndex");
     localStorage.removeItem("resCardIndex");
 
     let parentContainer = document.querySelector("#google-results");
     let cards = parentContainer.children;
-    //console.log(cards);
-
     let card = cards[index];
-    let reveal = card.children[3];
+    let reveal = cards[index].children[2];
     let cardEls = reveal.children;
 
     if (cardEls.length == 0) {
@@ -643,7 +624,6 @@ function populatePlaceDetails(data) {
 
 function selectCard(cardID) {
     console.log("applying glow to selected card");
-    console.log(cardID);
 
     let current = document.getElementById(cardID);
     let container = current.closest(".card-container");
@@ -673,7 +653,6 @@ function toggleHeartIcon(current) {
     if (previous) {
         let fullHearts = previous.querySelectorAll(".bucketlist-add");
         if (fullHearts !== null && fullHearts.length > 0) {
-            console.log(fullHearts);
             for (let i = 0; i < fullHearts.length; i++) {
                 fullHearts[i].textContent = "favorite_border";
             }
@@ -682,7 +661,6 @@ function toggleHeartIcon(current) {
 
     let emptyHearts = current.querySelectorAll(".bucketlist-add");
     if (emptyHearts && emptyHearts !== null && emptyHearts.length > 0) {
-        console.log(emptyHearts);
         for (let i = 0; i < emptyHearts.length; i++) {
             emptyHearts[i].textContent = "favorite";
         }
@@ -691,19 +669,14 @@ function toggleHeartIcon(current) {
 
 function storeSelectedEvent(cardID) {
     console.log("storing selected card");
-
     localStorage.setItem("likedEvent", JSON.stringify(cardID));
     console.log("removing stored eatery");
     localStorage.removeItem("likedEatery");
 }
 
 function bucketlistAddEatery(event) {
-    // console.log(event);
     console.log("adding eatery");
-    console.log(event);
     let card = event.target.closest(".search-card");
-    console.log(card);
-
     let index = card.getAttribute("id");
     index = index.substring(index.indexOf("-") + 1);
     let data = JSON.parse(localStorage.getItem("gTextData"));
@@ -715,14 +688,11 @@ function bucketlistAddDetails(details) {
     // save the details to the bucketlist
     console.log("saving details to new bucketlist pair");
     newPair.eatery.details = details;
-    console.log(newPair);
-
     createSaveButton();
 }
 
 function createSaveButton() {
     console.log("adding save button");
-
     let main = document.querySelector("main");
 
     let divEl = document.createElement("div");
@@ -744,10 +714,7 @@ function createSaveButton() {
 function saveBucketlist(event) {
     event.preventDefault();
     console.log("saves to bucket list");
-
     let bList = JSON.parse(localStorage.getItem("bucketlist"));
-
-    console.log(bList);
     let newList = [newPair];
 
     // if the bucketlist exists and has entries, return it, else make a new list
@@ -755,18 +722,14 @@ function saveBucketlist(event) {
         ? (bList = newList.concat(bList))
         : (bList = newList);
     localStorage.setItem("bucketlist", JSON.stringify(bList));
-
     window.location.href = "./bucketlist.html";
 }
 
-function openEateriesContainer (){
+function openEateriesContainer() {
     console.log("opening Eateries Container");
-
     let div = document.querySelector("#yelp-container");
-
     div.classList.remove("l12");
     div.classList.add("l6");
-
     let googleContainer = document.querySelector("#google-container");
     googleContainer.classList.remove("hide");
     googleContainer.classList.add("l6");
@@ -813,20 +776,7 @@ document.querySelector("body").addEventListener("click", function (event) {
     }
 });
 
-// // responsive nav bar
-// $(document).ready(function () {
-//     $(".sidenav").sidenav();
-// });
-
-// // events show hide function
-// jQuery(document).ready(function () {
-//     $("#click").click(function () {
-//         $("#bucketlist-add").slideDown("fast").hide();
-//         $(this).removeClass("l12").addClass("l6");
-//         $("#close").show();
-//     });
-//     $("#closed").click(function () {
-//         $("#close").hide();
-//         $("#click").removeClass("l6").addClass("l12");
-//     });
-// });
+// responsive nav bar
+$(document).ready(function () {
+    $(".sidenav").sidenav();
+});
