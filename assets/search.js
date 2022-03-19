@@ -451,11 +451,6 @@ function populatePlaceResults() {
                 iEl.textContent = "No rating";
             }
 
-            // create div for links
-            divEl = document.createElement("div");
-            divEl.className = "card-action";
-            cardEl.appendChild(divEl);
-
             // create div for reveal
             divEl = document.createElement("div");
             divEl.className = "card-reveal";
