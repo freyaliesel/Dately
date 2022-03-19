@@ -4,7 +4,7 @@ Dately is a web application that provides local event and restaurant information
 
 **Authors:** Kit Glidden, Lea Guerrero, Jenni Hartman
 
-[Link to Application](gitgals.github.io/dately/)
+[Link to Application](https://gitgals.github.io/dately/)
 
 ---
 
@@ -24,9 +24,9 @@ I click on an event and a restaurant choice to save to my bucket list for future
 - [Yelp Fusion API](https://www.yelp.com/developers/documentation/v3/get_started)
 - [Google Maps API - Places Library](https://developers.google.com/maps/documentation/javascript/places)
 
-### Expected Functionality/Screenshots
+### Screenshot
 
-Insert Screenshot Here
+![screenshot](./assets/images/screenshot.png)
 
 ---
 
