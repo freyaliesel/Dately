@@ -11,65 +11,78 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400;700&display=swap" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
     <link rel="stylesheet" href="./assets/style.css" />
     <title>Dately - Search</title>
-    <link rel="fav icon" type="image/png" href="./assets/links/Dately Logo_v3.png">
+    <link rel="fav icon" type="image/png" href="./assets/links/Dately Logo_v3.png" />
 </head>
 
 <body>
-        <header>
-            <nav>
-                <div class="nav-wrapper black">
-                    <img href="#" class="brand-logo logo" src="assets/links/Dately Logo.png">
-                    <a href="#" data-target="mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-                    <ul class="right hide-on-med-and-down">
-                        <li class="waves-effect waves-light"><a href="index.html">home</a></li>
-                        <li class="waves-effect waves-light"><a href="search.html">search</a></li>
-                        <li class="waves-effect waves-light"><a href="bucketlist.html">bucket list</a></li>
-                        <li class="waves-effect waves-light"><a href="about.html">about</a></li>
-                    </ul>
-                </div>
-            </nav>
-
-            <ul class="sidenav black white-text" id="mobile-demo">
-                <li><a class="white-text" href="index.html">home</a></li>
-                <li><a class="white-text" href="search.html">search</a></li>
-                <li><a class="white-text" href="bucketlist.html">bucket list</a></li>
-                <li><a class="white-text" href="about.html">about</a></li>
-              </ul>
-        </header>
+    <header>
+        <nav>
+          <div class="nav-wrapper black">
+            <img href="#" class="brand-logo logo" src="assets/links/Dately Logo.png">
+            <a href="#" data-target="mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+            <ul class="right hide-on-med-and-down">
+              <li class="waves-effect waves-light"><a href="index.html">home</a></li>
+              <li class="waves-effect waves-light"><a href="search.html">search</a></li>
+              <li class="waves-effect waves-light"><a href="bucketlist.html">bucket list</a></li>
+              <li class="waves-effect waves-light"><a href="about.html">about</a></li>
+            </ul>
+          </div>
+        </nav>
+    
+        <ul class="sidenav black white-text" id="mobile">
+          <li><a class="white-text" href="index.html">home</a></li>
+          <li><a class="white-text" href="search.html">search</a></li>
+          <li><a class="white-text" href="bucketlist.html">bucket list</a></li>
+          <li><a class="white-text" href="about.html">about</a></li>
+        </ul>
+    
+      </header>
    
     <div class="chicago-image">
         <div class="chicago-image-text">
-            <h2> Find an Event</h2>
-            <h5>Pick an event to see restaurants nearby and save to your bucketlist!</h5>
-            
+            <h2>Find an Event</h2>
+            <h5>
+                Pick an event to see restaurants nearby and save to your
+                bucketlist!
+            </h5>
         </div>
     </div>
 
     <main class="search-page">
         <div class="row">
             <div id="yelp-container" class="card-container col s12 flow-text">
-                <h2 class="white-text">Events</h2>
-                <p class="white-text flow-text">Like an event to find nearby restaurants</p>
+                <h2 class="white-text std-padding-left">Events</h2>
+                <p class="white-text flow-text std-padding-left"">Like an event to find nearby restaurants</p>
                 <div id="yelp-results" class="card-parent">
                     <div class="progress">
                         <div class="indeterminate"></div>
                     </div>
                 </div>
-
             </div>
             <div id="google-container" class="card-container hide col l6 s12 flow-text">
-                <h2 class="white-text">Eateries</h2> 
-                <p class="white-text flow-text">Like an eatery to save both to your Bucketlist</p>
+                <h2 class="white-text std-padding-left"">Eateries</h2> 
+                <p class="white-text flow-text std-padding-left"">Like an eatery to save both to your Bucketlist</p>
                 <div id="google-results" class="card-parent">
 
                 </div>
             </div>
             <div id="empty"></div>
-    </main>
+        </div>
 
+        <!-- Modal Structure -->
+        <div id="alert-modal" class="modal">
+            <div class="modal-content white-text">
+                <h4 class="white-text">Error</h4>
+                <p class="white-text">Error message</p>
+            </div>
+            <div class="modal-footer black">
+                <a id="modal-close" href="./index.html" class="modal-close waves-effect waves-green btn-flat">OK</a>
+            </div>
+        </div>
+    </main>
 
     <!--Scripts Go Here-->
     <script
@@ -88,7 +101,7 @@
     <div>
         © 2022 Copyright Gitgals
     </div>
-    <img src="assets/links/powered_by_google_on_non_white.png">
+    <img src="./assets/links/powered_by_google_on_non_white.png"  alt="google">
 </footer>
 
 </html>

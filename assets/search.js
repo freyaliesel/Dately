@@ -2,6 +2,10 @@
 function checkSearchHistory() {
     let yelpParam = JSON.parse(localStorage.getItem("yelpParam"));
     let yelpData = JSON.parse(localStorage.getItem("yelpData"));
+    let modal = document.getElementById("alert-modal");
+    let mTitle = modal.querySelector("h4");
+    let mContent = modal.querySelector("p");
+
     // if the search parameters exist
     if (yelpParam !== null && yelpParam.date && yelpParam.location) {
         // send to api, then clear the previous search's stored information
@@ -43,25 +47,38 @@ function checkSearchHistory() {
         }
     } // something went wrong and alert the user
     else {
-        let displayEl = document.getElementById("yelp-results");
-        if (document.getElementsByTagName("h4").length > 0) {
-            console.log(
-                "checkHistory: something went wrong on first search on page"
-            );
-            // needs a modal or pop up to alert user something went wrong
-        } else if (document.querySelectorAll(".card").length > 0) {
-            // Need an alert of some kind, either text in-line or modal
-            console.log(
-                "checkHistory: something went wrong on secondary search"
-            );
-        } else {
+        let displayEl = document.getElementById("yelp-results");        
+        if  (!yelpData && !yelpParam) {
             // user has not yet performed a search
             let textEl = document.createElement("h4");
             displayEl.appendChild(textEl);
             textEl.textContent = "Search for an event to get started!";
             textEl.className = "white-text";
+            let pEl = document.querySelector(".info");
+            pEl.remove();
+            removeProgressBar();
         }
     }
+}
+
+function removeProgressBar() {
+    let yelpBar = document.querySelector(".progress");
+    yelpBar.remove();
+}
+
+// opens a modal
+function callModal(input) {
+    console.log("popping up modal");
+    let options = input;
+    let modal = document.getElementById("alert-modal");
+
+    if (options !== null || options !== undefined) {
+        let instances = M.Modal.init(modal, options);
+    } else {
+        let instances = M.Modal.init(modal);
+    }
+    let instance = M.Modal.getInstance(modal);
+    instance.open();
 }
 
 // make a new bucketlist object
@@ -118,15 +135,26 @@ function accessYelp(param) {
 
 // yelp response error checking
 function checkError(response) {
+    let modal = document.getElementById("alert-modal");
+    let mTitle = modal.querySelector("h4");
+    let mContent = modal.querySelector("p");
     if (response.status >= 200 && response.status <= 299) {
         return response.json();
     } else {
         if (response.status === 400) {
             // let the user know they need to check their input and try again
+            mTitle.textContent = "400 Error";
+            mContent.textContent = "Search error, please try another location"
+            callModal();
         } else if (response.status === 500) {
             // let the user know that something is wrong with yelp
+            mTitle.textContent = "500 Error";
+            mContent.textContent = "Yelp is experiencing difficulties, please try again, and if the problems persist, come back later.";
+            callModal()
         } else {
             // let the user know that something happened and to try again, if it happens again, let the project owners know
+            mTitle.textContent = "Unexpected Error";
+            mContent.textContent = "Something went wrong, please try again.";
             console.log(response.status, response.statusText);
         }
         throw Error(response.statusText);
@@ -135,19 +163,25 @@ function checkError(response) {
 
 // store yelp data if returned, else alert the user
 function parseEventResults(data) {
+    let modal = document.getElementById("alert-modal");
+    let mTitle = modal.querySelector("h4");
+    let mContent = modal.querySelector("p");
     if (data.events.length > 0) {
         populateEventResults(data.events);
         localStorage.setItem("yelpData", JSON.stringify(data.events));
     } else {
         //let the user know something went wrong
+        mTitle.textContent = "No Results";
+        mContent.textContent = "Unfortunately, your search returned no results. Please make another search";
+        callModal();
     }
 }
 
 // make cards for yelp results
 function populateEventResults(events) {
     console.log("displaying results");
+    removeProgressBar();
     let displayEl = document.getElementById("yelp-results");
-    emptyElement(displayEl);
     let index = 0;
     events.forEach((event) => {
         // create card
@@ -281,11 +315,6 @@ function populateEventResults(events) {
     });
 }
 
-// remove all child elements from an element
-function emptyElement(element) {
-        $(element).empty();
-}
-
 // prepare and pass parameters for google search
 function passEventCoords(event) {
     event.stopPropagation();
@@ -343,7 +372,6 @@ function googleTextSearch(request, status) {
 }
 
 function saveTextResults(object) {
-
     let newArray = [];
     let newObject = {};
     object.eateries.forEach((place) => {
@@ -358,10 +386,10 @@ function saveTextResults(object) {
         let categories = [];
         for (let i = 0; i < place.types.length; i++) {
             categories.push(place.types[i]);
-        };
+        }
         newObject.types = categories;
         newArray.push(newObject);
-    })
+    });
     object.eateries = newArray;
     localStorage.setItem("gTextData", JSON.stringify(object));
 }

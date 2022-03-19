@@ -70,8 +70,7 @@ function saveParameters() {
 // event listener - submits form and sends user to search_results
 document.getElementById("submit-btn").addEventListener("click", function (event) {
     event.preventDefault();
-    let validInput = checkValidInput();
-    if (validInput == true) {
+      if(checkValidInput()) {
         saveParameters();
     } else {
         console.log("invalid location");
@@ -79,23 +78,24 @@ document.getElementById("submit-btn").addEventListener("click", function (event)
 });
 
 
-function toggleSubmitButton () {
-  let button = document.getElementById("submit-btn");
-  let date = document.getElementById("datepicker").checkValidity();
-  if (checkValidInput() && date ){
-    button.classList.remove("disabled");
-  } else {
-    if (!button.className.includes("disabled"))  {
-      button.classList.add("disabled");
-    }
-  }
-}
+// function toggleSubmitButton () {
+//   let button = document.getElementById("submit-btn");
+//   let date = document.getElementById("datepicker").checkValidity();
+//   if (checkValidInput() && date ){
+//     button.classList.remove("disabled");
 
-document.querySelector("body").addEventListener("keydown", toggleSubmitButton());
+//   } else {
+//     if (!button.className.includes("disabled"))  {
+//       button.classList.add("disabled");
+//     }
+//   }
+// }
 
-document.querySelector("body").addEventListener("click", function(){
-  toggleSubmitButton();
-});
+// document.querySelector("body").addEventListener("keydown", toggleSubmitButton());
+
+// document.querySelector("body").addEventListener("click", function(){
+//   toggleSubmitButton();
+// });
 
 // responsive nav bar
   $(document).ready(function(){
