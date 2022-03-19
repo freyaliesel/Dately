@@ -735,10 +735,6 @@ function openEateriesContainer() {
     googleContainer.classList.add("l6");
 }
 
-function collapseEateriesContainer() {
-    console.log("closing Eateries Container");
-}
-
 // on page load, parse and pass most recent search data to yelp API
 checkSearchHistory();
 
