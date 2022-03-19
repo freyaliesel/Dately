@@ -523,7 +523,7 @@ function prepDetailsSearch(event) {
         if (details.length == 0) {
             // get the details and save them to the bucketlist
             needsSave = true;
-            getPlaceDetails(getID(), needsSave);
+            initDetailsSearch(getID(), needsSave);
         } else {
             //pass details to bucketlist function
             console.log("details exist, pass to bucketlist");
@@ -531,13 +531,13 @@ function prepDetailsSearch(event) {
     } else if (current.className.includes("activator")) {
         // check if details exist before making API call
         details.length == 0
-            ? getPlaceDetails(getID(), needsSave)
+            ? initDetailsSearch(getID(), needsSave)
             : console.log("details exist");
     }
 }
 
 // send parameters to google for detailed information
-function getPlaceDetails(passId, needsSave) {
+function initDetailsSearch(passId, needsSave) {
     // let service;
     var elem = document.querySelector("#empty");
     console.log("getting place details from place_id");
