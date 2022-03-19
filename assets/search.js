@@ -759,6 +759,23 @@ function saveBucketlist(event) {
     window.location.href = "./bucketlist.html";
 }
 
+function openEateriesContainer (){
+    console.log("opening Eateries Container");
+
+    let div = document.querySelector("#yelp-container");
+
+    div.classList.remove("l12");
+    div.classList.add("l6");
+
+    let googleContainer = document.querySelector("#google-container");
+    googleContainer.classList.remove("hide");
+    googleContainer.classList.add("l6");
+}
+
+function collapseEateriesContainer() {
+    console.log("closing Eateries Container");
+}
+
 // on page load, parse and pass most recent search data to yelp API
 checkSearchHistory();
 
@@ -781,6 +798,7 @@ document.querySelector("body").addEventListener("click", function (event) {
                 console.log("button clicked");
                 passEventCoords(event);
                 selectCard(cardID);
+                openEateriesContainer();
             }
         } else if (container.id == "google-results") {
             // prep details search regardless, but if bucketlist add, select card
@@ -795,20 +813,20 @@ document.querySelector("body").addEventListener("click", function (event) {
     }
 });
 
-// responsive nav bar
-$(document).ready(function () {
-    $(".sidenav").sidenav();
-});
+// // responsive nav bar
+// $(document).ready(function () {
+//     $(".sidenav").sidenav();
+// });
 
-// events show hide function
-jQuery(document).ready(function () {
-    $("#click").click(function () {
-        $("#bucketlist-add").slideDown("fast").hide();
-        $(this).removeClass("l12").addClass("l6");
-        $("#close").show();
-    });
-    $("#closed").click(function () {
-        $("#close").hide();
-        $("#click").removeClass("l6").addClass("l12");
-    });
-});
+// // events show hide function
+// jQuery(document).ready(function () {
+//     $("#click").click(function () {
+//         $("#bucketlist-add").slideDown("fast").hide();
+//         $(this).removeClass("l12").addClass("l6");
+//         $("#close").show();
+//     });
+//     $("#closed").click(function () {
+//         $("#close").hide();
+//         $("#click").removeClass("l6").addClass("l12");
+//     });
+// });
