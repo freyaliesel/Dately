@@ -372,25 +372,25 @@ function googleTextSearch(request, status) {
 }
 
 function saveTextResults(object) {
-    let newArray = [];
-    let newObject = {};
-    object.eateries.forEach((place) => {
-        newObject.business_status = place.business_status;
-        newObject.formatted_address = place.formatted_address;
-        newObject.name = place.name;
-        newObject.place_id = place.place_id;
-        newObject.price_level = place.price_level;
-        newObject.rating = place.rating;
-        newObject.reference = place.reference;
-        newObject.user_ratings_total = place.user_ratings_total;
-        let categories = [];
-        for (let i = 0; i < place.types.length; i++) {
-            categories.push(place.types[i]);
-        }
-        newObject.types = categories;
-        newArray.push(newObject);
-    });
-    object.eateries = newArray;
+    // let newArray = [];
+    // let newObject = {};
+    // object.eateries.forEach((place) => {
+    //     newObject.business_status = place.business_status;
+    //     newObject.formatted_address = place.formatted_address;
+    //     newObject.name = place.name;
+    //     newObject.place_id = place.place_id;
+    //     newObject.price_level = place.price_level;
+    //     newObject.rating = place.rating;
+    //     newObject.reference = place.reference;
+    //     newObject.user_ratings_total = place.user_ratings_total;
+    //     let categories = [];
+    //     for (let i = 0; i < place.types.length; i++) {
+    //         categories.push(place.types[i]);
+    //     }
+    //     newObject.types = categories;
+    //     newArray.push(newObject);
+    // });
+    // object.eateries = newArray;
     localStorage.setItem("gTextData", JSON.stringify(object));
 }
 
@@ -402,7 +402,6 @@ function populatePlaceResults() {
     // only give 10 eatery options
     places = places.slice(0, 10);
     let displayEl = document.getElementById("google-results");
-    emptyElement(displayEl);
     let index = 0;
 
     // array for random photos in case an eatery lacks photos
@@ -553,14 +552,17 @@ function prepDetailsSearch(event) {
         // if there arent any details yet
         if (details.length == 0) {
             // get the details and save them to the bucketlist
+            console.log("needs details")
             needsSave = true;
             initDetailsSearch(getID(), needsSave);
         } else {
             //pass details to bucketlist function
             console.log("details exist, pass to bucketlist");
+            bucketlistAddDetails(details);
         }
-    } else if (current.className.includes("activator")) {
+    } else if (current.className.includes("activator") || current.className.includes("heart")) {
         // check if details exist before making API call
+        needsSave = true;
         details.length == 0
             ? initDetailsSearch(getID(), needsSave)
             : console.log("details exist");
@@ -738,6 +740,7 @@ function bucketlistAddEatery(event) {
     let index = card.getAttribute("id");
     index = index.substring(index.indexOf("-") + 1);
     let data = JSON.parse(localStorage.getItem("gTextData"));
+    console.log(data);
     newPair.eatery.text = data.eateries[index];
     newPair.event = JSON.parse(localStorage.getItem("yelpData"))[data.event];
 }
@@ -827,14 +830,16 @@ document.querySelector("body").addEventListener("click", function (event) {
         } else if (container.id == "google-results") {
             console.log("google container clicked");
             // prep details search regardless, but if bucketlist add, select card
-            prepDetailsSearch(event);
+            
             if (
                 click.className.includes("bucketlist-add") ||
                 btn.className.includes("bucketlist-add")
             ) {
+                console.log("eatery added to bucketlist")
                 selectCard(cardID);
                 bucketlistAddEatery(event);
             }
+            prepDetailsSearch(event);
         }
     }
 });
