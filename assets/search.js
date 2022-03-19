@@ -558,7 +558,7 @@ function initDetailsSearch(passId, needsSave) {
 
     if (needsSave === true) {
         console.log("passing to save details");
-        service.getDetails(placeRequest, saveDetails);
+        service.getDetails(placeRequest, getPlaceDetails);
     } else {
         console.log("passing details");
         service.getDetails(placeRequest, googleDetailSearch);
@@ -566,7 +566,7 @@ function initDetailsSearch(passId, needsSave) {
 }
 
 // because google doesnt let us handle the api call ourselves, this has to be a separate function
-function saveDetails(details, status) {
+function getPlaceDetails(details, status) {
     if (status == google.maps.places.PlacesServiceStatus.OK) {
         populatePlaceDetails(details);
         bucketlistAddDetails(details);
