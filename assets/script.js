@@ -91,11 +91,11 @@ document.getElementById("submit-btn").addEventListener("click", function (event)
 //   }
 // }
 
-document.querySelector("body").addEventListener("keydown", toggleSubmitButton());
+// document.querySelector("body").addEventListener("keydown", toggleSubmitButton());
 
-document.querySelector("body").addEventListener("click", function(){
-  toggleSubmitButton();
-});
+// document.querySelector("body").addEventListener("click", function(){
+//   toggleSubmitButton();
+// });
 
 // responsive nav bar
   $(document).ready(function(){
