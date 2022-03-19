@@ -1,4 +1,4 @@
-// determine if need to call api on page load
+// determine if need to call api on page load, alert user if something is wrong
 function checkSearchHistory() {
     let yelpParam = JSON.parse(localStorage.getItem("yelpParam"));
     let yelpData = JSON.parse(localStorage.getItem("yelpData"));
@@ -64,6 +64,7 @@ function checkSearchHistory() {
     }
 }
 
+// make a new bucketlist object
 function bucketList() {
     this.event = {};
     this.eatery = {
@@ -115,7 +116,7 @@ function accessYelp(param) {
         });
 }
 
-// error checking
+// yelp response error checking
 function checkError(response) {
     if (response.status >= 200 && response.status <= 299) {
         return response.json();
@@ -132,6 +133,7 @@ function checkError(response) {
     }
 }
 
+// store yelp data if returned, else alert the user
 function parseEventResults(data) {
     if (data.events.length > 0) {
         populateEventResults(data.events);
@@ -279,6 +281,7 @@ function populateEventResults(events) {
     });
 }
 
+// remove all child elements from an element
 function emptyElement(element) {
         $(element).empty();
 }
@@ -646,6 +649,7 @@ function populatePlaceDetails(data) {
     }
 }
 
+// apply glow to currently selected card
 function selectCard(cardID) {
     console.log("applying glow to selected card");
 
@@ -669,6 +673,7 @@ function selectCard(cardID) {
     toggleHeartIcon(current, previous);
 }
 
+// toggle heart icons between full and outline
 function toggleHeartIcon(current) {
     console.log("toggling heart icon");
     let container = current.closest(".card-container");
@@ -690,6 +695,7 @@ function toggleHeartIcon(current) {
     }
 }
 
+// track the currently selected event to repopulate on page refresh
 function storeSelectedEvent(cardID) {
     console.log("storing selected card");
     localStorage.setItem("likedEvent", JSON.stringify(cardID));
@@ -697,6 +703,7 @@ function storeSelectedEvent(cardID) {
     localStorage.removeItem("likedEatery");
 }
 
+// add eatery text search results to bucketlist pair
 function bucketlistAddEatery(event) {
     console.log("adding eatery");
     let card = event.target.closest(".search-card");
@@ -707,6 +714,7 @@ function bucketlistAddEatery(event) {
     newPair.event = JSON.parse(localStorage.getItem("yelpData"))[data.event];
 }
 
+// add eatery details to bucketlist pair
 function bucketlistAddDetails(details) {
     // save the details to the bucketlist
     console.log("saving details to new bucketlist pair");
@@ -714,6 +722,7 @@ function bucketlistAddDetails(details) {
     createSaveButton();
 }
 
+// insert a save button onto the page
 function createSaveButton() {
     console.log("adding save button");
     let main = document.querySelector("main");
@@ -734,6 +743,7 @@ function createSaveButton() {
     btn.appendChild(icon);
 }
 
+// save the bucketlist and send the user to the bucketlist page
 function saveBucketlist(event) {
     event.preventDefault();
     console.log("saves to bucket list");
@@ -748,6 +758,7 @@ function saveBucketlist(event) {
     window.location.href = "./bucketlist.html";
 }
 
+// expand the eateries container when a user selects an event
 function openEateriesContainer() {
     console.log("opening Eateries Container");
     let div = document.querySelector("#yelp-container");
