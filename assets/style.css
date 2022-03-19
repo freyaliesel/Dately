@@ -9,6 +9,7 @@
 /* =====Fonts and Styles====*/
 h1 {
     font-weight: 900;
+   
 }
 
 h4,
@@ -161,8 +162,9 @@ svg {
     width: 100%;
 }
 
-.std-padding-left {
-    margin-left: 60px;
+
+.std-padding-left{
+    padding-left: 40px;
 }
 
 .chicago-image {
@@ -175,6 +177,11 @@ svg {
     position: relative;
     z-index: -1;
 }
+@media only screen and (max-width: 600px) {
+    .chicago-image {
+        height: 300px;
+    }
+}
 
 .chicago-image-text {
     text-align: center;
@@ -183,6 +190,14 @@ svg {
     left: 50%;
     transform: translate(-50%, -50%);
     color: white;
+}
+@media only screen and (max-width: 600px) {
+    .chicago-image-text {
+        width:90%
+    }
+        h5{
+font-size: 18px;
+        }
 }
 
 /* Cards */
@@ -212,7 +227,15 @@ svg {
 
 .card.bucketlist-card {
     display: flex;
-    background-color: #000;
+    background: rgb(1, 8, 13);
+    background: radial-gradient(
+        circle,
+        rgba(1, 8, 13, 1) 8%,
+        rgba(21, 47, 64, 1) 38%,
+        rgba(63, 177, 251, 1) 61%,
+        rgba(104, 21, 152, 1) 84%,
+        rgba(60, 10, 89, 1) 99%
+    );
 }
 
 .card.search-card {
@@ -326,7 +349,7 @@ svg {
 
 @media only screen and (max-width: 600px) {
     .chicago-img {
-        width: 450px;
+        width: 100%;
         padding-right: 40px;
         margin-top: 60px;
     }
@@ -340,9 +363,13 @@ svg {
     .card-parent {
         overflow-x: auto;
         flex-wrap: nowrap;
+        justify-content:stretch;
     }
 
     .card-parent::-webkit-scrollbar {
         display: none;
+    }
+    h1{
+        font-size: 3.2rem;
     }
 }
