@@ -39,7 +39,7 @@ function populateBucketList(list) {
         container.appendChild(cardEl);
 
         populateEventSide(cardEl, pair.event);
-        populateEaterySide(cardEl, pair.eatery);
+        populateEaterySide(cardEl, pair.eatery, index);
 
         index++;
     });
@@ -148,7 +148,25 @@ function populateEventSide(parent, event) {
     // this could be a smaller list, populated with just names, date, and links
 }
 
-function populateEaterySide(parent, eatery) {
+function populateEaterySide(parent, eatery, index) {
+
+    var eateryPhotos = [];
+    eateryPhotos = [
+        "./assets/eatery-photos/eatery-1.jpg",
+        "./assets/eatery-photos/eatery-2.jpg",
+        "./assets/eatery-photos/eatery-3.jpg",
+        "./assets/eatery-photos/eatery-4.jpg",
+        "./assets/eatery-photos/eatery-5.jpg",
+        "./assets/eatery-photos/eatery-6.jpg",
+        "./assets/eatery-photos/eatery-7.jpg",
+        "./assets/eatery-photos/eatery-8.jpg",
+        "./assets/eatery-photos/eatery-9.jpg",
+        "./assets/eatery-photos/eatery-10.jpg",
+    ];
+
+    var randomNums = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+    shuffle(randomNums);
+
     console.log("filling in eatery info");
     console.log(eatery);
     let text = eatery.text;
@@ -166,8 +184,11 @@ function populateEaterySide(parent, eatery) {
     // image
     let imgEl = document.createElement("img");
     imgEl.className = "activator";
-    // this needs to change
-    imgEl.setAttribute("src", "./assets/links/drinks.jpg");
+    // grab image from eateryPhotos array, using shuffled randomNums array
+    if (index != randomNums.length) {
+        let r = randomNums[index];
+        imgEl.setAttribute("src", eateryPhotos[r]);
+    }
     divEl.appendChild(imgEl);
 
     // create div for content
@@ -229,6 +250,25 @@ function populateEaterySide(parent, eatery) {
     divEl.appendChild(aEl);
     aEl.setAttribute("href", "tel:" + dets.international_phone_number);
     aEl.textContent = dets.formatted_phone_number;
+}
+
+function shuffle(array) {
+    let currentIndex = array.length,
+        randomIndex;
+
+    // While there remain elements to shuffle...
+    while (currentIndex != 0) {
+        // Pick a remaining element...
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex--;
+
+        // And swap it with the current element.
+        [array[currentIndex], array[randomIndex]] = [
+            array[randomIndex],
+            array[currentIndex],
+        ];
+    }
+    return array;
 }
 
 function clearBucketList() {
