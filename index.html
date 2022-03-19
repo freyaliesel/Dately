@@ -50,9 +50,7 @@
         <br>
 
         <div>
-          <!---Modal-->
           <form autocomplete="off" class="white-text">
-
             <div class="input-field">
               <input class="datepicker validate white-text" id="datepicker" type="text" required=""
                 aria-required="true" />
@@ -60,13 +58,13 @@
               <span class="helper-text" data-error="Select a date"></span>
             </div>
             <div class="input-field">
-              <input id="location" class="autocomplete white-text" required="" aria-required="true"
+              <input id="location" class="autocomplete validate white-text" required="" aria-required="true"
                 type="text">
               <label for="location">Neighborhood</label>
               <span class="helper-text" data-error="Enter a location" data-success=""></span>
               </input>
             </div>
-            <button id="submit-btn" class="xwaves-effect waves-light btn-small">
+            <button id="submit-btn" class="xwaves-effect waves-light btn-small disabled">
               <i id="search-icon" class="medium material-icons">search</i>Search
             </button>
           </form>
