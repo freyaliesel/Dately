@@ -47,6 +47,7 @@ function checkSearchHistory() {
         }
     } // something went wrong and alert the user
     else {
+        removeProgressBar()
         let displayEl = document.getElementById("yelp-results");        
         if  (!yelpData && !yelpParam) {
             // user has not yet performed a search
@@ -830,7 +831,6 @@ document.querySelector("body").addEventListener("click", function (event) {
         } else if (container.id == "google-results") {
             console.log("google container clicked");
             // prep details search regardless, but if bucketlist add, select card
-            
             if (
                 click.className.includes("bucketlist-add") ||
                 btn.className.includes("bucketlist-add")
