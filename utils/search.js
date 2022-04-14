@@ -47,9 +47,9 @@ function checkSearchHistory() {
         }
     } // something went wrong and alert the user
     else {
-        removeProgressBar()
-        let displayEl = document.getElementById("yelp-results");        
-        if  (!yelpData && !yelpParam) {
+        removeProgressBar();
+        let displayEl = document.getElementById("yelp-results");
+        if (!yelpData && !yelpParam) {
             // user has not yet performed a search
             let textEl = document.createElement("h4");
             displayEl.appendChild(textEl);
@@ -60,26 +60,6 @@ function checkSearchHistory() {
             removeProgressBar();
         }
     }
-}
-
-function removeProgressBar() {
-    let yelpBar = document.querySelector(".progress");
-    yelpBar.remove();
-}
-
-// opens a modal
-function callModal(input) {
-    console.log("popping up modal");
-    let options = input;
-    let modal = document.getElementById("alert-modal");
-
-    if (options !== null || options !== undefined) {
-        let instances = M.Modal.init(modal, options);
-    } else {
-        let instances = M.Modal.init(modal);
-    }
-    let instance = M.Modal.getInstance(modal);
-    instance.open();
 }
 
 // make a new bucketlist object
@@ -145,13 +125,14 @@ function checkError(response) {
         if (response.status === 400) {
             // let the user know they need to check their input and try again
             mTitle.textContent = "400 Error";
-            mContent.textContent = "Search error, please try another location"
+            mContent.textContent = "Search error, please try another location";
             callModal();
         } else if (response.status === 500) {
             // let the user know that something is wrong with yelp
             mTitle.textContent = "500 Error";
-            mContent.textContent = "Yelp is experiencing difficulties, please try again, and if the problems persist, come back later.";
-            callModal()
+            mContent.textContent =
+                "Yelp is experiencing difficulties, please try again, and if the problems persist, come back later.";
+            callModal();
         } else {
             // let the user know that something happened and to try again, if it happens again, let the project owners know
             mTitle.textContent = "Unexpected Error";
@@ -173,7 +154,8 @@ function parseEventResults(data) {
     } else {
         //let the user know something went wrong
         mTitle.textContent = "No Results";
-        mContent.textContent = "Unfortunately, your search returned no results. Please make another search";
+        mContent.textContent =
+            "Unfortunately, your search returned no results. Please make another search";
         callModal();
     }
 }
@@ -511,26 +493,6 @@ function populatePlaceResults() {
     localStorage.setItem("gIDs", JSON.stringify(placeArray));
 }
 
-// Fisher-Yates shuffle to randomize arrays
-function shuffle(array) {
-    let currentIndex = array.length,
-        randomIndex;
-
-    // While there remain elements to shuffle...
-    while (currentIndex != 0) {
-        // Pick a remaining element...
-        randomIndex = Math.floor(Math.random() * currentIndex);
-        currentIndex--;
-
-        // And swap it with the current element.
-        [array[currentIndex], array[randomIndex]] = [
-            array[randomIndex],
-            array[currentIndex],
-        ];
-    }
-    return array;
-}
-
 // prepare parameters for details search
 function prepDetailsSearch(event) {
     let current = event.target;
@@ -553,7 +515,7 @@ function prepDetailsSearch(event) {
         // if there arent any details yet
         if (details.length == 0) {
             // get the details and save them to the bucketlist
-            console.log("needs details")
+            console.log("needs details");
             needsSave = true;
             initDetailsSearch(getID(), needsSave);
         } else {
@@ -561,7 +523,10 @@ function prepDetailsSearch(event) {
             console.log("details exist, pass to bucketlist");
             bucketlistAddDetails(details);
         }
-    } else if (current.className.includes("activator") || current.className.includes("heart")) {
+    } else if (
+        current.className.includes("activator") ||
+        current.className.includes("heart")
+    ) {
         // check if details exist before making API call
         needsSave = true;
         details.length == 0
@@ -754,33 +719,6 @@ function bucketlistAddDetails(details) {
     createSaveButton();
 }
 
-// insert a save button onto the page
-function createSaveButton() {
-
-    let selectedCards = document.getElementsByClassName("selected")
-
-    if (selectedCards.length == 2) {
-
-    console.log("adding save button");
-    let main = document.querySelector("main");
-
-    let divEl = document.createElement("div");
-    divEl.className = "fixed-action-btn";
-    main.appendChild(divEl);
-
-    let btn = document.createElement("button");
-    btn.className = "btn-large pink waves-effect waves-light";
-    btn.id = "bucketlist-save-btn";
-    btn.textContent = "Add to Bucketlist";
-    divEl.appendChild(btn);
-
-    let icon = document.createElement("i");
-    icon.className = "material-icons left";
-    icon.textContent = "file_download";
-    btn.appendChild(icon);
-    }
-}
-
 // save the bucketlist and send the user to the bucketlist page
 function saveBucketlist(event) {
     event.preventDefault();
@@ -794,17 +732,6 @@ function saveBucketlist(event) {
         : (bList = newList);
     localStorage.setItem("bucketlist", JSON.stringify(bList));
     window.location.href = "./bucketlist.html";
-}
-
-// expand the eateries container when a user selects an event
-function openEateriesContainer() {
-    console.log("opening Eateries Container");
-    let div = document.querySelector("#yelp-container");
-    div.classList.remove("l12");
-    div.classList.add("l6");
-    let googleContainer = document.querySelector("#google-container");
-    googleContainer.classList.remove("hide");
-    googleContainer.classList.add("l6");
 }
 
 // on page load, parse and pass most recent search data to yelp API
@@ -841,7 +768,7 @@ document.querySelector("body").addEventListener("click", function (event) {
                 click.className.includes("bucketlist-add") ||
                 btn.className.includes("bucketlist-add")
             ) {
-                console.log("eatery added to bucketlist")
+                console.log("eatery added to bucketlist");
                 selectCard(cardID);
                 bucketlistAddEatery(event);
             }
