@@ -474,10 +474,10 @@ function prepDetailsSearch(event) {
 // send parameters to google for detailed information
 function initDetailsSearch(passId, needsSave) {
     // let service;
-    var elem = document.querySelector("#empty");
+    let elem = document.querySelector("#empty");
     console.log("getting place details from place_id");
 
-    var placeRequest = {
+    let placeRequest = {
         placeId: passId,
         fields: [
             "name",
@@ -495,12 +495,12 @@ function initDetailsSearch(passId, needsSave) {
         console.log("passing to save details");
         service.getDetails(placeRequest, getPlaceDetails);
     } else {
-        console.log("passing details");
+        console.log("passing details to search");
         service.getDetails(placeRequest, googleDetailSearch);
     }
 }
 
-// because google doesnt let us handle the api call ourselves, this has to be a separate function
+// callback function for googlemaps api
 function getPlaceDetails(details, status) {
     if (status == google.maps.places.PlacesServiceStatus.OK) {
         populatePlaceDetails(details);
@@ -711,9 +711,4 @@ document.querySelector("body").addEventListener("click", function (event) {
             prepDetailsSearch(event);
         }
     }
-});
-
-// responsive nav bar
-$(document).ready(function () {
-    $(".sidenav").sidenav();
 });

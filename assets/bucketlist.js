@@ -276,8 +276,3 @@ function clearBucketList() {
 }
 
 checkBucketList();
-
-// responsive nav bar
-$(document).ready(function () {
-    $(".sidenav").sidenav();
-});
